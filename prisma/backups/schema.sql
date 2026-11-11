@@ -81,6 +81,136 @@ $_$;
 ALTER FUNCTION "public"."attach_payment_proof"("p_order_id" "uuid", "p_proof_token" "uuid", "p_proof_path" "text") OWNER TO "postgres";
 
 
+CREATE OR REPLACE FUNCTION "public"."attach_settlement_proof"("p_invoice_no" "text", "p_customer_phone" "text", "p_settlement_token" "text", "p_proof_path" "text", "p_reported_amount" bigint) RETURNS "jsonb"
+    LANGUAGE "plpgsql" SECURITY DEFINER
+    SET "search_path" TO 'public', 'pg_temp'
+    AS $_$
+DECLARE
+  v_order public.orders%ROWTYPE;
+  v_expected_amount bigint;
+BEGIN
+  IF p_reported_amount IS NULL OR p_reported_amount <= 0 THEN
+    RAISE EXCEPTION 'Nominal pelunasan tidak valid.';
+  END IF;
+
+  SELECT *
+  INTO v_order
+  FROM public.orders o
+  WHERE upper(trim(o.invoice_no)) = upper(trim(p_invoice_no))
+    AND regexp_replace(coalesce(o.customer_phone, ''), '\D', '', 'g')
+        = regexp_replace(coalesce(p_customer_phone, ''), '\D', '', 'g')
+    AND o.settlement_token::text = trim(p_settlement_token)
+  FOR UPDATE;
+
+  IF NOT FOUND THEN
+    RAISE EXCEPTION 'Pesanan atau token pelunasan tidak valid.';
+  END IF;
+
+  IF upper(coalesce(v_order.payment_plan, 'DP')) <> 'DP' THEN
+    RAISE EXCEPTION 'Pesanan Full Payment tidak memerlukan bukti pelunasan.';
+  END IF;
+
+  IF v_order.settlement_proof_path IS NOT NULL THEN
+    RAISE EXCEPTION 'Bukti pelunasan sudah pernah dikirim.';
+  END IF;
+
+  v_expected_amount :=
+    greatest(
+      coalesce(v_order.total_amount, 0)
+      - coalesce(v_order.payment_amount_due, 0),
+      0
+    );
+
+  IF v_expected_amount <= 0 THEN
+    RAISE EXCEPTION 'Tidak ada sisa pembayaran.';
+  END IF;
+
+  IF p_reported_amount > v_order.total_amount THEN
+    RAISE EXCEPTION 'Nominal pelunasan melebihi total pesanan.';
+  END IF;
+
+  IF p_proof_path !~ (
+    '^settlements/' || v_order.id::text || '/' ||
+    v_order.settlement_token::text || '\.(png|jpg|jpeg|webp|pdf)$'
+  ) THEN
+    RAISE EXCEPTION 'Lokasi atau format file bukti tidak valid.';
+  END IF;
+
+  INSERT INTO public.order_payments (
+    order_id,
+    payment_type,
+    expected_amount,
+    reported_amount,
+    proof_path,
+    internal_status,
+    uploaded_at
+  )
+  VALUES (
+    v_order.id,
+    'SETTLEMENT',
+    v_expected_amount,
+    p_reported_amount,
+    p_proof_path,
+    'PENDING',
+    now()
+  );
+
+  UPDATE public.orders
+  SET
+    settlement_proof_path = p_proof_path,
+    settlement_proof_uploaded_at = now(),
+    customer_payment_status = 'LUNAS'
+  WHERE id = v_order.id;
+
+  RETURN jsonb_build_object(
+    'success', true,
+    'invoice_no', v_order.invoice_no,
+    'customer_payment_status', 'LUNAS',
+    'reported_amount', p_reported_amount,
+    'expected_amount', v_expected_amount,
+    'message', 'Bukti pelunasan berhasil disimpan.'
+  );
+END;
+$_$;
+
+
+ALTER FUNCTION "public"."attach_settlement_proof"("p_invoice_no" "text", "p_customer_phone" "text", "p_settlement_token" "text", "p_proof_path" "text", "p_reported_amount" bigint) OWNER TO "postgres";
+
+
+CREATE OR REPLACE FUNCTION "public"."capture_initial_order_payment"() RETURNS "trigger"
+    LANGUAGE "plpgsql" SECURITY DEFINER
+    SET "search_path" TO 'public', 'pg_temp'
+    AS $$
+BEGIN
+  IF NEW.payment_proof_path IS NULL THEN
+    RETURN NEW;
+  END IF;
+
+  IF TG_OP = 'UPDATE' AND OLD.payment_proof_path IS NOT DISTINCT FROM NEW.payment_proof_path THEN
+    RETURN NEW;
+  END IF;
+
+  INSERT INTO public.order_payments (
+    order_id, payment_type, expected_amount, reported_amount, proof_path
+  )
+  VALUES (
+    NEW.id,
+    'INITIAL',
+    GREATEST(COALESCE(NEW.payment_amount_due, NEW.total_amount), 1),
+    GREATEST(COALESCE(NEW.payment_amount_due, NEW.total_amount), 1),
+    NEW.payment_proof_path
+  )
+  ON CONFLICT (order_id, payment_type) DO UPDATE
+    SET proof_path = EXCLUDED.proof_path;
+
+  RETURN NEW;
+END;
+$$;
+
+
+ALTER FUNCTION "public"."capture_initial_order_payment"() OWNER TO "postgres";
+
+
 CREATE OR REPLACE FUNCTION "public"."create_public_order"("p_customer_name" "text", "p_customer_email" "text", "p_customer_address" "text", "p_customer_phone" "text", "p_items" "jsonb") RETURNS "jsonb"
     LANGUAGE "plpgsql" SECURITY DEFINER
     SET "search_path" TO 'public'
@@ -507,7 +637,7 @@ CREATE OR REPLACE FUNCTION "public"."create_public_order"("p_customer_name" "tex
     LANGUAGE "plpgsql" SECURITY DEFINER
     SET "search_path" TO 'public', 'pg_temp'
     AS $$
-declare
+DECLARE
   v_code text := upper(regexp_replace(trim(coalesce(p_promo_code,'')), '\s+', ' ', 'g'));
   v_member public.promo_members%rowtype;
   v_result jsonb;
@@ -517,94 +647,87 @@ declare
   v_payment_due bigint := 0;
   v_dp_percentage integer := 50;
   v_order_id uuid;
-  v_member_used boolean := false;
-begin
-  if v_code <> '' then
-    select * into v_member
-    from public.promo_members
-    where plate_code = v_code
-    for update;
+BEGIN
+  IF v_code <> '' THEN
+    SELECT * INTO v_member
+    FROM public.promo_members
+    WHERE plate_code = v_code
+    FOR UPDATE;
 
-    if not found or not v_member.is_active then
-      raise exception 'Kode promo tidak ditemukan atau sedang nonaktif';
-    end if;
-    if v_member.is_used then
-      raise exception 'Kode promo ini sudah pernah digunakan';
-    end if;
-  end if;
+    IF NOT FOUND OR NOT v_member.is_active THEN
+      RAISE EXCEPTION 'Kode promo tidak ditemukan atau sedang nonaktif';
+    END IF;
+    IF v_member.is_used THEN
+      RAISE EXCEPTION 'Kode promo ini sudah pernah digunakan';
+    END IF;
+  END IF;
 
-  -- Panggil fungsi existing 8-parameter agar validasi produk, ukuran,
-  -- stok, invoice, proof token, dan detail order tetap memakai alur lama.
   v_result := public.create_public_order(
-    p_customer_name,
-    p_customer_email,
-    p_customer_address,
-    p_customer_phone,
-    p_delivery_method,
-    p_payment_plan,
-    p_payment_method,
-    p_items
+    p_customer_name, p_customer_email, p_customer_address, p_customer_phone,
+    p_delivery_method, p_payment_plan, p_payment_method, p_items
   );
 
   v_order_id := (v_result->>'id')::uuid;
-  v_subtotal := coalesce((v_result->>'total_amount')::bigint,0);
-  if v_subtotal <= 0 then
-    raise exception 'Subtotal pesanan tidak valid';
-  end if;
+  SELECT o.total_amount INTO v_subtotal
+  FROM public.orders o WHERE o.id = v_order_id;
 
-  if v_code <> '' then
-    if v_member.discount_type = 'PERCENT' then
+  IF v_subtotal IS NULL OR v_subtotal <= 0 THEN
+    RAISE EXCEPTION 'Subtotal pesanan tidak valid';
+  END IF;
+
+  IF v_code <> '' THEN
+    IF v_member.discount_type = 'PERCENT' THEN
       v_discount := round(v_subtotal::numeric * v_member.discount_value / 100)::bigint;
-    else
+    ELSE
       v_discount := v_member.discount_value;
-    end if;
+    END IF;
     v_discount := least(greatest(v_discount,0),greatest(v_subtotal-1,0));
-  end if;
+  END IF;
 
   v_final_total := v_subtotal - v_discount;
-  if v_final_total <= 0 then
-    raise exception 'Total setelah diskon harus lebih dari 0';
-  end if;
+  IF v_final_total <= 0 THEN
+    RAISE EXCEPTION 'Total setelah diskon harus lebih dari 0';
+  END IF;
 
-  select coalesce(dp_percentage,50) into v_dp_percentage
-  from public.site_settings where id = 1;
+  SELECT coalesce(dp_percentage,50) INTO v_dp_percentage
+  FROM public.site_settings WHERE id = 1;
   v_dp_percentage := greatest(1,least(99,coalesce(v_dp_percentage,50)));
 
-  if p_payment_plan = 'FULL' then
+  IF p_payment_plan = 'FULL' THEN
     v_payment_due := v_final_total;
-  elsif p_payment_plan = 'DP' then
+  ELSIF p_payment_plan = 'DP' THEN
     v_payment_due := greatest(1,ceil(v_final_total::numeric * v_dp_percentage / 100))::bigint;
-  else
-    raise exception 'Rencana pembayaran harus DP atau FULL';
-  end if;
+  ELSE
+    RAISE EXCEPTION 'Rencana pembayaran harus DP atau FULL';
+  END IF;
 
-  update public.orders
-  set subtotal_amount = v_subtotal,
+  UPDATE public.orders
+  SET subtotal_amount = v_subtotal,
       discount_amount = v_discount,
       promo_code = nullif(v_code,''),
       total_amount = v_final_total,
       payment_amount_due = v_payment_due,
-      remaining_amount = greatest(v_final_total - v_payment_due, 0)
-  where id = v_order_id;
+      customer_payment_status = CASE WHEN p_payment_plan = 'FULL' THEN 'LUNAS' ELSE 'DP' END
+  WHERE id = v_order_id;
 
-  if v_code <> '' then
-    update public.promo_members
-    set is_used = true,
+  IF v_code <> '' THEN
+    UPDATE public.promo_members
+    SET is_used = true,
         used_order_id = v_order_id,
         used_at = now(),
         updated_at = now()
-    where id = v_member.id;
-    v_member_used := true;
-  end if;
+    WHERE id = v_member.id;
+  END IF;
 
   v_result := jsonb_set(v_result,'{subtotal_amount}',to_jsonb(v_subtotal),true);
   v_result := jsonb_set(v_result,'{discount_amount}',to_jsonb(v_discount),true);
   v_result := jsonb_set(v_result,'{promo_code}',coalesce(to_jsonb(nullif(v_code,'')),'null'::jsonb),true);
   v_result := jsonb_set(v_result,'{total_amount}',to_jsonb(v_final_total),true);
   v_result := jsonb_set(v_result,'{payment_amount_due}',to_jsonb(v_payment_due),true);
-  v_result := jsonb_set(v_result,'{remaining_amount}',to_jsonb(greatest(v_final_total-v_payment_due,0)),true);
-  return v_result;
-end;
+  v_result := jsonb_set(v_result,'{remaining_amount}',to_jsonb(greatest(v_final_total - 0,0)),true);
+  v_result := jsonb_set(v_result,'{customer_payment_status}',to_jsonb(CASE WHEN p_payment_plan = 'FULL' THEN 'LUNAS' ELSE 'DP' END),true);
+  RETURN v_result;
+END;
 $$;
 
 
@@ -666,6 +789,143 @@ $_$;
 
 
 ALTER FUNCTION "public"."is_valid_proof_path"("object_path" "text") OWNER TO "postgres";
+
+
+CREATE OR REPLACE FUNCTION "public"."is_valid_settlement_proof_path"("object_path" "text") RETURNS boolean
+    LANGUAGE "plpgsql" SECURITY DEFINER
+    SET "search_path" TO 'public', 'pg_temp'
+    AS $_$
+DECLARE
+  v_order_id uuid;
+  v_token uuid;
+BEGIN
+  IF object_path IS NULL OR object_path !~ '^settlements/[0-9a-fA-F-]{36}/[0-9a-fA-F-]{36}\.(png|jpg|jpeg|webp|pdf)$' THEN
+    RETURN false;
+  END IF;
+  v_order_id := split_part(object_path, '/', 2)::uuid;
+  v_token := split_part(split_part(object_path, '/', 3), '.', 1)::uuid;
+  RETURN EXISTS (
+    SELECT 1 FROM public.orders o
+    WHERE o.id = v_order_id
+      AND o.settlement_token = v_token
+      AND o.payment_plan = 'DP'
+      AND o.customer_payment_status = 'DP'
+      AND o.settlement_proof_path IS NULL
+  );
+EXCEPTION WHEN OTHERS THEN
+  RETURN false;
+END;
+$_$;
+
+
+ALTER FUNCTION "public"."is_valid_settlement_proof_path"("object_path" "text") OWNER TO "postgres";
+
+
+CREATE OR REPLACE FUNCTION "public"."lookup_public_order"("p_invoice_no" "text", "p_customer_phone" "text") RETURNS "jsonb"
+    LANGUAGE "plpgsql" SECURITY DEFINER
+    SET "search_path" TO 'public', 'pg_temp'
+    AS $$
+DECLARE
+  v_order public.orders%rowtype;
+  v_phone text := regexp_replace(COALESCE(p_customer_phone, ''), '\D', '', 'g');
+  v_items jsonb;
+  v_payments jsonb;
+  v_can_settle boolean;
+BEGIN
+  IF length(v_phone) < 8 OR length(trim(COALESCE(p_invoice_no, ''))) < 5 THEN
+    RAISE EXCEPTION 'Nomor invoice atau nomor HP tidak valid';
+  END IF;
+
+  SELECT * INTO v_order
+  FROM public.orders o
+  WHERE upper(trim(o.invoice_no)) = upper(trim(p_invoice_no))
+    AND regexp_replace(COALESCE(o.customer_phone, o.customer_contact, ''), '\D', '', 'g') = v_phone
+  LIMIT 1;
+
+  IF NOT FOUND THEN
+    RAISE EXCEPTION 'Pesanan tidak ditemukan. Periksa nomor invoice dan nomor HP.';
+  END IF;
+
+  v_can_settle := v_order.payment_plan = 'DP'
+    AND v_order.customer_payment_status = 'DP'
+    AND v_order.settlement_proof_path IS NULL
+    AND EXISTS (
+      SELECT 1
+      FROM public.order_payments op
+      WHERE op.order_id = v_order.id
+        AND op.payment_type = 'INITIAL'
+    );
+
+  SELECT COALESCE(
+    jsonb_agg(
+      jsonb_build_object(
+        'name', oi.product_name,
+        'category', oi.product_category,
+        'size', oi.size,
+        'quantity', oi.quantity,
+        'unit_price', oi.unit_price,
+        'subtotal', COALESCE(oi.subtotal, oi.unit_price * oi.quantity)
+      )
+      ORDER BY oi.id
+    ),
+    '[]'::jsonb
+  )
+  INTO v_items
+  FROM public.order_items oi
+  WHERE oi.order_id = v_order.id;
+
+  SELECT COALESCE(
+    jsonb_agg(
+      jsonb_build_object(
+        'id', op.id,
+        'payment_type', op.payment_type,
+        'expected_amount', op.expected_amount,
+        'reported_amount', op.reported_amount,
+        'uploaded_at', op.uploaded_at,
+        'has_proof', true
+      )
+      ORDER BY op.uploaded_at
+    ),
+    '[]'::jsonb
+  )
+  INTO v_payments
+  FROM public.order_payments op
+  WHERE op.order_id = v_order.id;
+
+  RETURN jsonb_build_object(
+    'order', jsonb_build_object(
+      'id', v_order.id,
+      'invoice_no', v_order.invoice_no,
+      'created_at', v_order.created_at,
+      'customer_name', v_order.customer_name,
+      'customer_email', v_order.customer_email,
+      'customer_phone', COALESCE(v_order.customer_phone, v_order.customer_contact),
+      'delivery_method', v_order.delivery_method,
+      'customer_address', v_order.customer_address,
+      'payment_plan', v_order.payment_plan,
+      'customer_payment_status', v_order.customer_payment_status,
+      'payment_method', v_order.payment_method,
+      'total_amount', v_order.total_amount,
+      'subtotal_amount', COALESCE(v_order.subtotal_amount, v_order.total_amount),
+      'discount_amount', v_order.discount_amount,
+      'promo_code', v_order.promo_code,
+      'payment_amount_due', v_order.payment_amount_due,
+      'remaining_amount', v_order.remaining_amount,
+      'settlement_available', v_can_settle,
+      'settlement_token', CASE
+        WHEN v_can_settle THEN v_order.settlement_token
+        ELSE NULL
+      END,
+      'settlement_uploaded_at', v_order.settlement_proof_uploaded_at
+    ),
+    'items', v_items,
+    'payments', v_payments
+  );
+END;
+$$;
+
+
+ALTER FUNCTION "public"."lookup_public_order"("p_invoice_no" "text", "p_customer_phone" "text") OWNER TO "postgres";
 
 
 CREATE OR REPLACE FUNCTION "public"."next_invoice_no"() RETURNS "text"
@@ -734,6 +994,47 @@ CREATE OR REPLACE FUNCTION "public"."set_updated_at"() RETURNS "trigger"
 ALTER FUNCTION "public"."set_updated_at"() OWNER TO "postgres";
 
 
+CREATE OR REPLACE FUNCTION "public"."sync_order_payment_verification"() RETURNS "trigger"
+    LANGUAGE "plpgsql" SECURITY DEFINER
+    SET "search_path" TO 'public', 'pg_temp'
+    AS $$
+DECLARE
+  v_order_id uuid;
+  v_total bigint;
+  v_paid bigint;
+BEGIN
+  IF TG_OP = 'DELETE' THEN
+    v_order_id := OLD.order_id;
+  ELSE
+    v_order_id := NEW.order_id;
+  END IF;
+  SELECT total_amount INTO v_total
+  FROM public.orders WHERE id = v_order_id;
+
+  IF v_total IS NULL THEN
+    RETURN NULL;
+  END IF;
+
+  SELECT COALESCE(SUM(reported_amount), 0)::bigint INTO v_paid
+  FROM public.order_payments
+  WHERE order_id = v_order_id AND internal_status = 'MATCHED';
+
+  v_paid := LEAST(GREATEST(v_paid, 0), v_total);
+
+  UPDATE public.orders
+  SET paid_amount = v_paid,
+      payment_status = CASE WHEN v_paid = v_total THEN 'LUNAS' ELSE 'DP' END,
+      payment_verified_at = CASE WHEN v_paid > 0 THEN now() ELSE NULL END
+  WHERE id = v_order_id;
+
+  RETURN NULL;
+END;
+$$;
+
+
+ALTER FUNCTION "public"."sync_order_payment_verification"() OWNER TO "postgres";
+
+
 CREATE SEQUENCE IF NOT EXISTS "public"."order_invoice_seq"
     START WITH 1
     INCREMENT BY 1
@@ -767,6 +1068,28 @@ CREATE TABLE IF NOT EXISTS "public"."order_items" (
 ALTER TABLE "public"."order_items" OWNER TO "postgres";
 
 
+CREATE TABLE IF NOT EXISTS "public"."order_payments" (
+    "id" "uuid" DEFAULT "gen_random_uuid"() NOT NULL,
+    "order_id" "uuid" NOT NULL,
+    "payment_type" "text" NOT NULL,
+    "expected_amount" bigint NOT NULL,
+    "reported_amount" bigint NOT NULL,
+    "proof_path" "text" NOT NULL,
+    "internal_status" "text" DEFAULT 'PENDING'::"text" NOT NULL,
+    "internal_note" "text",
+    "uploaded_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    "checked_at" timestamp with time zone,
+    "checked_by" "uuid",
+    CONSTRAINT "order_payments_expected_amount_check" CHECK (("expected_amount" > 0)),
+    CONSTRAINT "order_payments_internal_status_check" CHECK (("internal_status" = ANY (ARRAY['PENDING'::"text", 'MATCHED'::"text", 'CONTACT'::"text"]))),
+    CONSTRAINT "order_payments_payment_type_check" CHECK (("payment_type" = ANY (ARRAY['INITIAL'::"text", 'SETTLEMENT'::"text"]))),
+    CONSTRAINT "order_payments_reported_amount_check" CHECK (("reported_amount" > 0))
+);
+
+
+ALTER TABLE "public"."order_payments" OWNER TO "postgres";
+
+
 CREATE TABLE IF NOT EXISTS "public"."orders" (
     "id" "uuid" DEFAULT "gen_random_uuid"() NOT NULL,
     "invoice_no" "text" NOT NULL,
@@ -793,9 +1116,14 @@ CREATE TABLE IF NOT EXISTS "public"."orders" (
     "subtotal_amount" bigint,
     "discount_amount" bigint DEFAULT 0 NOT NULL,
     "promo_code" "text",
-    CONSTRAINT "orders_customer_address_check" CHECK ((("char_length"(TRIM(BOTH FROM "customer_address")) >= 1) AND ("char_length"(TRIM(BOTH FROM "customer_address")) <= 500))),
+    "customer_payment_status" "text" DEFAULT 'DP'::"text" NOT NULL,
+    "settlement_token" "uuid" DEFAULT "gen_random_uuid"() NOT NULL,
+    "settlement_proof_path" "text",
+    "settlement_proof_uploaded_at" timestamp with time zone,
+    CONSTRAINT "orders_customer_address_check" CHECK ((("customer_address" IS NULL) OR (("char_length"("btrim"("customer_address")) >= 1) AND ("char_length"("btrim"("customer_address")) <= 500)))),
     CONSTRAINT "orders_customer_email_check" CHECK ((("char_length"(TRIM(BOTH FROM "customer_email")) >= 3) AND ("char_length"(TRIM(BOTH FROM "customer_email")) <= 160))),
     CONSTRAINT "orders_customer_name_check" CHECK ((("char_length"(TRIM(BOTH FROM "customer_name")) >= 1) AND ("char_length"(TRIM(BOTH FROM "customer_name")) <= 120))),
+    CONSTRAINT "orders_customer_payment_status_check" CHECK (("customer_payment_status" = ANY (ARRAY['DP'::"text", 'LUNAS'::"text"]))),
     CONSTRAINT "orders_customer_phone_check" CHECK ((("char_length"(TRIM(BOTH FROM "customer_phone")) >= 3) AND ("char_length"(TRIM(BOTH FROM "customer_phone")) <= 30))),
     CONSTRAINT "orders_delivery_method_check" CHECK (("delivery_method" = ANY (ARRAY['BOOTH_CF24'::"text", 'SHIP_TO_ADDRESS'::"text"]))),
     CONSTRAINT "orders_paid_amount_check" CHECK (("paid_amount" >= 0)),
@@ -893,6 +1221,16 @@ ALTER TABLE ONLY "public"."order_items"
 
 
 
+ALTER TABLE ONLY "public"."order_payments"
+    ADD CONSTRAINT "order_payments_order_id_payment_type_key" UNIQUE ("order_id", "payment_type");
+
+
+
+ALTER TABLE ONLY "public"."order_payments"
+    ADD CONSTRAINT "order_payments_pkey" PRIMARY KEY ("id");
+
+
+
 ALTER TABLE ONLY "public"."orders"
     ADD CONSTRAINT "orders_invoice_no_key" UNIQUE ("invoice_no");
 
@@ -941,6 +1279,14 @@ CREATE INDEX "products_category_idx" ON "public"."products" USING "btree" ("cate
 
 
 
+CREATE OR REPLACE TRIGGER "order_payments_sync_verification" AFTER INSERT OR DELETE OR UPDATE OF "internal_status", "reported_amount" ON "public"."order_payments" FOR EACH ROW EXECUTE FUNCTION "public"."sync_order_payment_verification"();
+
+
+
+CREATE OR REPLACE TRIGGER "orders_capture_initial_payment" AFTER INSERT OR UPDATE OF "payment_proof_path" ON "public"."orders" FOR EACH ROW EXECUTE FUNCTION "public"."capture_initial_order_payment"();
+
+
+
 CREATE OR REPLACE TRIGGER "orders_set_updated_at" BEFORE UPDATE ON "public"."orders" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
 
 
@@ -963,6 +1309,16 @@ ALTER TABLE ONLY "public"."order_items"
 
 
 
+ALTER TABLE ONLY "public"."order_payments"
+    ADD CONSTRAINT "order_payments_checked_by_fkey" FOREIGN KEY ("checked_by") REFERENCES "auth"."users"("id") ON DELETE SET NULL;
+
+
+
+ALTER TABLE ONLY "public"."order_payments"
+    ADD CONSTRAINT "order_payments_order_id_fkey" FOREIGN KEY ("order_id") REFERENCES "public"."orders"("id") ON DELETE CASCADE;
+
+
+
 ALTER TABLE ONLY "public"."profiles"
     ADD CONSTRAINT "profiles_id_fkey" FOREIGN KEY ("id") REFERENCES "auth"."users"("id") ON DELETE CASCADE;
 
@@ -977,6 +1333,17 @@ ALTER TABLE "public"."order_items" ENABLE ROW LEVEL SECURITY;
 
 
 CREATE POLICY "order_items_admin_select" ON "public"."order_items" FOR SELECT TO "authenticated" USING ("public"."is_admin"());
+
+
+
+ALTER TABLE "public"."order_payments" ENABLE ROW LEVEL SECURITY;
+
+
+CREATE POLICY "order_payments_admin_select" ON "public"."order_payments" FOR SELECT TO "authenticated" USING ("public"."is_admin"());
+
+
+
+CREATE POLICY "order_payments_admin_update" ON "public"."order_payments" FOR UPDATE TO "authenticated" USING ("public"."is_admin"()) WITH CHECK ("public"."is_admin"());
 
 
 
@@ -1239,6 +1606,19 @@ GRANT ALL ON FUNCTION "public"."attach_payment_proof"("p_order_id" "uuid", "p_pr
 
 
 
+REVOKE ALL ON FUNCTION "public"."attach_settlement_proof"("p_invoice_no" "text", "p_customer_phone" "text", "p_settlement_token" "text", "p_proof_path" "text", "p_reported_amount" bigint) FROM PUBLIC;
+GRANT ALL ON FUNCTION "public"."attach_settlement_proof"("p_invoice_no" "text", "p_customer_phone" "text", "p_settlement_token" "text", "p_proof_path" "text", "p_reported_amount" bigint) TO "anon";
+GRANT ALL ON FUNCTION "public"."attach_settlement_proof"("p_invoice_no" "text", "p_customer_phone" "text", "p_settlement_token" "text", "p_proof_path" "text", "p_reported_amount" bigint) TO "authenticated";
+GRANT ALL ON FUNCTION "public"."attach_settlement_proof"("p_invoice_no" "text", "p_customer_phone" "text", "p_settlement_token" "text", "p_proof_path" "text", "p_reported_amount" bigint) TO "service_role";
+
+
+
+GRANT ALL ON FUNCTION "public"."capture_initial_order_payment"() TO "anon";
+GRANT ALL ON FUNCTION "public"."capture_initial_order_payment"() TO "authenticated";
+GRANT ALL ON FUNCTION "public"."capture_initial_order_payment"() TO "service_role";
+
+
+
 REVOKE ALL ON FUNCTION "public"."create_public_order"("p_customer_name" "text", "p_customer_email" "text", "p_customer_address" "text", "p_customer_phone" "text", "p_items" "jsonb") FROM PUBLIC;
 GRANT ALL ON FUNCTION "public"."create_public_order"("p_customer_name" "text", "p_customer_email" "text", "p_customer_address" "text", "p_customer_phone" "text", "p_items" "jsonb") TO "anon";
 GRANT ALL ON FUNCTION "public"."create_public_order"("p_customer_name" "text", "p_customer_email" "text", "p_customer_address" "text", "p_customer_phone" "text", "p_items" "jsonb") TO "authenticated";
@@ -1286,6 +1666,20 @@ GRANT ALL ON FUNCTION "public"."is_valid_proof_path"("object_path" "text") TO "s
 
 
 
+REVOKE ALL ON FUNCTION "public"."is_valid_settlement_proof_path"("object_path" "text") FROM PUBLIC;
+GRANT ALL ON FUNCTION "public"."is_valid_settlement_proof_path"("object_path" "text") TO "anon";
+GRANT ALL ON FUNCTION "public"."is_valid_settlement_proof_path"("object_path" "text") TO "authenticated";
+GRANT ALL ON FUNCTION "public"."is_valid_settlement_proof_path"("object_path" "text") TO "service_role";
+
+
+
+REVOKE ALL ON FUNCTION "public"."lookup_public_order"("p_invoice_no" "text", "p_customer_phone" "text") FROM PUBLIC;
+GRANT ALL ON FUNCTION "public"."lookup_public_order"("p_invoice_no" "text", "p_customer_phone" "text") TO "anon";
+GRANT ALL ON FUNCTION "public"."lookup_public_order"("p_invoice_no" "text", "p_customer_phone" "text") TO "authenticated";
+GRANT ALL ON FUNCTION "public"."lookup_public_order"("p_invoice_no" "text", "p_customer_phone" "text") TO "service_role";
+
+
+
 GRANT ALL ON FUNCTION "public"."next_invoice_no"() TO "anon";
 GRANT ALL ON FUNCTION "public"."next_invoice_no"() TO "authenticated";
 GRANT ALL ON FUNCTION "public"."next_invoice_no"() TO "service_role";
@@ -1302,6 +1696,12 @@ GRANT ALL ON FUNCTION "public"."preview_public_promo"("p_code" "text", "p_subtot
 GRANT ALL ON FUNCTION "public"."set_updated_at"() TO "anon";
 GRANT ALL ON FUNCTION "public"."set_updated_at"() TO "authenticated";
 GRANT ALL ON FUNCTION "public"."set_updated_at"() TO "service_role";
+
+
+
+GRANT ALL ON FUNCTION "public"."sync_order_payment_verification"() TO "anon";
+GRANT ALL ON FUNCTION "public"."sync_order_payment_verification"() TO "authenticated";
+GRANT ALL ON FUNCTION "public"."sync_order_payment_verification"() TO "service_role";
 
 
 
@@ -1328,6 +1728,11 @@ GRANT ALL ON SEQUENCE "public"."order_invoice_seq" TO "service_role";
 
 GRANT ALL ON TABLE "public"."order_items" TO "authenticated";
 GRANT ALL ON TABLE "public"."order_items" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."order_payments" TO "authenticated";
+GRANT ALL ON TABLE "public"."order_payments" TO "service_role";
 
 
 
