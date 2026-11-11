@@ -1,0 +1,1059 @@
+SET session_replication_role = replica;
+
+--
+-- PostgreSQL database dump
+--
+
+-- \restrict 5sm6aqNf4YwfEx5iLe29WndKjuYjBnIQheCYeLnPsZfI9CoUsF4SSMZWqky63MZ
+
+-- Dumped from database version 17.6
+-- Dumped by pg_dump version 17.11
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET transaction_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- Data for Name: audit_log_entries; Type: TABLE DATA; Schema: auth; Owner: supabase_auth_admin
+--
+
+COPY "auth"."audit_log_entries" ("instance_id", "id", "payload", "created_at", "ip_address") FROM stdin;
+\.
+
+
+--
+-- Data for Name: custom_oauth_providers; Type: TABLE DATA; Schema: auth; Owner: supabase_auth_admin
+--
+
+COPY "auth"."custom_oauth_providers" ("id", "provider_type", "identifier", "name", "client_id", "client_secret", "acceptable_client_ids", "scopes", "pkce_enabled", "attribute_mapping", "authorization_params", "enabled", "email_optional", "issuer", "discovery_url", "skip_nonce_check", "cached_discovery", "discovery_cached_at", "authorization_url", "token_url", "userinfo_url", "jwks_uri", "created_at", "updated_at", "custom_claims_allowlist") FROM stdin;
+\.
+
+
+--
+-- Data for Name: flow_state; Type: TABLE DATA; Schema: auth; Owner: supabase_auth_admin
+--
+
+COPY "auth"."flow_state" ("id", "user_id", "auth_code", "code_challenge_method", "code_challenge", "provider_type", "provider_access_token", "provider_refresh_token", "created_at", "updated_at", "authentication_method", "auth_code_issued_at", "invite_token", "referrer", "oauth_client_state_id", "linking_target_id", "email_optional") FROM stdin;
+\.
+
+
+--
+-- Data for Name: users; Type: TABLE DATA; Schema: auth; Owner: supabase_auth_admin
+--
+
+COPY "auth"."users" ("instance_id", "id", "aud", "role", "email", "encrypted_password", "email_confirmed_at", "invited_at", "confirmation_token", "confirmation_sent_at", "recovery_token", "recovery_sent_at", "email_change_token_new", "email_change", "email_change_sent_at", "last_sign_in_at", "raw_app_meta_data", "raw_user_meta_data", "is_super_admin", "created_at", "updated_at", "phone", "phone_confirmed_at", "phone_change", "phone_change_token", "phone_change_sent_at", "email_change_token_current", "email_change_confirm_status", "banned_until", "reauthentication_token", "reauthentication_sent_at", "is_sso_user", "deleted_at", "is_anonymous") FROM stdin;
+00000000-0000-0000-0000-000000000000	0941d6f4-4f0d-4dd1-8ca2-70fa36b59ccd	authenticated	authenticated	faridzki.aqmal@gmail.com	$2a$10$TG/RZDUCT8Vz6teWnGivEOqdjT5VKRGSpr4Z9/tSkLl3/dDnPASle	2026-10-04 00:43:26.773296+07	\N		2026-10-04 00:43:11.877731+07		\N			\N	2026-10-08 12:28:02.024889+07	{"provider": "email", "providers": ["email"]}	{"sub": "0941d6f4-4f0d-4dd1-8ca2-70fa36b59ccd", "email": "faridzki.aqmal@gmail.com", "username": "tai", "email_verified": true, "phone_verified": false}	\N	2026-10-04 00:43:11.779738+07	2026-10-08 12:28:02.041085+07	\N	\N			\N		0	\N		\N	f	\N	f
+00000000-0000-0000-0000-000000000000	8bd5441c-ad00-4d75-9651-cc4b61c0f942	authenticated	authenticated	rlayuta998@gmail.com	$2a$10$bhAcXcrrFCm9/y27fDbD.O10ctlCcr6KowHBDEKP0u53XhFyoRNHq	\N	\N	e56a8b34507ac5aa7c6e6acf41d52f1847ad2c64ed9a3d4b2005ec0a	2026-10-06 19:30:32.443836+07		\N			\N	\N	{"provider": "email", "providers": ["email"]}	{"sub": "8bd5441c-ad00-4d75-9651-cc4b61c0f942", "email": "rlayuta998@gmail.com", "username": "rlayuta", "email_verified": false, "phone_verified": false}	\N	2026-10-06 19:30:32.387993+07	2026-10-06 19:30:35.181113+07	\N	\N			\N		0	\N		\N	f	\N	f
+00000000-0000-0000-0000-000000000000	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	authenticated	authenticated	wowsrumahmakan@gmail.com	$2a$10$QRl5/Xc91tAGt/dPPgheguXbeCBhosmg8CqYf9w7ihR.eZRY5aVrW	2026-10-06 23:40:03.312655+07	\N		\N		\N			\N	2026-10-12 11:56:01.82408+07	{"provider": "email", "providers": ["email"]}	{"username": "rlayuta", "email_verified": true}	\N	2026-10-06 23:40:03.295524+07	2026-11-05 12:10:06.282114+07	\N	\N			\N		0	\N		\N	f	\N	f
+00000000-0000-0000-0000-000000000000	9994be3f-31c9-497f-94f0-1c954547425a	authenticated	authenticated	mrlvvearween@gmail.com	$2a$10$atekLFaO/1LbOr/2adh0P.x/DfnHcAbt5Yl8aQF8PMwQNkY228j1a	\N	\N	144bf4a024177525e0f5cc0f8ce079b601804446cc267106af6cd319	2026-11-03 21:13:36.484837+07		\N			\N	\N	{"provider": "email", "providers": ["email"]}	{"sub": "9994be3f-31c9-497f-94f0-1c954547425a", "email": "mrlvvearween@gmail.com", "username": "dindin", "email_verified": false, "phone_verified": false}	\N	2026-11-03 21:13:36.385997+07	2026-11-03 21:13:39.166218+07	\N	\N			\N		0	\N		\N	f	\N	f
+00000000-0000-0000-0000-000000000000	71532f37-a14c-4909-b1fd-f499d8783a38	authenticated	authenticated	faharmp17@gmail.com	$2a$10$.5g2yt7xCrovu7viP8OdmunEoK25nzLRhy2h9hHlnFjbdrzvDeu66	2026-10-08 12:12:56.288449+07	\N		2026-10-08 12:12:33.304197+07		\N			\N	2026-10-09 16:05:22.019825+07	{"provider": "email", "providers": ["email"]}	{"sub": "71532f37-a14c-4909-b1fd-f499d8783a38", "email": "faharmp17@gmail.com", "username": "kurei shop", "email_verified": true, "phone_verified": false}	\N	2026-10-08 12:12:33.25404+07	2026-10-31 12:26:52.633692+07	\N	\N			\N		0	\N		\N	f	\N	f
+00000000-0000-0000-0000-000000000000	0a4467f5-c6a0-4c35-8a6a-4eea1a220f0c	authenticated	authenticated	ra.dit@outlook.com	$2a$10$K02zURCgdFmA4drPe4AFleBwbtYCT3OvPHf/XO1hufF/l8SBzYjPC	2026-10-06 19:54:51.880069+07	\N		\N		\N			\N	2026-10-06 19:58:36.047214+07	{"provider": "email", "providers": ["email"]}	{"email_verified": true}	\N	2026-10-06 19:54:51.863039+07	2026-10-06 19:58:36.08319+07	\N	\N			\N		0	\N		\N	f	\N	f
+00000000-0000-0000-0000-000000000000	9cc4f707-42ad-4005-9edb-b0aee7921de4	authenticated	authenticated	shirokuro9029@gmail.com	$2a$10$yVFHVePanDhCmtAqw3wHqeu9sfh.tpkKjfjtuifYVRSB0RCkh/HSW	2026-09-22 23:19:02.229655+07	\N		\N		\N			\N	2026-11-10 14:16:29.884083+07	{"provider": "email", "providers": ["email"]}	{"sub": "9cc4f707-42ad-4005-9edb-b0aee7921de4", "email": "shirokuro9029@gmail.com", "username": "tester", "email_verified": true, "phone_verified": false}	\N	2026-09-22 23:18:03.009289+07	2026-11-10 14:16:29.903594+07	\N	\N			\N		0	\N		\N	f	\N	f
+00000000-0000-0000-0000-000000000000	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	authenticated	authenticated	luqmankun9029@gmail.com	$2a$10$ZRDnTkXocOBpwbtV7S1ssObfPYhb8O12G7YPtfrJ9z4O1341kFos2	2026-09-24 02:26:44.882371+07	\N		\N		\N			\N	2026-11-10 14:23:40.188384+07	{"provider": "email", "providers": ["email"]}	{"username": "luqman", "email_verified": true}	\N	2026-09-24 02:26:44.830934+07	2026-11-10 18:25:32.145698+07	\N	\N			\N		0	\N		\N	f	\N	f
+00000000-0000-0000-0000-000000000000	543c1512-85e1-49e3-803c-463e9dea8091	authenticated	authenticated	witheldkirino@gmail.com	$2a$10$5Di8PrFWu3c9ZoImRVP1IuLi52pVOClXLikQu4sDnFm58WRJe1tba	2026-10-05 15:58:42.011274+07	\N		2026-10-05 15:58:22.753882+07		\N			\N	2026-10-05 15:59:51.882919+07	{"provider": "email", "providers": ["email"]}	{"sub": "543c1512-85e1-49e3-803c-463e9dea8091", "email": "witheldkirino@gmail.com", "username": "witheld", "email_verified": true, "phone_verified": false}	\N	2026-10-05 15:58:22.626768+07	2026-10-08 10:51:10.499029+07	\N	\N			\N		0	\N		\N	f	\N	f
+00000000-0000-0000-0000-000000000000	126faf31-b09e-4087-a462-540d81a3131e	authenticated	authenticated	ibay@gmail.com	$2a$10$4IP.woJfw0FMAABpT.pNm.CuKA3j8MygJ2fsVn/RTt4cvJP5TQgO6	2026-09-25 23:44:17.000423+07	\N		\N		\N			\N	2026-10-03 06:22:37.162646+07	{"provider": "email", "providers": ["email"]}	{"email_verified": true}	\N	2026-09-25 23:44:16.981176+07	2026-10-03 18:43:58.338001+07	\N	\N			\N		0	\N		\N	f	\N	f
+\.
+
+
+--
+-- Data for Name: identities; Type: TABLE DATA; Schema: auth; Owner: supabase_auth_admin
+--
+
+COPY "auth"."identities" ("provider_id", "user_id", "identity_data", "provider", "last_sign_in_at", "created_at", "updated_at", "id") FROM stdin;
+9cc4f707-42ad-4005-9edb-b0aee7921de4	9cc4f707-42ad-4005-9edb-b0aee7921de4	{"sub": "9cc4f707-42ad-4005-9edb-b0aee7921de4", "email": "shirokuro9029@gmail.com", "username": "luqman", "email_verified": true, "phone_verified": false}	email	2026-09-22 23:18:03.03245+07	2026-09-22 23:18:03.032521+07	2026-09-22 23:18:03.032521+07	9a1358a2-1a44-4f81-b752-81dc7951d251
+27d0f21a-efea-48e0-bc00-a1394c5dd3a8	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	{"sub": "27d0f21a-efea-48e0-bc00-a1394c5dd3a8", "email": "luqmankun9029@gmail.com", "email_verified": false, "phone_verified": false}	email	2026-09-24 02:26:44.874881+07	2026-09-24 02:26:44.874952+07	2026-09-24 02:26:44.874952+07	c06209b7-92e8-4612-8a3f-6121c5dad26e
+126faf31-b09e-4087-a462-540d81a3131e	126faf31-b09e-4087-a462-540d81a3131e	{"sub": "126faf31-b09e-4087-a462-540d81a3131e", "email": "ibay@gmail.com", "email_verified": false, "phone_verified": false}	email	2026-09-25 23:44:16.994029+07	2026-09-25 23:44:16.994103+07	2026-09-25 23:44:16.994103+07	ec364af6-32a4-4ba0-b0f4-564d33adc518
+0941d6f4-4f0d-4dd1-8ca2-70fa36b59ccd	0941d6f4-4f0d-4dd1-8ca2-70fa36b59ccd	{"sub": "0941d6f4-4f0d-4dd1-8ca2-70fa36b59ccd", "email": "faridzki.aqmal@gmail.com", "username": "zenryuuki", "email_verified": true, "phone_verified": false}	email	2026-10-04 00:43:11.860202+07	2026-10-04 00:43:11.861299+07	2026-10-04 00:43:11.861299+07	6526aa69-d11c-446e-92dd-dde1a0291b16
+543c1512-85e1-49e3-803c-463e9dea8091	543c1512-85e1-49e3-803c-463e9dea8091	{"sub": "543c1512-85e1-49e3-803c-463e9dea8091", "email": "witheldkirino@gmail.com", "username": "witheld", "email_verified": true, "phone_verified": false}	email	2026-10-05 15:58:22.737123+07	2026-10-05 15:58:22.737186+07	2026-10-05 15:58:22.737186+07	d4009040-e5d6-4c87-9d13-71477a3845c2
+8bd5441c-ad00-4d75-9651-cc4b61c0f942	8bd5441c-ad00-4d75-9651-cc4b61c0f942	{"sub": "8bd5441c-ad00-4d75-9651-cc4b61c0f942", "email": "rlayuta998@gmail.com", "username": "rlayuta", "email_verified": false, "phone_verified": false}	email	2026-10-06 19:30:32.428097+07	2026-10-06 19:30:32.428161+07	2026-10-06 19:30:32.428161+07	793fe08b-952c-4e1b-8b51-f696d8de8903
+0a4467f5-c6a0-4c35-8a6a-4eea1a220f0c	0a4467f5-c6a0-4c35-8a6a-4eea1a220f0c	{"sub": "0a4467f5-c6a0-4c35-8a6a-4eea1a220f0c", "email": "ra.dit@outlook.com", "email_verified": false, "phone_verified": false}	email	2026-10-06 19:54:51.876157+07	2026-10-06 19:54:51.87622+07	2026-10-06 19:54:51.87622+07	eb2a79b6-0b4f-4f46-91f9-068c7a9c4d1d
+5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	{"sub": "5bb36e5c-7283-4341-bc7f-de5b3c0fef5e", "email": "wowsrumahmakan@gmail.com", "email_verified": false, "phone_verified": false}	email	2026-10-06 23:40:03.310552+07	2026-10-06 23:40:03.310616+07	2026-10-06 23:40:03.310616+07	06e6cd43-37fe-4b1f-992e-57f4f170c224
+71532f37-a14c-4909-b1fd-f499d8783a38	71532f37-a14c-4909-b1fd-f499d8783a38	{"sub": "71532f37-a14c-4909-b1fd-f499d8783a38", "email": "faharmp17@gmail.com", "username": "kurei shop", "email_verified": true, "phone_verified": false}	email	2026-10-08 12:12:33.292927+07	2026-10-08 12:12:33.292985+07	2026-10-08 12:12:33.292985+07	40f4c925-5382-435d-aded-66fbe6907e1a
+9994be3f-31c9-497f-94f0-1c954547425a	9994be3f-31c9-497f-94f0-1c954547425a	{"sub": "9994be3f-31c9-497f-94f0-1c954547425a", "email": "mrlvvearween@gmail.com", "username": "dindin", "email_verified": false, "phone_verified": false}	email	2026-11-03 21:13:36.469997+07	2026-11-03 21:13:36.470061+07	2026-11-03 21:13:36.470061+07	e6955937-e211-46cb-b7d5-2bc51b680757
+\.
+
+
+--
+-- Data for Name: instances; Type: TABLE DATA; Schema: auth; Owner: supabase_auth_admin
+--
+
+COPY "auth"."instances" ("id", "uuid", "raw_base_config", "created_at", "updated_at") FROM stdin;
+\.
+
+
+--
+-- Data for Name: oauth_clients; Type: TABLE DATA; Schema: auth; Owner: supabase_auth_admin
+--
+
+COPY "auth"."oauth_clients" ("id", "client_secret_hash", "registration_type", "redirect_uris", "grant_types", "client_name", "client_uri", "logo_uri", "created_at", "updated_at", "deleted_at", "client_type", "token_endpoint_auth_method") FROM stdin;
+\.
+
+
+--
+-- Data for Name: sessions; Type: TABLE DATA; Schema: auth; Owner: supabase_auth_admin
+--
+
+COPY "auth"."sessions" ("id", "user_id", "created_at", "updated_at", "factor_id", "aal", "not_after", "refreshed_at", "user_agent", "ip", "tag", "oauth_client_id", "refresh_token_hmac_key", "refresh_token_counter", "scopes") FROM stdin;
+c7b199d8-a5ff-4805-97ef-525a4bdd7c41	543c1512-85e1-49e3-803c-463e9dea8091	2026-10-05 15:58:42.016484+07	2026-10-05 15:58:42.016484+07	\N	aal1	\N	\N	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36	36.50.219.27	\N	\N	\N	\N	\N
+25b833cc-0f00-4a41-89f5-e84af142bf86	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-10-10 20:50:18.857707+07	2026-11-03 08:00:53.056979+07	\N	aal1	\N	2026-11-03 01:00:53.0568	Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36	182.253.124.107	\N	\N	\N	\N	\N
+14d21d0a-fe16-436e-a3c2-ab8c03b8b489	71532f37-a14c-4909-b1fd-f499d8783a38	2026-10-08 12:12:56.299724+07	2026-10-08 12:12:56.299724+07	\N	aal1	\N	\N	Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Mobile Safari/537.36	36.50.219.27	\N	\N	\N	\N	\N
+677bfaa6-6400-4715-b240-e0130219a9ea	0941d6f4-4f0d-4dd1-8ca2-70fa36b59ccd	2026-10-08 12:28:02.027481+07	2026-10-08 12:28:02.027481+07	\N	aal1	\N	\N	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36 OPR/136.0.0.0	157.85.212.220	\N	\N	\N	\N	\N
+72da545f-0dca-461c-9876-96001d717b23	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-10-12 11:56:01.825388+07	2026-11-05 12:10:06.311524+07	\N	aal1	\N	2026-11-05 05:10:06.310821	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36	182.253.124.107	\N	\N	\N	\N	\N
+5b9ee4df-ea3c-4c22-b9ff-f51ad94e6c52	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-11-10 14:23:40.193582+07	2026-11-10 18:25:32.171193+07	\N	aal1	\N	2026-11-10 11:25:32.171064	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36	104.28.218.132	\N	\N	\N	\N	\N
+feaec2ad-02db-41eb-ba8c-19a1459c8412	126faf31-b09e-4087-a462-540d81a3131e	2026-10-03 06:22:37.163993+07	2026-10-03 18:43:58.359937+07	\N	aal1	\N	2026-10-03 11:43:58.359833	Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Mobile Safari/537.36	182.5.136.140	\N	\N	\N	\N	\N
+6b7d4363-3347-4b26-ad1f-b6697c105640	0a4467f5-c6a0-4c35-8a6a-4eea1a220f0c	2026-10-06 19:58:36.050353+07	2026-10-06 19:58:36.050353+07	\N	aal1	\N	\N	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36 OPR/136.0.0.0	113.11.180.7	\N	\N	\N	\N	\N
+b7e5988f-18ed-449c-9f24-3337d5a22886	71532f37-a14c-4909-b1fd-f499d8783a38	2026-10-08 12:13:45.42594+07	2026-10-09 13:33:38.852689+07	\N	aal1	\N	2026-10-09 06:33:38.852567	Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Mobile Safari/537.36	114.122.85.26	\N	\N	\N	\N	\N
+959f43c6-6237-456c-97be-763a47c213a0	71532f37-a14c-4909-b1fd-f499d8783a38	2026-10-08 21:18:00.380329+07	2026-10-16 10:13:24.152877+07	\N	aal1	\N	2026-10-16 03:13:24.152749	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36	36.50.219.31	\N	\N	\N	\N	\N
+d7ff56ee-1217-48b9-b2f4-daffe4309e2c	71532f37-a14c-4909-b1fd-f499d8783a38	2026-10-09 16:05:22.020581+07	2026-10-31 12:26:52.654588+07	\N	aal1	\N	2026-10-31 05:26:52.654408	Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36	36.50.219.27	\N	\N	\N	\N	\N
+\.
+
+
+--
+-- Data for Name: mfa_amr_claims; Type: TABLE DATA; Schema: auth; Owner: supabase_auth_admin
+--
+
+COPY "auth"."mfa_amr_claims" ("session_id", "created_at", "updated_at", "authentication_method", "id") FROM stdin;
+959f43c6-6237-456c-97be-763a47c213a0	2026-10-08 21:18:00.417032+07	2026-10-08 21:18:00.417032+07	password	fff14a07-0bc3-45d5-b83b-df76a01e37e9
+d7ff56ee-1217-48b9-b2f4-daffe4309e2c	2026-10-09 16:05:22.081766+07	2026-10-09 16:05:22.081766+07	password	a8d8a7de-4606-4d62-b11d-2599698cb5e0
+feaec2ad-02db-41eb-ba8c-19a1459c8412	2026-10-03 06:22:37.178661+07	2026-10-03 06:22:37.178661+07	password	6355e8ee-ff71-453b-b955-1174b19e6720
+c7b199d8-a5ff-4805-97ef-525a4bdd7c41	2026-10-05 15:58:42.043582+07	2026-10-05 15:58:42.043582+07	otp	d7f77352-d775-46b3-a241-f685187b0fe6
+25b833cc-0f00-4a41-89f5-e84af142bf86	2026-10-10 20:50:18.864694+07	2026-10-10 20:50:18.864694+07	password	cd7e97d2-dbcb-4c35-9f66-e2c5bdfefaa1
+72da545f-0dca-461c-9876-96001d717b23	2026-10-12 11:56:01.887391+07	2026-10-12 11:56:01.887391+07	password	afabbfe6-c58b-4295-9f43-2a5afde5aeda
+6b7d4363-3347-4b26-ad1f-b6697c105640	2026-10-06 19:58:36.089312+07	2026-10-06 19:58:36.089312+07	password	5d9f2531-7b87-45b9-a0a8-922c9e7fd432
+5b9ee4df-ea3c-4c22-b9ff-f51ad94e6c52	2026-11-10 14:23:40.276773+07	2026-11-10 14:23:40.276773+07	password	c4603384-1e99-4318-ac2a-0b3512fcbfa0
+14d21d0a-fe16-436e-a3c2-ab8c03b8b489	2026-10-08 12:12:56.308331+07	2026-10-08 12:12:56.308331+07	otp	6f6610fb-bc76-4afe-96fa-369dd24fa637
+b7e5988f-18ed-449c-9f24-3337d5a22886	2026-10-08 12:13:45.430046+07	2026-10-08 12:13:45.430046+07	password	8e31b5ba-b2bc-4336-8a76-37a3ba7efdc5
+677bfaa6-6400-4715-b240-e0130219a9ea	2026-10-08 12:28:02.04227+07	2026-10-08 12:28:02.04227+07	password	b0e76fae-d65e-4bd3-afd1-e7b7e131c8f3
+\.
+
+
+--
+-- Data for Name: mfa_factors; Type: TABLE DATA; Schema: auth; Owner: supabase_auth_admin
+--
+
+COPY "auth"."mfa_factors" ("id", "user_id", "friendly_name", "factor_type", "status", "created_at", "updated_at", "secret", "phone", "last_challenged_at", "web_authn_credential", "web_authn_aaguid", "last_webauthn_challenge_data") FROM stdin;
+\.
+
+
+--
+-- Data for Name: mfa_challenges; Type: TABLE DATA; Schema: auth; Owner: supabase_auth_admin
+--
+
+COPY "auth"."mfa_challenges" ("id", "factor_id", "created_at", "verified_at", "ip_address", "otp_code", "web_authn_session_data") FROM stdin;
+\.
+
+
+--
+-- Data for Name: mfa_recovery_code_sets; Type: TABLE DATA; Schema: auth; Owner: supabase_auth_admin
+--
+
+COPY "auth"."mfa_recovery_code_sets" ("id", "user_id", "mfa_factor_id", "failed_verification_count", "verification_locked_until", "created_at", "updated_at") FROM stdin;
+\.
+
+
+--
+-- Data for Name: mfa_recovery_codes; Type: TABLE DATA; Schema: auth; Owner: supabase_auth_admin
+--
+
+COPY "auth"."mfa_recovery_codes" ("id", "mfa_recovery_code_set_id", "code_hash", "consumed_at", "created_at") FROM stdin;
+\.
+
+
+--
+-- Data for Name: oauth_authorizations; Type: TABLE DATA; Schema: auth; Owner: supabase_auth_admin
+--
+
+COPY "auth"."oauth_authorizations" ("id", "authorization_id", "client_id", "user_id", "redirect_uri", "scope", "state", "resource", "code_challenge", "code_challenge_method", "response_type", "status", "authorization_code", "created_at", "expires_at", "approved_at", "nonce") FROM stdin;
+\.
+
+
+--
+-- Data for Name: oauth_client_states; Type: TABLE DATA; Schema: auth; Owner: supabase_auth_admin
+--
+
+COPY "auth"."oauth_client_states" ("id", "provider_type", "code_verifier", "created_at") FROM stdin;
+\.
+
+
+--
+-- Data for Name: oauth_consents; Type: TABLE DATA; Schema: auth; Owner: supabase_auth_admin
+--
+
+COPY "auth"."oauth_consents" ("id", "user_id", "client_id", "scopes", "granted_at", "revoked_at") FROM stdin;
+\.
+
+
+--
+-- Data for Name: one_time_tokens; Type: TABLE DATA; Schema: auth; Owner: supabase_auth_admin
+--
+
+COPY "auth"."one_time_tokens" ("id", "user_id", "token_type", "token_hash", "relates_to", "created_at", "updated_at", "expires_at") FROM stdin;
+33331501-b2c4-4c54-82c1-037ce341cde2	8bd5441c-ad00-4d75-9651-cc4b61c0f942	confirmation_token	e56a8b34507ac5aa7c6e6acf41d52f1847ad2c64ed9a3d4b2005ec0a	rlayuta998@gmail.com	2026-10-06 12:30:35.188972	2026-10-06 12:30:35.188972	\N
+dea01154-8830-4c36-b297-d31a9575c2f8	9994be3f-31c9-497f-94f0-1c954547425a	confirmation_token	144bf4a024177525e0f5cc0f8ce079b601804446cc267106af6cd319	mrlvvearween@gmail.com	2026-11-03 14:13:39.176327	2026-11-03 14:13:39.176327	\N
+\.
+
+
+--
+-- Data for Name: refresh_tokens; Type: TABLE DATA; Schema: auth; Owner: supabase_auth_admin
+--
+
+COPY "auth"."refresh_tokens" ("instance_id", "id", "token", "user_id", "revoked", "created_at", "updated_at", "parent", "session_id") FROM stdin;
+00000000-0000-0000-0000-000000000000	174	va34kyixm4de	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	t	2026-10-11 03:09:54.045991+07	2026-10-11 04:17:28.758526+07	dqa4w6a7tkrb	25b833cc-0f00-4a41-89f5-e84af142bf86
+00000000-0000-0000-0000-000000000000	167	okhwucxm35d5	71532f37-a14c-4909-b1fd-f499d8783a38	t	2026-10-10 21:34:43.384113+07	2026-10-11 08:01:35.823367+07	qvgtbawq5e7n	959f43c6-6237-456c-97be-763a47c213a0
+00000000-0000-0000-0000-000000000000	175	mdy3ylgxtwyr	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	t	2026-10-11 04:17:28.780414+07	2026-10-11 12:26:46.69683+07	va34kyixm4de	25b833cc-0f00-4a41-89f5-e84af142bf86
+00000000-0000-0000-0000-000000000000	93	mm6z3j23fd6t	71532f37-a14c-4909-b1fd-f499d8783a38	f	2026-10-08 12:12:56.302875+07	2026-10-08 12:12:56.302875+07	\N	14d21d0a-fe16-436e-a3c2-ab8c03b8b489
+00000000-0000-0000-0000-000000000000	231	rkzfha2jmiir	71532f37-a14c-4909-b1fd-f499d8783a38	t	2026-10-14 14:19:43.348428+07	2026-10-14 19:37:31.372356+07	4txqsih4tqkw	959f43c6-6237-456c-97be-763a47c213a0
+00000000-0000-0000-0000-000000000000	95	ewz47olb5ahy	0941d6f4-4f0d-4dd1-8ca2-70fa36b59ccd	f	2026-10-08 12:28:02.037983+07	2026-10-08 12:28:02.037983+07	\N	677bfaa6-6400-4715-b240-e0130219a9ea
+00000000-0000-0000-0000-000000000000	94	iii2ycowhhsl	71532f37-a14c-4909-b1fd-f499d8783a38	t	2026-10-08 12:13:45.428339+07	2026-10-08 16:06:08.184301+07	\N	b7e5988f-18ed-449c-9f24-3337d5a22886
+00000000-0000-0000-0000-000000000000	169	2xoodazyyy6w	71532f37-a14c-4909-b1fd-f499d8783a38	t	2026-10-10 22:15:32.048726+07	2026-10-11 14:54:45.079296+07	dyfhztyzgc3x	d7ff56ee-1217-48b9-b2f4-daffe4309e2c
+00000000-0000-0000-0000-000000000000	125	rhblf5njh7t7	71532f37-a14c-4909-b1fd-f499d8783a38	t	2026-10-09 16:05:22.053216+07	2026-10-10 00:15:47.192663+07	\N	d7ff56ee-1217-48b9-b2f4-daffe4309e2c
+00000000-0000-0000-0000-000000000000	233	utqzt3uic3yx	71532f37-a14c-4909-b1fd-f499d8783a38	t	2026-10-14 20:40:15.059593+07	2026-10-14 22:27:45.223221+07	grwxxe5vzb4g	959f43c6-6237-456c-97be-763a47c213a0
+00000000-0000-0000-0000-000000000000	97	d6332j5oa7dx	71532f37-a14c-4909-b1fd-f499d8783a38	t	2026-10-08 16:06:08.206097+07	2026-10-08 17:38:12.489067+07	iii2ycowhhsl	b7e5988f-18ed-449c-9f24-3337d5a22886
+00000000-0000-0000-0000-000000000000	177	locudz4msjm4	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	t	2026-10-11 12:26:46.713962+07	2026-10-11 15:14:20.172739+07	mdy3ylgxtwyr	25b833cc-0f00-4a41-89f5-e84af142bf86
+00000000-0000-0000-0000-000000000000	176	ve2guict2yzu	71532f37-a14c-4909-b1fd-f499d8783a38	t	2026-10-11 08:01:35.842871+07	2026-10-11 18:15:42.289539+07	okhwucxm35d5	959f43c6-6237-456c-97be-763a47c213a0
+00000000-0000-0000-0000-000000000000	131	44htkrsfp4di	71532f37-a14c-4909-b1fd-f499d8783a38	t	2026-10-09 18:57:34.689274+07	2026-10-10 10:43:10.310489+07	x2rymzf3lra3	959f43c6-6237-456c-97be-763a47c213a0
+00000000-0000-0000-0000-000000000000	237	3cxsnc6nwcp5	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	t	2026-10-15 00:23:39.343558+07	2026-10-15 02:41:24.029149+07	rqfqt47jqjxs	25b833cc-0f00-4a41-89f5-e84af142bf86
+00000000-0000-0000-0000-000000000000	179	mumoy3yttijx	71532f37-a14c-4909-b1fd-f499d8783a38	t	2026-10-11 14:54:45.103781+07	2026-10-11 20:15:53.236518+07	2xoodazyyy6w	d7ff56ee-1217-48b9-b2f4-daffe4309e2c
+00000000-0000-0000-0000-000000000000	182	cfabhqti5xt7	71532f37-a14c-4909-b1fd-f499d8783a38	t	2026-10-11 18:15:42.316005+07	2026-10-11 21:33:53.066863+07	ve2guict2yzu	959f43c6-6237-456c-97be-763a47c213a0
+00000000-0000-0000-0000-000000000000	240	ot7b5myg37al	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	t	2026-10-15 10:27:30.175037+07	2026-10-15 11:30:08.004203+07	6mv5abvpeey3	25b833cc-0f00-4a41-89f5-e84af142bf86
+00000000-0000-0000-0000-000000000000	183	k42e3orh3vt2	71532f37-a14c-4909-b1fd-f499d8783a38	t	2026-10-11 20:15:53.251226+07	2026-10-11 22:05:43.825217+07	mumoy3yttijx	d7ff56ee-1217-48b9-b2f4-daffe4309e2c
+00000000-0000-0000-0000-000000000000	106	xo4b3fs3td5e	71532f37-a14c-4909-b1fd-f499d8783a38	t	2026-10-08 21:18:00.399202+07	2026-10-08 22:48:30.641976+07	\N	959f43c6-6237-456c-97be-763a47c213a0
+00000000-0000-0000-0000-000000000000	235	7ec4qfjmybxh	71532f37-a14c-4909-b1fd-f499d8783a38	t	2026-10-14 22:27:45.24319+07	2026-10-16 10:13:24.102551+07	utqzt3uic3yx	959f43c6-6237-456c-97be-763a47c213a0
+00000000-0000-0000-0000-000000000000	180	wp42ty36snkf	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	t	2026-10-11 15:14:20.182834+07	2026-10-12 00:15:58.277286+07	locudz4msjm4	25b833cc-0f00-4a41-89f5-e84af142bf86
+00000000-0000-0000-0000-000000000000	186	ptt5wlzcfl2u	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	t	2026-10-12 00:15:58.290029+07	2026-10-12 03:20:16.398847+07	wp42ty36snkf	25b833cc-0f00-4a41-89f5-e84af142bf86
+00000000-0000-0000-0000-000000000000	185	izt2qoirnd6e	71532f37-a14c-4909-b1fd-f499d8783a38	t	2026-10-11 22:05:43.84621+07	2026-10-12 08:46:15.241058+07	k42e3orh3vt2	d7ff56ee-1217-48b9-b2f4-daffe4309e2c
+00000000-0000-0000-0000-000000000000	146	r65l3syb3h77	71532f37-a14c-4909-b1fd-f499d8783a38	t	2026-10-10 00:15:47.201733+07	2026-10-10 15:19:50.299162+07	rhblf5njh7t7	d7ff56ee-1217-48b9-b2f4-daffe4309e2c
+00000000-0000-0000-0000-000000000000	158	4leade3gmk7i	71532f37-a14c-4909-b1fd-f499d8783a38	t	2026-10-10 15:19:50.316821+07	2026-10-10 16:35:33.79375+07	r65l3syb3h77	d7ff56ee-1217-48b9-b2f4-daffe4309e2c
+00000000-0000-0000-0000-000000000000	184	aimuk4nnz5ke	71532f37-a14c-4909-b1fd-f499d8783a38	t	2026-10-11 21:33:53.088645+07	2026-10-12 09:50:59.355646+07	cfabhqti5xt7	959f43c6-6237-456c-97be-763a47c213a0
+00000000-0000-0000-0000-000000000000	188	elywazp6z3mc	71532f37-a14c-4909-b1fd-f499d8783a38	t	2026-10-12 08:46:15.261276+07	2026-10-12 12:09:25.737752+07	izt2qoirnd6e	d7ff56ee-1217-48b9-b2f4-daffe4309e2c
+00000000-0000-0000-0000-000000000000	32	gqtlktpkvs27	126faf31-b09e-4087-a462-540d81a3131e	t	2026-10-03 06:22:37.174733+07	2026-10-03 18:43:58.310404+07	\N	feaec2ad-02db-41eb-ba8c-19a1459c8412
+00000000-0000-0000-0000-000000000000	34	hjqxk4qqqktn	126faf31-b09e-4087-a462-540d81a3131e	f	2026-10-03 18:43:58.328783+07	2026-10-03 18:43:58.328783+07	gqtlktpkvs27	feaec2ad-02db-41eb-ba8c-19a1459c8412
+00000000-0000-0000-0000-000000000000	187	xze37b2psqqq	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	t	2026-10-12 03:20:16.422768+07	2026-10-12 13:07:31.589151+07	ptt5wlzcfl2u	25b833cc-0f00-4a41-89f5-e84af142bf86
+00000000-0000-0000-0000-000000000000	159	ru6g5x2abz5d	71532f37-a14c-4909-b1fd-f499d8783a38	t	2026-10-10 16:35:33.827487+07	2026-10-10 18:16:38.079095+07	4leade3gmk7i	d7ff56ee-1217-48b9-b2f4-daffe4309e2c
+00000000-0000-0000-0000-000000000000	98	paysbgbl327e	71532f37-a14c-4909-b1fd-f499d8783a38	t	2026-10-08 17:38:12.512093+07	2026-10-09 07:01:17.772668+07	d6332j5oa7dx	b7e5988f-18ed-449c-9f24-3337d5a22886
+00000000-0000-0000-0000-000000000000	37	x472zbl3inxa	543c1512-85e1-49e3-803c-463e9dea8091	f	2026-10-05 15:58:42.031938+07	2026-10-05 15:58:42.031938+07	\N	c7b199d8-a5ff-4805-97ef-525a4bdd7c41
+00000000-0000-0000-0000-000000000000	161	2zvwz7nawkto	71532f37-a14c-4909-b1fd-f499d8783a38	t	2026-10-10 18:16:38.104173+07	2026-10-10 19:33:04.015116+07	ru6g5x2abz5d	d7ff56ee-1217-48b9-b2f4-daffe4309e2c
+00000000-0000-0000-0000-000000000000	107	5i37o4kxnfqg	71532f37-a14c-4909-b1fd-f499d8783a38	t	2026-10-08 22:48:30.666631+07	2026-10-09 08:01:47.289522+07	xo4b3fs3td5e	959f43c6-6237-456c-97be-763a47c213a0
+00000000-0000-0000-0000-000000000000	116	p6ej65afkjop	71532f37-a14c-4909-b1fd-f499d8783a38	t	2026-10-09 07:01:17.781274+07	2026-10-09 08:41:49.90217+07	paysbgbl327e	b7e5988f-18ed-449c-9f24-3337d5a22886
+00000000-0000-0000-0000-000000000000	43	kxlvnsvb5zx6	0a4467f5-c6a0-4c35-8a6a-4eea1a220f0c	f	2026-10-06 19:58:36.079011+07	2026-10-06 19:58:36.079011+07	\N	6b7d4363-3347-4b26-ad1f-b6697c105640
+00000000-0000-0000-0000-000000000000	118	odbmpyitvpxu	71532f37-a14c-4909-b1fd-f499d8783a38	t	2026-10-09 08:01:47.304967+07	2026-10-09 09:21:35.285688+07	5i37o4kxnfqg	959f43c6-6237-456c-97be-763a47c213a0
+00000000-0000-0000-0000-000000000000	121	cce63vlvu6ly	71532f37-a14c-4909-b1fd-f499d8783a38	t	2026-10-09 09:21:35.296033+07	2026-10-09 10:30:21.207394+07	odbmpyitvpxu	959f43c6-6237-456c-97be-763a47c213a0
+00000000-0000-0000-0000-000000000000	119	2v6hqulh7uvm	71532f37-a14c-4909-b1fd-f499d8783a38	t	2026-10-09 08:41:49.92178+07	2026-10-09 12:33:38.766335+07	p6ej65afkjop	b7e5988f-18ed-449c-9f24-3337d5a22886
+00000000-0000-0000-0000-000000000000	150	qvgtbawq5e7n	71532f37-a14c-4909-b1fd-f499d8783a38	t	2026-10-10 10:43:10.326248+07	2026-10-10 21:34:43.360639+07	44htkrsfp4di	959f43c6-6237-456c-97be-763a47c213a0
+00000000-0000-0000-0000-000000000000	123	zfinm6hfxvfa	71532f37-a14c-4909-b1fd-f499d8783a38	t	2026-10-09 12:33:38.783835+07	2026-10-09 13:33:38.794699+07	2v6hqulh7uvm	b7e5988f-18ed-449c-9f24-3337d5a22886
+00000000-0000-0000-0000-000000000000	124	x22krtzm4zzb	71532f37-a14c-4909-b1fd-f499d8783a38	f	2026-10-09 13:33:38.815438+07	2026-10-09 13:33:38.815438+07	zfinm6hfxvfa	b7e5988f-18ed-449c-9f24-3337d5a22886
+00000000-0000-0000-0000-000000000000	122	3ibdy42v3mnx	71532f37-a14c-4909-b1fd-f499d8783a38	t	2026-10-09 10:30:21.227621+07	2026-10-09 17:32:30.032672+07	cce63vlvu6ly	959f43c6-6237-456c-97be-763a47c213a0
+00000000-0000-0000-0000-000000000000	162	dyfhztyzgc3x	71532f37-a14c-4909-b1fd-f499d8783a38	t	2026-10-10 19:33:04.034193+07	2026-10-10 22:15:32.035081+07	2zvwz7nawkto	d7ff56ee-1217-48b9-b2f4-daffe4309e2c
+00000000-0000-0000-0000-000000000000	166	45e6qdqsmigw	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	t	2026-10-10 20:50:18.860206+07	2026-10-10 22:58:29.885714+07	\N	25b833cc-0f00-4a41-89f5-e84af142bf86
+00000000-0000-0000-0000-000000000000	126	x2rymzf3lra3	71532f37-a14c-4909-b1fd-f499d8783a38	t	2026-10-09 17:32:30.056558+07	2026-10-09 18:57:34.667571+07	3ibdy42v3mnx	959f43c6-6237-456c-97be-763a47c213a0
+00000000-0000-0000-0000-000000000000	170	dqa4w6a7tkrb	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	t	2026-10-10 22:58:29.908014+07	2026-10-11 03:09:54.025348+07	45e6qdqsmigw	25b833cc-0f00-4a41-89f5-e84af142bf86
+00000000-0000-0000-0000-000000000000	221	u2nnkz54cu37	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	t	2026-10-14 05:38:19.199836+07	2026-10-14 13:27:31.615763+07	4durhcvhk6w7	25b833cc-0f00-4a41-89f5-e84af142bf86
+00000000-0000-0000-0000-000000000000	215	4txqsih4tqkw	71532f37-a14c-4909-b1fd-f499d8783a38	t	2026-10-13 11:35:44.531904+07	2026-10-14 14:19:43.325977+07	b5qbnb63iskp	959f43c6-6237-456c-97be-763a47c213a0
+00000000-0000-0000-0000-000000000000	189	x4xur4jgzmc2	71532f37-a14c-4909-b1fd-f499d8783a38	t	2026-10-12 09:50:59.375935+07	2026-10-12 13:22:29.756834+07	aimuk4nnz5ke	959f43c6-6237-456c-97be-763a47c213a0
+00000000-0000-0000-0000-000000000000	193	jco25ofteb3m	71532f37-a14c-4909-b1fd-f499d8783a38	t	2026-10-12 13:22:29.76821+07	2026-10-12 14:44:06.710519+07	x4xur4jgzmc2	959f43c6-6237-456c-97be-763a47c213a0
+00000000-0000-0000-0000-000000000000	232	grwxxe5vzb4g	71532f37-a14c-4909-b1fd-f499d8783a38	t	2026-10-14 19:37:31.392014+07	2026-10-14 20:40:15.04827+07	rkzfha2jmiir	959f43c6-6237-456c-97be-763a47c213a0
+00000000-0000-0000-0000-000000000000	194	okolx3gygc5s	71532f37-a14c-4909-b1fd-f499d8783a38	t	2026-10-12 14:44:06.726968+07	2026-10-12 16:15:28.650944+07	jco25ofteb3m	959f43c6-6237-456c-97be-763a47c213a0
+00000000-0000-0000-0000-000000000000	230	4kweb4u7sbiu	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	t	2026-10-14 13:27:31.627354+07	2026-10-14 21:38:32.085612+07	u2nnkz54cu37	25b833cc-0f00-4a41-89f5-e84af142bf86
+00000000-0000-0000-0000-000000000000	234	wexsvj6cht7x	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	t	2026-10-14 21:38:32.100246+07	2026-10-14 22:55:07.688541+07	4kweb4u7sbiu	25b833cc-0f00-4a41-89f5-e84af142bf86
+00000000-0000-0000-0000-000000000000	236	rqfqt47jqjxs	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	t	2026-10-14 22:55:07.700436+07	2026-10-15 00:23:39.32765+07	wexsvj6cht7x	25b833cc-0f00-4a41-89f5-e84af142bf86
+00000000-0000-0000-0000-000000000000	239	6mv5abvpeey3	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	t	2026-10-15 02:41:24.040848+07	2026-10-15 10:27:30.153635+07	3cxsnc6nwcp5	25b833cc-0f00-4a41-89f5-e84af142bf86
+00000000-0000-0000-0000-000000000000	195	4rfakp6kva5a	71532f37-a14c-4909-b1fd-f499d8783a38	t	2026-10-12 16:15:28.669556+07	2026-10-12 22:40:22.925192+07	okolx3gygc5s	959f43c6-6237-456c-97be-763a47c213a0
+00000000-0000-0000-0000-000000000000	304	ymyzi4qlxnpd	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	t	2026-10-26 17:16:44.558027+07	2026-10-27 16:48:53.19431+07	a2rt3nlv2upd	25b833cc-0f00-4a41-89f5-e84af142bf86
+00000000-0000-0000-0000-000000000000	203	wp75wuyph6r4	71532f37-a14c-4909-b1fd-f499d8783a38	t	2026-10-12 22:40:22.944748+07	2026-10-13 07:05:05.19273+07	4rfakp6kva5a	959f43c6-6237-456c-97be-763a47c213a0
+00000000-0000-0000-0000-000000000000	190	stygwbtfxqzp	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	t	2026-10-12 11:56:01.858073+07	2026-10-15 17:53:02.093757+07	\N	72da545f-0dca-461c-9876-96001d717b23
+00000000-0000-0000-0000-000000000000	191	kaddrm62k7qa	71532f37-a14c-4909-b1fd-f499d8783a38	t	2026-10-12 12:09:25.752909+07	2026-10-13 08:36:50.472878+07	elywazp6z3mc	d7ff56ee-1217-48b9-b2f4-daffe4309e2c
+00000000-0000-0000-0000-000000000000	192	m27tatrij67p	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	t	2026-10-12 13:07:31.612543+07	2026-10-13 09:23:23.17588+07	xze37b2psqqq	25b833cc-0f00-4a41-89f5-e84af142bf86
+00000000-0000-0000-0000-000000000000	241	uyrr2ag6xe5z	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	t	2026-10-15 11:30:08.021678+07	2026-10-15 20:09:09.906322+07	ot7b5myg37al	25b833cc-0f00-4a41-89f5-e84af142bf86
+00000000-0000-0000-0000-000000000000	208	jmwjcfdr7yte	71532f37-a14c-4909-b1fd-f499d8783a38	t	2026-10-13 07:05:05.216117+07	2026-10-13 09:46:57.155676+07	wp75wuyph6r4	959f43c6-6237-456c-97be-763a47c213a0
+00000000-0000-0000-0000-000000000000	209	7f4al3sok5v5	71532f37-a14c-4909-b1fd-f499d8783a38	t	2026-10-13 08:36:50.492175+07	2026-10-13 11:07:28.874006+07	kaddrm62k7qa	d7ff56ee-1217-48b9-b2f4-daffe4309e2c
+00000000-0000-0000-0000-000000000000	249	ln2oo7jezm4z	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	t	2026-10-15 20:09:09.926023+07	2026-10-16 03:26:41.153025+07	uyrr2ag6xe5z	25b833cc-0f00-4a41-89f5-e84af142bf86
+00000000-0000-0000-0000-000000000000	250	ptv7intsmids	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	t	2026-10-16 03:26:41.176432+07	2026-10-16 09:19:36.167237+07	ln2oo7jezm4z	25b833cc-0f00-4a41-89f5-e84af142bf86
+00000000-0000-0000-0000-000000000000	211	b5qbnb63iskp	71532f37-a14c-4909-b1fd-f499d8783a38	t	2026-10-13 09:46:57.164551+07	2026-10-13 11:35:44.529678+07	jmwjcfdr7yte	959f43c6-6237-456c-97be-763a47c213a0
+00000000-0000-0000-0000-000000000000	212	oskymdenq4x4	71532f37-a14c-4909-b1fd-f499d8783a38	t	2026-10-13 11:07:28.892775+07	2026-10-13 13:12:05.876342+07	7f4al3sok5v5	d7ff56ee-1217-48b9-b2f4-daffe4309e2c
+00000000-0000-0000-0000-000000000000	216	khs45odhjy4t	71532f37-a14c-4909-b1fd-f499d8783a38	t	2026-10-13 13:12:05.890874+07	2026-10-13 14:58:14.931261+07	oskymdenq4x4	d7ff56ee-1217-48b9-b2f4-daffe4309e2c
+00000000-0000-0000-0000-000000000000	210	leptca5w5mfu	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	t	2026-10-13 09:23:23.197166+07	2026-10-13 18:19:06.205935+07	m27tatrij67p	25b833cc-0f00-4a41-89f5-e84af142bf86
+00000000-0000-0000-0000-000000000000	254	4os2iqmrste2	71532f37-a14c-4909-b1fd-f499d8783a38	f	2026-10-16 10:13:24.118597+07	2026-10-16 10:13:24.118597+07	7ec4qfjmybxh	959f43c6-6237-456c-97be-763a47c213a0
+00000000-0000-0000-0000-000000000000	218	elrxztk3p6xc	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	t	2026-10-13 18:19:06.221255+07	2026-10-13 19:42:59.23285+07	leptca5w5mfu	25b833cc-0f00-4a41-89f5-e84af142bf86
+00000000-0000-0000-0000-000000000000	252	jzw33fqcs4qj	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	t	2026-10-16 09:19:36.192271+07	2026-10-16 14:22:19.737062+07	ptv7intsmids	25b833cc-0f00-4a41-89f5-e84af142bf86
+00000000-0000-0000-0000-000000000000	219	vtummzctooas	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	t	2026-10-13 19:42:59.247816+07	2026-10-13 20:41:11.281893+07	elrxztk3p6xc	25b833cc-0f00-4a41-89f5-e84af142bf86
+00000000-0000-0000-0000-000000000000	220	4durhcvhk6w7	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	t	2026-10-13 20:41:11.303413+07	2026-10-14 05:38:19.184208+07	vtummzctooas	25b833cc-0f00-4a41-89f5-e84af142bf86
+00000000-0000-0000-0000-000000000000	217	zdwdz4ne76fx	71532f37-a14c-4909-b1fd-f499d8783a38	t	2026-10-13 14:58:14.952299+07	2026-10-14 11:01:27.104253+07	khs45odhjy4t	d7ff56ee-1217-48b9-b2f4-daffe4309e2c
+00000000-0000-0000-0000-000000000000	255	vauagyl2l5vn	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	t	2026-10-16 14:22:19.756198+07	2026-10-16 16:02:45.625064+07	jzw33fqcs4qj	25b833cc-0f00-4a41-89f5-e84af142bf86
+00000000-0000-0000-0000-000000000000	256	fawp2ev2moke	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	t	2026-10-16 16:02:45.644849+07	2026-10-17 02:37:43.194044+07	vauagyl2l5vn	25b833cc-0f00-4a41-89f5-e84af142bf86
+00000000-0000-0000-0000-000000000000	259	65un6zan35pg	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	t	2026-10-17 02:37:43.215567+07	2026-10-17 09:44:35.920355+07	fawp2ev2moke	25b833cc-0f00-4a41-89f5-e84af142bf86
+00000000-0000-0000-0000-000000000000	260	fov2o2irvqtn	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	t	2026-10-17 09:44:35.938595+07	2026-10-17 16:11:55.800776+07	65un6zan35pg	25b833cc-0f00-4a41-89f5-e84af142bf86
+00000000-0000-0000-0000-000000000000	261	s36vv6kqugki	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	t	2026-10-17 16:11:55.825872+07	2026-10-17 17:24:56.230262+07	fov2o2irvqtn	25b833cc-0f00-4a41-89f5-e84af142bf86
+00000000-0000-0000-0000-000000000000	262	p4fbekcuqzne	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	t	2026-10-17 17:24:56.24401+07	2026-10-18 02:02:32.052207+07	s36vv6kqugki	25b833cc-0f00-4a41-89f5-e84af142bf86
+00000000-0000-0000-0000-000000000000	264	wyls7ucdwled	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	t	2026-10-18 02:02:32.074217+07	2026-10-18 03:32:05.777747+07	p4fbekcuqzne	25b833cc-0f00-4a41-89f5-e84af142bf86
+00000000-0000-0000-0000-000000000000	248	4y2gy2kpilt7	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	t	2026-10-15 17:53:02.119901+07	2026-10-19 04:12:17.59585+07	stygwbtfxqzp	72da545f-0dca-461c-9876-96001d717b23
+00000000-0000-0000-0000-000000000000	266	et5f4byg63r5	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	t	2026-10-19 04:12:17.620631+07	2026-10-19 05:48:30.072117+07	4y2gy2kpilt7	72da545f-0dca-461c-9876-96001d717b23
+00000000-0000-0000-0000-000000000000	265	dofehn6bma6v	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	t	2026-10-18 03:32:05.798665+07	2026-10-20 13:11:09.67531+07	wyls7ucdwled	25b833cc-0f00-4a41-89f5-e84af142bf86
+00000000-0000-0000-0000-000000000000	269	ejnehrsqgmvx	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	t	2026-10-20 13:11:09.746339+07	2026-10-20 15:24:19.505214+07	dofehn6bma6v	25b833cc-0f00-4a41-89f5-e84af142bf86
+00000000-0000-0000-0000-000000000000	270	hpxkmwjygool	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	t	2026-10-20 15:24:19.528216+07	2026-10-22 08:39:56.584758+07	ejnehrsqgmvx	25b833cc-0f00-4a41-89f5-e84af142bf86
+00000000-0000-0000-0000-000000000000	267	j2gov63zzxmw	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	t	2026-10-19 05:48:30.091605+07	2026-10-22 09:42:20.739096+07	et5f4byg63r5	72da545f-0dca-461c-9876-96001d717b23
+00000000-0000-0000-0000-000000000000	272	vge2qui3f6qi	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	t	2026-10-22 08:39:56.608762+07	2026-10-22 12:04:40.135768+07	hpxkmwjygool	25b833cc-0f00-4a41-89f5-e84af142bf86
+00000000-0000-0000-0000-000000000000	273	bo7yq7xct4qz	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	t	2026-10-22 09:42:20.760488+07	2026-10-22 16:10:26.768366+07	j2gov63zzxmw	72da545f-0dca-461c-9876-96001d717b23
+00000000-0000-0000-0000-000000000000	275	eq23kfo4nfz6	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	t	2026-10-22 12:04:40.157476+07	2026-10-24 11:09:11.581102+07	vge2qui3f6qi	25b833cc-0f00-4a41-89f5-e84af142bf86
+00000000-0000-0000-0000-000000000000	222	342cxnbi3usp	71532f37-a14c-4909-b1fd-f499d8783a38	t	2026-10-14 11:01:27.120846+07	2026-10-25 16:09:18.344609+07	zdwdz4ne76fx	d7ff56ee-1217-48b9-b2f4-daffe4309e2c
+00000000-0000-0000-0000-000000000000	277	wxlxln2iouvh	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	t	2026-10-22 16:10:26.781256+07	2026-10-23 17:30:34.524196+07	bo7yq7xct4qz	72da545f-0dca-461c-9876-96001d717b23
+00000000-0000-0000-0000-000000000000	281	z3ffevekfswg	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	t	2026-10-24 11:09:11.598015+07	2026-10-24 12:18:19.573156+07	eq23kfo4nfz6	25b833cc-0f00-4a41-89f5-e84af142bf86
+00000000-0000-0000-0000-000000000000	285	k64hayagci4g	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	t	2026-10-25 07:37:11.307485+07	2026-10-26 15:21:26.076953+07	djthebulzmy5	25b833cc-0f00-4a41-89f5-e84af142bf86
+00000000-0000-0000-0000-000000000000	282	sf5i3fqt7xhf	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	t	2026-10-24 12:18:19.589916+07	2026-10-24 22:38:58.849821+07	z3ffevekfswg	25b833cc-0f00-4a41-89f5-e84af142bf86
+00000000-0000-0000-0000-000000000000	303	a2rt3nlv2upd	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	t	2026-10-26 15:21:26.100237+07	2026-10-26 17:16:44.535552+07	k64hayagci4g	25b833cc-0f00-4a41-89f5-e84af142bf86
+00000000-0000-0000-0000-000000000000	283	djthebulzmy5	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	t	2026-10-24 22:38:58.867072+07	2026-10-25 07:37:11.282034+07	sf5i3fqt7xhf	25b833cc-0f00-4a41-89f5-e84af142bf86
+00000000-0000-0000-0000-000000000000	280	2cc42hd37d3b	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	t	2026-10-23 17:30:34.543579+07	2026-10-25 15:16:52.529875+07	wxlxln2iouvh	72da545f-0dca-461c-9876-96001d717b23
+00000000-0000-0000-0000-000000000000	286	arurdfuiuffw	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	t	2026-10-25 15:16:52.550324+07	2026-10-27 09:48:19.800637+07	2cc42hd37d3b	72da545f-0dca-461c-9876-96001d717b23
+00000000-0000-0000-0000-000000000000	368	lixk4bbf2ddo	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	t	2026-11-10 14:23:40.241779+07	2026-11-10 18:25:32.111832+07	\N	5b9ee4df-ea3c-4c22-b9ff-f51ad94e6c52
+00000000-0000-0000-0000-000000000000	369	s4zja4ix4iky	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	f	2026-11-10 18:25:32.134856+07	2026-11-10 18:25:32.134856+07	lixk4bbf2ddo	5b9ee4df-ea3c-4c22-b9ff-f51ad94e6c52
+00000000-0000-0000-0000-000000000000	314	av75vtzjo2sw	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	t	2026-10-27 16:48:53.209124+07	2026-10-27 21:24:54.155229+07	ymyzi4qlxnpd	25b833cc-0f00-4a41-89f5-e84af142bf86
+00000000-0000-0000-0000-000000000000	287	5xlv3kaxtrjp	71532f37-a14c-4909-b1fd-f499d8783a38	t	2026-10-25 16:09:18.36465+07	2026-10-28 00:12:08.67638+07	342cxnbi3usp	d7ff56ee-1217-48b9-b2f4-daffe4309e2c
+00000000-0000-0000-0000-000000000000	316	6t3axx5y6zvc	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	t	2026-10-27 21:24:54.173028+07	2026-10-28 21:04:28.700146+07	av75vtzjo2sw	25b833cc-0f00-4a41-89f5-e84af142bf86
+00000000-0000-0000-0000-000000000000	319	7e3supy5gccm	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	t	2026-10-28 21:04:28.730059+07	2026-10-30 22:38:00.296755+07	6t3axx5y6zvc	25b833cc-0f00-4a41-89f5-e84af142bf86
+00000000-0000-0000-0000-000000000000	323	4ksp2f7kkdit	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	t	2026-10-30 22:38:00.316739+07	2026-10-31 06:01:10.615627+07	7e3supy5gccm	25b833cc-0f00-4a41-89f5-e84af142bf86
+00000000-0000-0000-0000-000000000000	324	orszo5afmoov	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	t	2026-10-31 06:01:10.635317+07	2026-10-31 07:40:33.350613+07	4ksp2f7kkdit	25b833cc-0f00-4a41-89f5-e84af142bf86
+00000000-0000-0000-0000-000000000000	325	ej7i4delxpgz	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	t	2026-10-31 07:40:33.374228+07	2026-10-31 10:45:23.779006+07	orszo5afmoov	25b833cc-0f00-4a41-89f5-e84af142bf86
+00000000-0000-0000-0000-000000000000	326	kebcpb4susrm	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	t	2026-10-31 10:45:23.799376+07	2026-10-31 11:46:55.916276+07	ej7i4delxpgz	25b833cc-0f00-4a41-89f5-e84af142bf86
+00000000-0000-0000-0000-000000000000	318	ntvsjz7r3t4k	71532f37-a14c-4909-b1fd-f499d8783a38	t	2026-10-28 00:12:08.694257+07	2026-10-31 12:26:52.598839+07	5xlv3kaxtrjp	d7ff56ee-1217-48b9-b2f4-daffe4309e2c
+00000000-0000-0000-0000-000000000000	328	624pu2sm43pe	71532f37-a14c-4909-b1fd-f499d8783a38	f	2026-10-31 12:26:52.620632+07	2026-10-31 12:26:52.620632+07	ntvsjz7r3t4k	d7ff56ee-1217-48b9-b2f4-daffe4309e2c
+00000000-0000-0000-0000-000000000000	327	xpy66z42r4y5	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	t	2026-10-31 11:46:55.927746+07	2026-10-31 17:28:42.742896+07	kebcpb4susrm	25b833cc-0f00-4a41-89f5-e84af142bf86
+00000000-0000-0000-0000-000000000000	329	qwyd3u3xjp3p	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	t	2026-10-31 17:28:42.764063+07	2026-10-31 19:01:16.154689+07	xpy66z42r4y5	25b833cc-0f00-4a41-89f5-e84af142bf86
+00000000-0000-0000-0000-000000000000	330	w477pkkoxgko	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	t	2026-10-31 19:01:16.175399+07	2026-11-01 20:26:48.941328+07	qwyd3u3xjp3p	25b833cc-0f00-4a41-89f5-e84af142bf86
+00000000-0000-0000-0000-000000000000	334	sxe6yqbbacpq	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	t	2026-11-01 20:26:48.970744+07	2026-11-02 05:32:38.718131+07	w477pkkoxgko	25b833cc-0f00-4a41-89f5-e84af142bf86
+00000000-0000-0000-0000-000000000000	336	6f2dp2fndk2z	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	t	2026-11-02 05:32:38.7439+07	2026-11-02 20:16:37.555762+07	sxe6yqbbacpq	25b833cc-0f00-4a41-89f5-e84af142bf86
+00000000-0000-0000-0000-000000000000	337	fnc4x7df6hi5	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	t	2026-11-02 20:16:37.580684+07	2026-11-03 08:00:52.999111+07	6f2dp2fndk2z	25b833cc-0f00-4a41-89f5-e84af142bf86
+00000000-0000-0000-0000-000000000000	339	c4ncghrmkn6a	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	f	2026-11-03 08:00:53.02137+07	2026-11-03 08:00:53.02137+07	fnc4x7df6hi5	25b833cc-0f00-4a41-89f5-e84af142bf86
+00000000-0000-0000-0000-000000000000	312	kfchypdj544b	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	t	2026-10-27 09:48:19.806131+07	2026-11-05 12:10:06.228725+07	arurdfuiuffw	72da545f-0dca-461c-9876-96001d717b23
+00000000-0000-0000-0000-000000000000	344	5fqumiq7qpm5	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	f	2026-11-05 12:10:06.265361+07	2026-11-05 12:10:06.265361+07	kfchypdj544b	72da545f-0dca-461c-9876-96001d717b23
+\.
+
+
+--
+-- Data for Name: sso_providers; Type: TABLE DATA; Schema: auth; Owner: supabase_auth_admin
+--
+
+COPY "auth"."sso_providers" ("id", "resource_id", "created_at", "updated_at", "disabled") FROM stdin;
+\.
+
+
+--
+-- Data for Name: saml_providers; Type: TABLE DATA; Schema: auth; Owner: supabase_auth_admin
+--
+
+COPY "auth"."saml_providers" ("id", "sso_provider_id", "entity_id", "metadata_xml", "metadata_url", "attribute_mapping", "created_at", "updated_at", "name_id_format") FROM stdin;
+\.
+
+
+--
+-- Data for Name: saml_relay_states; Type: TABLE DATA; Schema: auth; Owner: supabase_auth_admin
+--
+
+COPY "auth"."saml_relay_states" ("id", "sso_provider_id", "request_id", "for_email", "redirect_to", "created_at", "updated_at", "flow_state_id") FROM stdin;
+\.
+
+
+--
+-- Data for Name: scim_tokens; Type: TABLE DATA; Schema: auth; Owner: supabase_auth_admin
+--
+
+COPY "auth"."scim_tokens" ("id", "sso_provider_id", "token_hash", "prefix", "created_at", "expires_at", "revoked_at", "last_used_at") FROM stdin;
+\.
+
+
+--
+-- Data for Name: scim_users; Type: TABLE DATA; Schema: auth; Owner: supabase_auth_admin
+--
+
+COPY "auth"."scim_users" ("id", "sso_provider_id", "user_id", "resource", "created_at", "updated_at", "deleted_at") FROM stdin;
+\.
+
+
+--
+-- Data for Name: sso_domains; Type: TABLE DATA; Schema: auth; Owner: supabase_auth_admin
+--
+
+COPY "auth"."sso_domains" ("id", "sso_provider_id", "domain", "created_at", "updated_at") FROM stdin;
+\.
+
+
+--
+-- Data for Name: webauthn_challenges; Type: TABLE DATA; Schema: auth; Owner: supabase_auth_admin
+--
+
+COPY "auth"."webauthn_challenges" ("id", "user_id", "challenge_type", "session_data", "created_at", "expires_at") FROM stdin;
+\.
+
+
+--
+-- Data for Name: webauthn_credentials; Type: TABLE DATA; Schema: auth; Owner: supabase_auth_admin
+--
+
+COPY "auth"."webauthn_credentials" ("id", "user_id", "credential_id", "public_key", "attestation_type", "aaguid", "sign_count", "transports", "backup_eligible", "backed_up", "friendly_name", "created_at", "updated_at", "last_used_at") FROM stdin;
+\.
+
+
+--
+-- Data for Name: budgets; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY "public"."budgets" ("id", "user_id", "month", "category", "amount", "created_at") FROM stdin;
+4	9cc4f707-42ad-4005-9edb-b0aee7921de4	2026-09-01	Makanan	2000000.00	2026-09-24 02:24:15.369328+07
+6	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-10-01	Makanan	3000000.00	2026-10-06 23:50:36.629999+07
+7	543c1512-85e1-49e3-803c-463e9dea8091	2026-10-01	Gaji	46000000.00	2026-10-07 15:04:09.598289+07
+8	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-10-01	Belanja	3000000.00	2026-10-07 18:38:26.007849+07
+11	0941d6f4-4f0d-4dd1-8ca2-70fa36b59ccd	2026-10-01	Belanja	1231231.00	2026-10-08 12:31:10.894377+07
+\.
+
+
+--
+-- Data for Name: categories; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY "public"."categories" ("id", "user_id", "name", "created_at") FROM stdin;
+1	9cc4f707-42ad-4005-9edb-b0aee7921de4	Gaji	2026-09-23 05:10:21.874051+07
+2	9cc4f707-42ad-4005-9edb-b0aee7921de4	Bonus	2026-09-23 05:10:21.874051+07
+3	9cc4f707-42ad-4005-9edb-b0aee7921de4	Makanan	2026-09-23 05:10:21.874051+07
+4	9cc4f707-42ad-4005-9edb-b0aee7921de4	Transportasi	2026-09-23 05:10:21.874051+07
+5	9cc4f707-42ad-4005-9edb-b0aee7921de4	Tagihan	2026-09-23 05:10:21.874051+07
+6	9cc4f707-42ad-4005-9edb-b0aee7921de4	Belanja	2026-09-23 05:10:21.874051+07
+7	9cc4f707-42ad-4005-9edb-b0aee7921de4	Hiburan	2026-09-23 05:10:21.874051+07
+8	9cc4f707-42ad-4005-9edb-b0aee7921de4	Kesehatan	2026-09-23 05:10:21.874051+07
+9	9cc4f707-42ad-4005-9edb-b0aee7921de4	Pendidikan	2026-09-23 05:10:21.874051+07
+11	9cc4f707-42ad-4005-9edb-b0aee7921de4	Lainnya	2026-09-23 05:10:21.874051+07
+12	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	Gaji	2026-09-24 02:26:44.828157+07
+13	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	Bonus	2026-09-24 02:26:44.828157+07
+15	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	Transportasi	2026-09-24 02:26:44.828157+07
+16	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	Tagihan	2026-09-24 02:26:44.828157+07
+17	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	Belanja	2026-09-24 02:26:44.828157+07
+18	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	Hiburan	2026-09-24 02:26:44.828157+07
+19	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	Kesehatan	2026-09-24 02:26:44.828157+07
+20	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	Pendidikan	2026-09-24 02:26:44.828157+07
+22	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	Lainnya	2026-09-24 02:26:44.828157+07
+23	126faf31-b09e-4087-a462-540d81a3131e	Gaji	2026-09-25 23:44:16.980786+07
+24	126faf31-b09e-4087-a462-540d81a3131e	Bonus	2026-09-25 23:44:16.980786+07
+25	126faf31-b09e-4087-a462-540d81a3131e	Makanan	2026-09-25 23:44:16.980786+07
+26	126faf31-b09e-4087-a462-540d81a3131e	Transportasi	2026-09-25 23:44:16.980786+07
+27	126faf31-b09e-4087-a462-540d81a3131e	Tagihan	2026-09-25 23:44:16.980786+07
+28	126faf31-b09e-4087-a462-540d81a3131e	Belanja	2026-09-25 23:44:16.980786+07
+29	126faf31-b09e-4087-a462-540d81a3131e	Hiburan	2026-09-25 23:44:16.980786+07
+30	126faf31-b09e-4087-a462-540d81a3131e	Kesehatan	2026-09-25 23:44:16.980786+07
+31	126faf31-b09e-4087-a462-540d81a3131e	Pendidikan	2026-09-25 23:44:16.980786+07
+32	126faf31-b09e-4087-a462-540d81a3131e	Investasi	2026-09-25 23:44:16.980786+07
+33	126faf31-b09e-4087-a462-540d81a3131e	Lainnya	2026-09-25 23:44:16.980786+07
+34	0941d6f4-4f0d-4dd1-8ca2-70fa36b59ccd	Gaji	2026-10-04 00:43:11.777143+07
+35	0941d6f4-4f0d-4dd1-8ca2-70fa36b59ccd	Bonus	2026-10-04 00:43:11.777143+07
+36	0941d6f4-4f0d-4dd1-8ca2-70fa36b59ccd	Makanan	2026-10-04 00:43:11.777143+07
+37	0941d6f4-4f0d-4dd1-8ca2-70fa36b59ccd	Transportasi	2026-10-04 00:43:11.777143+07
+38	0941d6f4-4f0d-4dd1-8ca2-70fa36b59ccd	Tagihan	2026-10-04 00:43:11.777143+07
+39	0941d6f4-4f0d-4dd1-8ca2-70fa36b59ccd	Belanja	2026-10-04 00:43:11.777143+07
+40	0941d6f4-4f0d-4dd1-8ca2-70fa36b59ccd	Hiburan	2026-10-04 00:43:11.777143+07
+41	0941d6f4-4f0d-4dd1-8ca2-70fa36b59ccd	Kesehatan	2026-10-04 00:43:11.777143+07
+42	0941d6f4-4f0d-4dd1-8ca2-70fa36b59ccd	Pendidikan	2026-10-04 00:43:11.777143+07
+43	0941d6f4-4f0d-4dd1-8ca2-70fa36b59ccd	Investasi	2026-10-04 00:43:11.777143+07
+44	0941d6f4-4f0d-4dd1-8ca2-70fa36b59ccd	Lainnya	2026-10-04 00:43:11.777143+07
+45	543c1512-85e1-49e3-803c-463e9dea8091	Gaji	2026-10-05 15:58:22.624697+07
+46	543c1512-85e1-49e3-803c-463e9dea8091	Bonus	2026-10-05 15:58:22.624697+07
+47	543c1512-85e1-49e3-803c-463e9dea8091	Makanan	2026-10-05 15:58:22.624697+07
+48	543c1512-85e1-49e3-803c-463e9dea8091	Transportasi	2026-10-05 15:58:22.624697+07
+49	543c1512-85e1-49e3-803c-463e9dea8091	Tagihan	2026-10-05 15:58:22.624697+07
+50	543c1512-85e1-49e3-803c-463e9dea8091	Belanja	2026-10-05 15:58:22.624697+07
+51	543c1512-85e1-49e3-803c-463e9dea8091	Hiburan	2026-10-05 15:58:22.624697+07
+52	543c1512-85e1-49e3-803c-463e9dea8091	Kesehatan	2026-10-05 15:58:22.624697+07
+53	543c1512-85e1-49e3-803c-463e9dea8091	Pendidikan	2026-10-05 15:58:22.624697+07
+54	543c1512-85e1-49e3-803c-463e9dea8091	Investasi	2026-10-05 15:58:22.624697+07
+55	543c1512-85e1-49e3-803c-463e9dea8091	Lainnya	2026-10-05 15:58:22.624697+07
+56	8bd5441c-ad00-4d75-9651-cc4b61c0f942	Gaji	2026-10-06 19:30:32.386465+07
+57	8bd5441c-ad00-4d75-9651-cc4b61c0f942	Bonus	2026-10-06 19:30:32.386465+07
+58	8bd5441c-ad00-4d75-9651-cc4b61c0f942	Makanan	2026-10-06 19:30:32.386465+07
+59	8bd5441c-ad00-4d75-9651-cc4b61c0f942	Transportasi	2026-10-06 19:30:32.386465+07
+60	8bd5441c-ad00-4d75-9651-cc4b61c0f942	Tagihan	2026-10-06 19:30:32.386465+07
+61	8bd5441c-ad00-4d75-9651-cc4b61c0f942	Belanja	2026-10-06 19:30:32.386465+07
+62	8bd5441c-ad00-4d75-9651-cc4b61c0f942	Hiburan	2026-10-06 19:30:32.386465+07
+63	8bd5441c-ad00-4d75-9651-cc4b61c0f942	Kesehatan	2026-10-06 19:30:32.386465+07
+64	8bd5441c-ad00-4d75-9651-cc4b61c0f942	Pendidikan	2026-10-06 19:30:32.386465+07
+65	8bd5441c-ad00-4d75-9651-cc4b61c0f942	Investasi	2026-10-06 19:30:32.386465+07
+66	8bd5441c-ad00-4d75-9651-cc4b61c0f942	Lainnya	2026-10-06 19:30:32.386465+07
+165	71532f37-a14c-4909-b1fd-f499d8783a38	Gaji	2026-10-08 12:12:33.252618+07
+166	71532f37-a14c-4909-b1fd-f499d8783a38	Bonus	2026-10-08 12:12:33.252618+07
+167	71532f37-a14c-4909-b1fd-f499d8783a38	Makanan	2026-10-08 12:12:33.252618+07
+168	71532f37-a14c-4909-b1fd-f499d8783a38	Transportasi	2026-10-08 12:12:33.252618+07
+169	71532f37-a14c-4909-b1fd-f499d8783a38	Tagihan	2026-10-08 12:12:33.252618+07
+170	71532f37-a14c-4909-b1fd-f499d8783a38	Belanja	2026-10-08 12:12:33.252618+07
+171	71532f37-a14c-4909-b1fd-f499d8783a38	Hiburan	2026-10-08 12:12:33.252618+07
+172	71532f37-a14c-4909-b1fd-f499d8783a38	Kesehatan	2026-10-08 12:12:33.252618+07
+173	71532f37-a14c-4909-b1fd-f499d8783a38	Pendidikan	2026-10-08 12:12:33.252618+07
+174	71532f37-a14c-4909-b1fd-f499d8783a38	Investasi	2026-10-08 12:12:33.252618+07
+175	71532f37-a14c-4909-b1fd-f499d8783a38	Lainnya	2026-10-08 12:12:33.252618+07
+201	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	Token Listrik	2026-10-08 21:37:40.982377+07
+203	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	Kesehatan	2026-10-09 20:20:25.146938+07
+204	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	Pendidikan	2026-10-09 20:20:27.994615+07
+208	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	Investasi	2026-10-10 20:46:12.440744+07
+210	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	Investasi	2026-10-10 20:47:11.250124+07
+214	9cc4f707-42ad-4005-9edb-b0aee7921de4	Investasi	2026-10-13 00:48:09.113684+07
+218	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	Perkir	2026-10-19 10:23:17.199317+07
+111	0a4467f5-c6a0-4c35-8a6a-4eea1a220f0c	Gaji	2026-10-06 19:54:51.857657+07
+112	0a4467f5-c6a0-4c35-8a6a-4eea1a220f0c	Bonus	2026-10-06 19:54:51.857657+07
+113	0a4467f5-c6a0-4c35-8a6a-4eea1a220f0c	Makanan	2026-10-06 19:54:51.857657+07
+114	0a4467f5-c6a0-4c35-8a6a-4eea1a220f0c	Transportasi	2026-10-06 19:54:51.857657+07
+115	0a4467f5-c6a0-4c35-8a6a-4eea1a220f0c	Tagihan	2026-10-06 19:54:51.857657+07
+116	0a4467f5-c6a0-4c35-8a6a-4eea1a220f0c	Belanja	2026-10-06 19:54:51.857657+07
+117	0a4467f5-c6a0-4c35-8a6a-4eea1a220f0c	Hiburan	2026-10-06 19:54:51.857657+07
+118	0a4467f5-c6a0-4c35-8a6a-4eea1a220f0c	Kesehatan	2026-10-06 19:54:51.857657+07
+119	0a4467f5-c6a0-4c35-8a6a-4eea1a220f0c	Pendidikan	2026-10-06 19:54:51.857657+07
+120	0a4467f5-c6a0-4c35-8a6a-4eea1a220f0c	Investasi	2026-10-06 19:54:51.857657+07
+121	0a4467f5-c6a0-4c35-8a6a-4eea1a220f0c	Lainnya	2026-10-06 19:54:51.857657+07
+122	0a4467f5-c6a0-4c35-8a6a-4eea1a220f0c	Commission	2026-10-06 20:06:49.908735+07
+123	0a4467f5-c6a0-4c35-8a6a-4eea1a220f0c	Restock	2026-10-06 20:09:17.190323+07
+164	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	Motor	2026-10-08 11:44:43.156779+07
+137	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	Makanan	2026-10-06 23:40:03.293729+07
+138	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	Transportasi	2026-10-06 23:40:03.293729+07
+139	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	Tagihan	2026-10-06 23:40:03.293729+07
+140	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	Belanja	2026-10-06 23:40:03.293729+07
+141	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	Hiburan	2026-10-06 23:40:03.293729+07
+205	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	Comifuro	2026-10-09 20:41:57.848451+07
+145	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	Lainnya	2026-10-06 23:40:03.293729+07
+217	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	Makanan	2026-10-16 09:51:26.202968+07
+219	9994be3f-31c9-497f-94f0-1c954547425a	Gaji	2026-11-03 21:13:36.384193+07
+220	9994be3f-31c9-497f-94f0-1c954547425a	Bonus	2026-11-03 21:13:36.384193+07
+221	9994be3f-31c9-497f-94f0-1c954547425a	Makanan	2026-11-03 21:13:36.384193+07
+222	9994be3f-31c9-497f-94f0-1c954547425a	Transportasi	2026-11-03 21:13:36.384193+07
+223	9994be3f-31c9-497f-94f0-1c954547425a	Tagihan	2026-11-03 21:13:36.384193+07
+224	9994be3f-31c9-497f-94f0-1c954547425a	Belanja	2026-11-03 21:13:36.384193+07
+157	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	Gaji	2026-10-07 06:39:29.265516+07
+158	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	Bonus	2026-10-07 06:39:37.991662+07
+225	9994be3f-31c9-497f-94f0-1c954547425a	Hiburan	2026-11-03 21:13:36.384193+07
+226	9994be3f-31c9-497f-94f0-1c954547425a	Kesehatan	2026-11-03 21:13:36.384193+07
+227	9994be3f-31c9-497f-94f0-1c954547425a	Pendidikan	2026-11-03 21:13:36.384193+07
+228	9994be3f-31c9-497f-94f0-1c954547425a	Investasi	2026-11-03 21:13:36.384193+07
+229	9994be3f-31c9-497f-94f0-1c954547425a	Lainnya	2026-11-03 21:13:36.384193+07
+\.
+
+
+--
+-- Data for Name: category_catalog; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY "public"."category_catalog" ("id", "name", "is_default", "sort_order", "created_at") FROM stdin;
+1	Gaji	t	10	2026-10-14 12:54:28.723388+07
+2	Bonus	t	20	2026-10-14 12:54:28.723388+07
+4	Transportasi	t	40	2026-10-14 12:54:28.723388+07
+5	Tagihan	t	50	2026-10-14 12:54:28.723388+07
+7	Hiburan	t	70	2026-10-14 12:54:28.723388+07
+9	Pendidikan	t	90	2026-10-14 12:54:28.723388+07
+11	Lainnya	t	110	2026-10-14 12:54:28.723388+07
+14	Comifuro	f	1000	2026-10-14 12:54:28.723388+07
+15	Commission	f	1000	2026-10-14 12:54:28.723388+07
+22	Motor	f	1000	2026-10-14 12:54:28.723388+07
+24	Restock	f	1000	2026-10-14 12:54:28.723388+07
+26	Token Listrik	f	1000	2026-10-14 12:54:28.723388+07
+10	Investasi	t	100	2026-10-14 12:54:28.723388+07
+6	Belanja	t	60	2026-10-14 12:54:28.723388+07
+8	Kesehatan	t	80	2026-10-14 12:54:28.723388+07
+3	Kuliner	t	30	2026-10-14 12:54:28.723388+07
+37	Makanan	f	1000	2026-10-27 10:24:54.317766+07
+\.
+
+
+--
+-- Data for Name: financial_goals; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY "public"."financial_goals" ("id", "user_id", "name", "target_amount", "saved_amount", "target_date", "created_at") FROM stdin;
+1	9cc4f707-42ad-4005-9edb-b0aee7921de4	figure asuna 1/7	2700000.00	150000.00	2026-10-31	2026-09-24 02:23:12.514867+07
+2	0941d6f4-4f0d-4dd1-8ca2-70fa36b59ccd	gulingkan prabowo	5000000000.00	2131232.00	2026-10-08	2026-10-08 12:30:45.404462+07
+\.
+
+
+--
+-- Data for Name: profiles; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY "public"."profiles" ("id", "username", "created_at") FROM stdin;
+126faf31-b09e-4087-a462-540d81a3131e	ibay	2026-09-25 23:44:16.980786+07
+543c1512-85e1-49e3-803c-463e9dea8091	witheld	2026-10-05 15:58:22.624697+07
+8bd5441c-ad00-4d75-9651-cc4b61c0f942	rlayuta	2026-10-06 19:30:32.386465+07
+9cc4f707-42ad-4005-9edb-b0aee7921de4	tester	2026-09-22 23:18:03.008073+07
+0a4467f5-c6a0-4c35-8a6a-4eea1a220f0c	ra.dit	2026-10-06 19:54:51.857657+07
+5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	wowsrumahmakan	2026-10-06 23:40:03.293729+07
+71532f37-a14c-4909-b1fd-f499d8783a38	kurei shop	2026-10-08 12:12:33.252618+07
+0941d6f4-4f0d-4dd1-8ca2-70fa36b59ccd	tai	2026-10-04 00:43:11.777143+07
+27d0f21a-efea-48e0-bc00-a1394c5dd3a8	luqman	2026-09-24 02:26:44.828157+07
+9994be3f-31c9-497f-94f0-1c954547425a	dindin	2026-11-03 21:13:36.384193+07
+\.
+
+
+--
+-- Data for Name: recurring_transactions; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY "public"."recurring_transactions" ("id", "user_id", "name", "type", "category", "amount", "payment_method", "note", "day_of_month", "start_date", "end_date", "active", "created_at") FROM stdin;
+5	0941d6f4-4f0d-4dd1-8ca2-70fa36b59ccd	ngewe anime	expense	Belanja	150000.00	Transfer Bank	ngewe anime	1	2026-10-08	\N	t	2026-10-08 12:31:38.925404+07
+6	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	Bayar My Republic	expense	Tagihan	250000.00	Transfer Bank	Tagihan Internet Bulanan	1	2026-11-01	\N	t	2026-10-08 21:28:39.135897+07
+7	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	Kuota Pascabayar telkomsel	expense	Tagihan	88800.00	Transfer Bank	kuota internet	20	2026-10-20	\N	t	2026-10-08 21:29:34.470673+07
+8	9cc4f707-42ad-4005-9edb-b0aee7921de4	internet	expense	Tagihan	233500.00	Kartu Debit	tagin internet	1	2026-11-01	\N	t	2026-11-09 14:49:02.270975+07
+\.
+
+
+--
+-- Data for Name: transactions; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY "public"."transactions" ("id", "user_id", "transaction_date", "type", "category", "amount", "payment_method", "note", "created_at") FROM stdin;
+1	9cc4f707-42ad-4005-9edb-b0aee7921de4	2026-09-23	income	Gaji	8000000.00	Transfer Bank	gaji september 26	2026-09-23 04:52:00.429704+07
+2	9cc4f707-42ad-4005-9edb-b0aee7921de4	2026-09-24	expense	Hiburan	2500000.00	Transfer Bank	figure asuna muach muach	2026-09-23 05:22:52.795176+07
+3	9cc4f707-42ad-4005-9edb-b0aee7921de4	2026-09-24	expense	Makanan	500000.00	Transfer Bank	makan2 anak ita bandung	2026-09-23 05:23:25.291975+07
+4	9cc4f707-42ad-4005-9edb-b0aee7921de4	2026-09-24	expense	Tagihan	355000.00	Transfer Bank	kuota dan wifi	2026-09-23 05:24:09.113189+07
+5	9cc4f707-42ad-4005-9edb-b0aee7921de4	2026-09-24	expense	Transportasi	1000000.00	Transfer Bank	service asuna	2026-09-23 05:24:45.036167+07
+6	9cc4f707-42ad-4005-9edb-b0aee7921de4	2026-09-24	expense	Investasi	2000000.00	Transfer Bank	simpen uang	2026-09-23 05:25:16.603277+07
+7	9cc4f707-42ad-4005-9edb-b0aee7921de4	2026-09-30	expense	Tagihan	233500.00	Transfer Bank	my republic • Transaksi berulang: interner	2026-09-25 21:57:10.73118+07
+8	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-10-02	income	Lainnya	113000.00	Transfer Bank	Jual figurise burst hatsune miku	2026-10-06 19:15:56.927634+07
+9	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-10-03	expense	Lainnya	15000.00	Transfer Bank	Adm bca	2026-10-06 19:16:38.394301+07
+10	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-10-04	expense	Investasi	31732.00	Transfer Bank	Beli subs gemini pro luqmankun9029@gmail.com	2026-10-06 19:17:37.529846+07
+11	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-10-05	expense	Hiburan	59237.00	Transfer Bank	Beli pin can ichinose asuna kyou hobby shop	2026-10-06 19:18:36.459724+07
+12	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-10-05	income	Lainnya	1300000.00	Transfer Bank	Buat bayar wisuda dari ayah	2026-10-06 19:19:24.832053+07
+13	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-10-04	income	Lainnya	100000.00	Cash	Dari mamah	2026-10-06 19:20:06.565051+07
+14	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-10-05	expense	Belanja	10000.00	Cash	Beli susu buat sensei di koperasi	2026-10-06 19:20:33.932901+07
+15	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-10-05	income	Lainnya	12000.00	Transfer Bank	Dari sensei bayar susu + profit	2026-10-06 19:21:12.402037+07
+16	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-10-05	expense	Pendidikan	1300000.00	Kartu Debit	Bayar wisuda ke kampus	2026-10-06 19:21:58.482421+07
+19	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-10-05	income	Lainnya	100000.00	Transfer Bank	Dari arif buat beli plush kitasan di kyou	2026-10-06 19:24:38.614336+07
+20	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-10-05	expense	Hiburan	70564.00	Transfer Bank	Dp Beli plush kitasan di kyou	2026-10-06 19:25:16.906657+07
+21	9cc4f707-42ad-4005-9edb-b0aee7921de4	2026-10-06	expense	Belanja	200000.00	QRIS	\N	2026-10-06 19:45:58.663435+07
+22	0a4467f5-c6a0-4c35-8a6a-4eea1a220f0c	2026-10-01	expense	Restock	130000.00	Cash	Mie campur	2026-10-06 20:09:45.800905+07
+23	0a4467f5-c6a0-4c35-8a6a-4eea1a220f0c	2026-10-01	expense	Restock	250000.00	Cash	Roti, aneka selai, bahan chilli oil	2026-10-06 20:11:13.802315+07
+24	0a4467f5-c6a0-4c35-8a6a-4eea1a220f0c	2026-10-02	income	Commission	250000.00	Transfer Bank	\N	2026-10-06 20:11:45.095635+07
+25	0a4467f5-c6a0-4c35-8a6a-4eea1a220f0c	2026-10-04	income	Lainnya	130000.00	Cash	\N	2026-10-06 20:14:36.382348+07
+26	0a4467f5-c6a0-4c35-8a6a-4eea1a220f0c	2026-10-05	income	Commission	250000.00	Transfer Bank	\N	2026-10-06 20:15:07.101965+07
+27	0a4467f5-c6a0-4c35-8a6a-4eea1a220f0c	2026-10-05	expense	Tagihan	250000.00	Transfer Bank	Biznet	2026-10-06 20:15:32.731331+07
+28	9cc4f707-42ad-4005-9edb-b0aee7921de4	2026-10-06	expense	Hiburan	5000000.00	QRIS	haha hehe	2026-10-06 20:26:14.829555+07
+17	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-10-05	expense	Kuliner	5000.00	Transfer Bank	Beli exotea	2026-10-06 19:22:46.943788+07
+18	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-10-05	expense	Kuliner	22000.00	Cash	Ayam serundeng deket kampus	2026-10-06 19:23:28.838825+07
+31	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-10-06	income	Gaji	12475882.00	Cash	\N	2026-10-07 06:14:48.207773+07
+32	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-10-07	expense	Makanan	17000.00	QRIS	Sarapan	2026-10-07 06:25:45.941165+07
+33	543c1512-85e1-49e3-803c-463e9dea8091	2026-10-07	income	Investasi	46000000.00	Transfer Bank	KUR	2026-10-07 15:14:50.300899+07
+318	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-10-23	expense	Kuliner	17000.00	Cash	nasi kuning	2026-10-23 07:32:05.501713+07
+35	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-10-07	expense	Belanja	112000.00	QRIS	Sarung Tangan Respiro	2026-10-07 18:37:32.481095+07
+36	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-10-07	expense	Makanan	15700.00	QRIS	Makan Malam - Indomie	2026-10-07 19:37:43.317268+07
+37	543c1512-85e1-49e3-803c-463e9dea8091	2026-10-07	expense	Tagihan	15000000.00	Transfer Bank	\N	2026-10-07 22:52:16.330755+07
+38	543c1512-85e1-49e3-803c-463e9dea8091	2026-10-07	expense	Investasi	5000000.00	Transfer Bank	Tabungan	2026-10-07 22:53:11.362049+07
+39	543c1512-85e1-49e3-803c-463e9dea8091	2026-10-07	expense	Belanja	3591137.00	Transfer Bank	Belanja Bahan Petticoat	2026-10-08 08:07:14.933575+07
+40	543c1512-85e1-49e3-803c-463e9dea8091	2026-10-08	expense	Tagihan	2100000.00	Transfer Bank	YUP dan Paylater	2026-10-08 08:08:23.4328+07
+41	543c1512-85e1-49e3-803c-463e9dea8091	2026-10-08	expense	Kesehatan	275000.00	Transfer Bank	Maru	2026-10-08 10:36:26.498201+07
+42	543c1512-85e1-49e3-803c-463e9dea8091	2026-10-08	expense	Belanja	100000.00	Cash	Tarik Tunai 100rb	2026-10-08 10:36:52.027123+07
+43	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-10-08	expense	Makanan	50000.00	Transfer Bank	\N	2026-10-08 11:43:29.478928+07
+44	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-10-07	expense	Motor	79000.00	QRIS	Maintenance - Spion Revo	2026-10-08 11:45:35.228855+07
+203	71532f37-a14c-4909-b1fd-f499d8783a38	2026-10-08	expense	Belanja	150000.00	Cash	Ongkir Mesin	2026-10-08 17:38:48.462694+07
+209	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-10-09	expense	Makanan	9000.00	Cash	Tebs	2026-10-09 09:17:03.264107+07
+215	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-10-09	expense	Belanja	91000.00	Cash	Stok telor mie sama racik nasi goreng	2026-10-09 17:51:34.952959+07
+48	71532f37-a14c-4909-b1fd-f499d8783a38	2026-10-08	expense	Tagihan	15000000.00	Transfer Bank	Bayar Hutang Mamah	2026-10-08 12:14:48.982326+07
+49	71532f37-a14c-4909-b1fd-f499d8783a38	2026-10-08	expense	Belanja	3592000.00	Transfer Bank	SHOPEE PETTICOAT	2026-10-08 12:15:17.976155+07
+50	71532f37-a14c-4909-b1fd-f499d8783a38	2026-10-08	expense	Kesehatan	275000.00	Transfer Bank	Maru	2026-10-08 12:15:32.244307+07
+51	71532f37-a14c-4909-b1fd-f499d8783a38	2026-10-08	expense	Makanan	150000.00	Kartu Debit	Domino	2026-10-08 12:15:46.852811+07
+52	71532f37-a14c-4909-b1fd-f499d8783a38	2026-10-08	expense	Lainnya	100000.00	Cash	Tarik tunai	2026-10-08 12:16:03.544936+07
+53	71532f37-a14c-4909-b1fd-f499d8783a38	2026-10-08	expense	Tagihan	1421500.00	Transfer Bank	Paylater SP	2026-10-08 12:16:30.824406+07
+221	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-10-09	expense	Comifuro	120000.00	QRIS	Pre-Order Doujin Yuuka	2026-10-09 20:42:29.319711+07
+347	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-10-27	expense	Kuliner	25000.00	Transfer Bank	Po ayam bawang putih cf ke veni	2026-10-27 19:31:38.968797+07
+353	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-10-28	expense	Belanja	170000.00	Cash	Jersey	2026-10-28 21:09:23.234843+07
+361	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-10-30	expense	Makanan	25000.00	Cash	Alfamart	2026-10-30 22:39:49.501438+07
+227	71532f37-a14c-4909-b1fd-f499d8783a38	2026-10-09	expense	Belanja	2111262.00	Transfer Bank	Mesin press dtf + resi	2026-10-10 00:16:13.265629+07
+234	71532f37-a14c-4909-b1fd-f499d8783a38	2026-10-10	income	Belanja	1000000.00	Transfer Bank	\N	2026-10-10 15:20:16.535857+07
+240	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-10-10	income	Transportasi	25000.00	Cash	Buat bensin dr ayah	2026-10-10 21:59:38.750783+07
+246	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-10-10	expense	Transportasi	25000.00	Cash	bensin pulang dr warung	2026-10-10 23:41:40.561394+07
+252	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-10-11	expense	Makanan	57000.00	Cash	Sei	2026-10-12 00:16:12.250837+07
+265	71532f37-a14c-4909-b1fd-f499d8783a38	2026-10-13	expense	Tagihan	68153.00	Transfer Bank	\N	2026-10-13 11:07:50.061465+07
+273	9cc4f707-42ad-4005-9edb-b0aee7921de4	2026-10-14	income	pemasukan tester	1000000.00	Cash	freelance web klei	2026-10-14 13:07:27.031672+07
+281	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-10-15	income	Investasi	50000.00	Transfer Bank	dari ayah buat bensin ke subang	2026-10-16 07:00:48.800384+07
+291	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-10-17	expense	Belanja	180000.00	Transfer Bank	Khilaf	2026-10-17 16:13:21.623226+07
+292	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-10-17	expense	Motor	25000.00	Cash	Cuci Motor + Bensin Revo	2026-10-17 16:14:19.128513+07
+297	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-10-18	expense	Makanan	126000.00	Cash	Makan	2026-10-19 06:25:54.62144+07
+305	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-10-19	expense	Belanja	24482.00	QRIS	telor 1kg	2026-10-19 10:27:10.655321+07
+312	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-10-22	expense	Makanan	48000.00	QRIS	Sei	2026-10-22 08:41:22.904532+07
+326	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-10-25	expense	Makanan	100000.00	Cash	Makan	2026-10-25 07:37:21.177222+07
+216	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-10-09	expense	Kuliner	9000.00	Cash	Es krim 2 sm pucuk di a erdi	2026-10-09 18:11:29.428268+07
+241	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-10-10	expense	Kuliner	5000.00	Cash	Fruit tea a erdi	2026-10-10 22:00:22.022475+07
+283	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-10-16	expense	Kuliner	4900.00	Cash	Niiis madu	2026-10-16 09:47:14.111209+07
+204	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-10-08	expense	Token Listrik	22500.00	Transfer Bank	token listrik di shopee	2026-10-08 21:38:07.284717+07
+210	71532f37-a14c-4909-b1fd-f499d8783a38	2026-10-09	income	Lainnya	1000000.00	Cash	Jual Mesin Gede	2026-10-09 09:22:04.378418+07
+222	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-10-09	expense	Comifuro	130000.00	QRIS	Pre Order - Artbook Halloween Archive	2026-10-09 20:43:41.557173+07
+228	71532f37-a14c-4909-b1fd-f499d8783a38	2026-10-09	expense	Belanja	3420807.00	Transfer Bank	3D Printer	2026-10-10 00:32:06.697606+07
+235	71532f37-a14c-4909-b1fd-f499d8783a38	2026-10-10	expense	Belanja	1528500.00	Transfer Bank	Kain	2026-10-10 16:09:37.421739+07
+247	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-10-11	expense	Makanan	14000.00	Cash	Alfamart	2026-10-11 12:27:26.35508+07
+253	71532f37-a14c-4909-b1fd-f499d8783a38	2026-10-12	expense	Belanja	200000.00	Cash	\N	2026-10-12 08:46:48.040013+07
+259	71532f37-a14c-4909-b1fd-f499d8783a38	2026-10-13	expense	Makanan	25000.00	QRIS	\N	2026-10-13 08:37:17.73756+07
+266	71532f37-a14c-4909-b1fd-f499d8783a38	2026-10-13	expense	Makanan	30000.00	QRIS	\N	2026-10-13 13:12:16.846402+07
+274	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-10-14	expense	Makanan	17000.00	Cash	Lontong	2026-10-14 13:27:49.222628+07
+275	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-10-14	expense	Makanan	8500.00	Cash	Warung Batak	2026-10-14 13:28:01.163525+07
+276	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-10-14	expense	Makanan	9500.00	Cash	Pocari	2026-10-14 13:28:11.832006+07
+282	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-10-16	expense	Transportasi	30000.00	Cash	Bensin ke subang	2026-10-16 09:46:45.450754+07
+290	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-10-17	expense	Makanan	71000.00	Cash	Makan	2026-10-17 16:12:56.614455+07
+298	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-10-18	income	Lainnya	100000.00	Cash	dari ayah buat gantiin yang d irfan sama buat pegangan jajan d fio	2026-10-19 10:22:29.844197+07
+299	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-10-18	expense	Kuliner	30000.00	Cash	jajan d fio di rrq arena	2026-10-19 10:22:51.568956+07
+342	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-10-27	expense	Belanja	150000.00	Cash	bathing needs	2026-10-27 09:48:54.668388+07
+306	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-10-19	expense	Hiburan	5040.00	QRIS	iseng tes bug fanmate gagal	2026-10-19 10:27:35.935907+07
+313	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-10-22	expense	Makanan	31000.00	Cash	Padang Mixue	2026-10-22 08:41:58.749111+07
+319	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-10-23	expense	Makanan	50000.00	Cash	\N	2026-10-23 17:30:52.205257+07
+327	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-10-25	expense	Belanja	196000.00	Cash	Akrilik Kou-Sensei	2026-10-25 15:17:33.304477+07
+335	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-10-26	expense	Makanan	56000.00	Cash	sei	2026-10-26 15:21:36.144568+07
+339	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-10-26	income	Gaji	120000.00	Cash	Artbook Kanna Rakha	2026-10-26 15:23:14.367228+07
+348	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-10-27	expense	Lainnya	2000.00	Cash	Parkir mekarwangi	2026-10-27 22:24:55.266073+07
+354	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-10-28	expense	Lainnya	50000.00	Cash	Ade Vira	2026-10-28 21:10:04.252463+07
+362	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-10-30	expense	Motor	55000.00	Transfer Bank	Cuci Motor R15	2026-10-30 22:45:08.574203+07
+367	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-11-01	income	Investasi	500000.00	Transfer Bank	Buat bayar hp d fio ke akmal	2026-11-01 12:51:07.083894+07
+368	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-11-01	expense	Transportasi	25000.00	QRIS	Flat parkir serena meganeco	2026-11-01 12:51:29.842323+07
+374	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-11-02	expense	Makanan	46000.00	Cash	baso + warung	2026-11-02 20:17:12.768885+07
+381	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-11-02	income	Bonus	25000.00	Transfer Bank	Akmal bayar minum	2026-11-03 21:02:09.132691+07
+386	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-11-05	expense	Lainnya	24000.00	QRIS	Materai 2 buat rizki sm cau	2026-11-05 08:07:31.452722+07
+391	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-11-09	expense	Hiburan	36089.00	QRIS	Dp asuna aniversaru golden retriver	2026-11-09 13:00:40.240991+07
+397	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-11-08	income	Bonus	50000.00	Cash	dari mamah buat pegangan	2026-11-09 15:45:56.585043+07
+402	9cc4f707-42ad-4005-9edb-b0aee7921de4	2026-11-10	expense	Belanja	5000000.00	QRIS	belanja bulanan cek buat tes	2026-11-10 14:11:49.657397+07
+242	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-10-10	expense	Kuliner	60000.00	Transfer Bank	Cookies josep	2026-10-10 22:02:24.05963+07
+343	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-10-27	expense	Makanan	13000.00	Cash	Soto	2026-10-27 10:25:13.335517+07
+205	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-10-09	income	Lainnya	150000.00	Transfer Bank	dari ayah buat beli telor sama pegangan	2026-10-09 06:01:52.352308+07
+211	71532f37-a14c-4909-b1fd-f499d8783a38	2026-10-09	expense	Investasi	500000.00	Cash	Pinjaman ibu	2026-10-09 09:22:18.993385+07
+223	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-10-09	expense	Comifuro	100000.00	Transfer Bank	Pre-Order Artbook Kang Aldi	2026-10-09 21:11:50.552478+07
+229	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-10-10	expense	Belanja	738187.00	QRIS	Dehumidifire - Simplus	2026-10-10 02:50:36.166732+07
+236	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-10-10	expense	Belanja	509000.00	Transfer Bank	Diecast Nissan R89C	2026-10-10 17:00:21.211975+07
+248	71532f37-a14c-4909-b1fd-f499d8783a38	2026-10-11	expense	Makanan	72000.00	Cash	\N	2026-10-11 14:54:54.683034+07
+254	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-10-12	expense	Transportasi	34000.00	Cash	Bensin Revo	2026-10-12 11:56:19.555182+07
+260	71532f37-a14c-4909-b1fd-f499d8783a38	2026-10-13	expense	Lainnya	37400.00	QRIS	Bensin	2026-10-13 08:52:36.140759+07
+267	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-10-13	expense	Makanan	48400.00	QRIS	Sei	2026-10-13 19:43:13.374182+07
+277	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-10-14	expense	Makanan	44000.00	Cash	Makan Malem	2026-10-14 23:30:41.258593+07
+284	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-10-16	expense	Lainnya	4000.00	Cash	Admin gestun indomaret	2026-10-16 09:47:56.133471+07
+293	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-10-17	expense	Lainnya	50000.00	Cash	ke d irfan	2026-10-17 21:22:42.433454+07
+355	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-10-29	income	Investasi	20000.00	Cash	Buat bensin	2026-10-30 07:58:39.400003+07
+300	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-10-18	expense	Perkir	2000.00	Cash	parkir rrq arena	2026-10-19 10:23:32.34964+07
+308	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-10-20	expense	Transportasi	25000.00	Cash	Bensin	2026-10-20 13:11:57.94796+07
+314	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-10-22	expense	Makanan	40000.00	Transfer Bank	Kupat + Alfamart	2026-10-22 08:42:28.920523+07
+320	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-10-24	expense	Motor	20000.00	Cash	Cuci Motor R15	2026-10-24 11:09:30.499542+07
+363	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-10-31	expense	Belanja	300000.00	Transfer Bank	Kou Diecast	2026-10-31 07:40:44.948403+07
+336	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-10-26	expense	Makanan	16000.00	Cash	Sabana	2026-10-26 15:21:44.729048+07
+338	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-10-26	expense	Motor	288000.00	Transfer Bank	Service R15	2026-10-26 15:22:23.288035+07
+369	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-11-01	expense	Kuliner	135000.00	QRIS	Matchauk, 55 me, 55 ibay, 25 akmal	2026-11-01 13:58:24.383335+07
+375	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-11-02	expense	Belanja	180000.00	QRIS	hep hep	2026-11-02 20:17:35.316089+07
+382	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-11-03	expense	Lainnya	15000.00	Transfer Bank	Admin bca	2026-11-03 21:03:23.893834+07
+392	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-11-09	income	Investasi	40000.00	Transfer Bank	Dari rizki buat ambil sertifikat jlpt	2026-11-09 13:26:01.098841+07
+398	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-11-08	expense	Transportasi	25000.00	Cash	bensin pulang ke cisarua	2026-11-09 15:46:23.15109+07
+387	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-11-05	expense	Transportasi	100000.00	QRIS	Bensin mobil ayah ambil sertifikat jlpt	2026-11-05 08:40:13.542465+07
+321	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-10-24	income	Investasi	150000.00	Cash	Dari mamah buat bekel	2026-10-25 05:37:00.352798+07
+206	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-10-09	expense	Kuliner	10000.00	Cash	Nasi kuning sama gorengan	2026-10-09 07:01:45.245001+07
+344	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-10-27	expense	Transportasi	20000.00	QRIS	Bensin buat foto meganeco	2026-10-27 13:49:52.781105+07
+350	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-10-28	expense	Belanja	250000.00	Cash	Komis	2026-10-28 21:07:08.411552+07
+356	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-10-30	income	Investasi	200000.00	Transfer Bank	Buat pegangan ke tangerang dari ayah	2026-10-30 07:59:39.388715+07
+109	71532f37-a14c-4909-b1fd-f499d8783a38	2026-10-08	expense	Investasi	5000000.00	Transfer Bank	TABUNGAN	2026-10-08 12:19:15.243924+07
+357	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-10-30	expense	Kuliner	37000.00	QRIS	Bolu susu buat rithe	2026-10-30 08:00:06.701924+07
+364	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-10-31	expense	Belanja	500000.00	Cash	Ambil Cash Ibay	2026-10-31 07:41:01.208862+07
+370	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-11-01	expense	Hiburan	100000.00	Cash	Checki rithe cf23	2026-11-01 15:33:56.164772+07
+376	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-11-02	income	Gaji	525000.00	Transfer Bank	Fee meganeco	2026-11-03 20:57:19.890282+07
+377	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-11-02	expense	Belanja	500000.00	Transfer Bank	Bayar hp d fio ke akmal	2026-11-03 20:57:46.599219+07
+378	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-11-02	expense	Kuliner	10000.00	QRIS	Mie ayam baso pahlawan	2026-11-03 20:58:10.12626+07
+383	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-11-02	expense	Transportasi	20000.00	Cash	Bensin pulang dr meganeco ke rumah	2026-11-03 21:05:36.454+07
+212	71532f37-a14c-4909-b1fd-f499d8783a38	2026-10-09	expense	Makanan	101500.00	Transfer Bank	Makan siang	2026-10-09 12:34:20.905279+07
+388	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-11-05	expense	Kuliner	7500.00	Cash	Dumdum thai tea indomaret	2026-11-05 15:06:34.723878+07
+224	9cc4f707-42ad-4005-9edb-b0aee7921de4	2026-10-09	income	Gaji	1500000.00	Transfer Bank	cek tome zone db	2026-10-09 23:48:40.442431+07
+230	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-10-10	expense	Makanan	17000.00	Cash	\N	2026-10-10 09:18:36.893134+07
+237	71532f37-a14c-4909-b1fd-f499d8783a38	2026-10-10	expense	Belanja	2967900.00	Transfer Bank	Azko	2026-10-10 18:17:02.181625+07
+243	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-10-10	expense	Lainnya	6000.00	Cash	Parkir ciwalk	2026-10-10 22:12:56.023231+07
+249	71532f37-a14c-4909-b1fd-f499d8783a38	2026-10-11	expense	Tagihan	75000.00	Transfer Bank	Yujin	2026-10-11 20:16:18.297729+07
+255	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-10-12	expense	Belanja	8000.00	Cash	Pocari	2026-10-12 11:56:36.161131+07
+261	71532f37-a14c-4909-b1fd-f499d8783a38	2026-10-13	expense	Belanja	36500.00	Cash	Makanan maru	2026-10-13 08:52:59.728028+07
+268	71532f37-a14c-4909-b1fd-f499d8783a38	2026-10-14	expense	Kesehatan	400000.00	Cash	Maru	2026-10-14 11:02:20.054062+07
+278	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-10-15	expense	Token Listrik	22500.00	Transfer Bank	token listrik 20rb	2026-10-15 14:46:23.093533+07
+285	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-10-16	income	Lainnya	8212.00	Transfer Bank	Pembulatan duit gweh	2026-10-16 09:50:37.439005+07
+294	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-10-18	expense	Makanan	49000.00	QRIS	Sei	2026-10-19 04:12:29.090057+07
+301	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-10-18	expense	Tagihan	177600.00	Transfer Bank	kuota telkomsel oktober november	2026-10-19 10:25:01.146006+07
+309	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-10-20	expense	Makanan	75000.00	Cash	Makan	2026-10-20 13:12:10.457351+07
+315	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-10-22	expense	Tagihan	200000.00	Transfer Bank	Biznet Wifi	2026-10-22 08:42:48.918778+07
+329	9cc4f707-42ad-4005-9edb-b0aee7921de4	2026-10-25	income	Investasi	1000000000.00	Transfer Bank	gajian crypto	2026-10-26 00:40:36.828132+07
+337	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-10-26	expense	Belanja	75000.00	Cash	Mod ETS2	2026-10-26 15:22:08.441735+07
+393	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-11-09	expense	Token Listrik	22000.00	E-Wallet	Token listrik 20rb	2026-11-09 13:29:01.460466+07
+399	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-11-08	expense	Kuliner	7500.00	Cash	dumdum thai tea indomaret lembang	2026-11-09 15:47:01.422641+07
+322	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-10-24	expense	Kuliner	20000.00	Cash	D fio tianlala ciwalk	2026-10-25 05:37:16.35111+07
+340	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-10-24	expense	Kuliner	10000.00	Cash	ke ibay beli pink lava	2026-10-27 09:33:00.209942+07
+345	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-10-27	expense	Comifuro	80000.00	Transfer Bank	Postcard Freebies	2026-10-27 16:49:11.330098+07
+351	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-10-28	expense	Transportasi	120000.00	Cash	Bensin R15	2026-10-28 21:07:25.881719+07
+358	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-10-30	expense	Belanja	100000.00	Cash	GoSend	2026-10-30 22:38:15.990081+07
+359	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-10-30	expense	Makanan	48000.00	Cash	Sei	2026-10-30 22:38:32.213601+07
+365	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-10-31	expense	Comifuro	230000.00	Cash	Artbook Kanna 2 + doujin 1	2026-10-31 11:48:13.589644+07
+371	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-11-01	expense	Comifuro	180000.00	Cash	Pin Toki	2026-11-01 20:28:56.25004+07
+373	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-11-01	expense	Makanan	55000.00	QRIS	Mcdonald	2026-11-01 20:29:28.483404+07
+379	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-11-03	expense	Hiburan	150000.00	Transfer Bank	Bayar kaos eru ke ibay	2026-11-03 20:59:03.309105+07
+384	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-11-03	expense	Transportasi	20000.00	Cash	Bensin ke subang	2026-11-04 01:00:38.037785+07
+389	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-11-05	expense	Lainnya	34500.00	Transfer Bank	Tubles ban sm tambah angin arif	2026-11-05 15:07:13.724806+07
+201	71532f37-a14c-4909-b1fd-f499d8783a38	2026-10-08	expense	Belanja	284000.00	Cash	Sparepart neci	2026-10-08 16:06:40.018893+07
+207	71532f37-a14c-4909-b1fd-f499d8783a38	2026-10-09	expense	Tagihan	135000.00	Transfer Bank	Telkomsel	2026-10-09 07:01:54.525538+07
+213	71532f37-a14c-4909-b1fd-f499d8783a38	2026-10-09	expense	Belanja	242500.00	Cash	Benang	2026-10-09 13:13:51.760453+07
+219	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-10-09	expense	Makanan	18000.00	Cash	Naspad	2026-10-09 20:19:28.933694+07
+225	9cc4f707-42ad-4005-9edb-b0aee7921de4	2026-10-09	income	Bonus	1500000.00	Transfer Bank	cek timezone utc	2026-10-09 23:50:39.85562+07
+231	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-10-10	expense	Makanan	11900.00	Cash	Alfamart	2026-10-10 10:00:39.928564+07
+238	71532f37-a14c-4909-b1fd-f499d8783a38	2026-10-10	expense	Lainnya	462088.00	Lainnya	SELISIH TIDAK TERHITUNG TELODOR	2026-10-10 18:48:14.360193+07
+244	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-10-10	income	Investasi	25000.00	Transfer Bank	Dari rio foto cosplay zeta ryuu	2026-10-10 22:13:34.95699+07
+250	71532f37-a14c-4909-b1fd-f499d8783a38	2026-10-11	expense	Lainnya	52500.00	Transfer Bank	Trf bca	2026-10-11 20:22:00.650803+07
+256	71532f37-a14c-4909-b1fd-f499d8783a38	2026-10-12	expense	Makanan	24000.00	Cash	\N	2026-10-12 12:09:45.128026+07
+262	71532f37-a14c-4909-b1fd-f499d8783a38	2026-10-13	expense	Belanja	550000.00	Cash	\N	2026-10-13 08:54:16.942586+07
+269	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-10-14	income	Investasi	175000.00	Cash	dari ayah buat ganti oli	2026-10-14 12:34:53.99759+07
+270	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-10-14	expense	Belanja	175000.00	Cash	beli oli motul 5100 1L	2026-10-14 12:35:11.336371+07
+279	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-10-15	expense	Comifuro	69000.00	QRIS	Artbook Rio	2026-10-15 17:53:44.997779+07
+286	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-10-16	expense	Makanan	24000.00	Cash	Sarapan	2026-10-16 14:22:32.363299+07
+295	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-10-18	expense	Makanan	15000.00	Cash	Warung	2026-10-19 04:13:21.339108+07
+302	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-10-19	income	Investasi	100000.00	Transfer Bank	dari ayah buat beli telor sm bolu	2026-10-19 10:25:55.530423+07
+316	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-10-22	expense	Makanan	24000.00	Cash	Mixue	2026-10-22 16:21:14.092526+07
+330	9cc4f707-42ad-4005-9edb-b0aee7921de4	2026-10-25	expense	Belanja	100000000.00	Kartu Debit	dp rumah	2026-10-26 00:50:47.551055+07
+394	9cc4f707-42ad-4005-9edb-b0aee7921de4	2026-11-01	expense	Tagihan	233500.00	Kartu Debit	tagin internet • Transaksi berulang: internet	2026-11-09 14:49:03.903631+07
+400	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-11-09	income	Bonus	2500.00	Transfer Bank	dari d irfan	2026-11-09 15:49:17.940592+07
+310	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-10-20	income	Investasi	20000.00	Cash	dari ayah	2026-10-20 22:05:06.691393+07
+232	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-10-10	expense	Kuliner	20000.00	Cash	susu 2 liter	2026-10-10 13:13:59.859258+07
+84	71532f37-a14c-4909-b1fd-f499d8783a38	2026-10-08	income	Belanja	46000000.00	Transfer Bank	\N	2026-10-08 12:18:46.739952+07
+303	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-10-19	expense	Kuliner	72500.00	Transfer Bank	bolu susu lembang + admin bri	2026-10-19 10:26:27.377757+07
+307	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-10-19	expense	Kuliner	10000.00	Cash	SUSU 1L	2026-10-19 10:27:54.683048+07
+323	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-10-24	expense	Kuliner	19000.00	Cash	D fio jajan di warung mie, es krim, fruit tea	2026-10-25 05:38:05.03373+07
+202	71532f37-a14c-4909-b1fd-f499d8783a38	2026-10-08	expense	Belanja	8700028.00	Transfer Bank	Mesin	2026-10-08 16:20:19.736852+07
+208	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-10-09	expense	Motor	110000.00	Cash	Nano Coating - Revo	2026-10-09 09:16:49.89919+07
+214	71532f37-a14c-4909-b1fd-f499d8783a38	2026-10-09	expense	Belanja	71000.00	Cash	\N	2026-10-09 16:05:33.592784+07
+346	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-10-27	expense	Kuliner	10000.00	Cash	Mie ayam	2026-10-27 19:30:59.556568+07
+233	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-10-10	expense	Transportasi	20000.00	Cash	Bensin	2026-10-10 13:14:28.39732+07
+239	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-10-10	expense	Comifuro	240000.00	Cash	Nginep	2026-10-10 21:02:52.482308+07
+245	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-10-10	expense	Makanan	10000.00	Cash	Warung	2026-10-10 22:58:45.417747+07
+251	71532f37-a14c-4909-b1fd-f499d8783a38	2026-10-11	expense	Kesehatan	30000.00	Cash	\N	2026-10-11 20:24:52.286638+07
+257	71532f37-a14c-4909-b1fd-f499d8783a38	2026-10-12	expense	Belanja	142700.00	Transfer Bank	\N	2026-10-12 16:15:50.531461+07
+263	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-10-13	expense	Makanan	32000.00	Cash	Gacoan	2026-10-13 09:23:42.045348+07
+264	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-10-13	expense	Makanan	9000.00	Cash	Indomaret	2026-10-13 09:23:56.506797+07
+271	9cc4f707-42ad-4005-9edb-b0aee7921de4	2026-10-14	income	Bonus	500000.00	Transfer Bank	cek pemasukan	2026-10-14 13:03:08.503629+07
+272	9cc4f707-42ad-4005-9edb-b0aee7921de4	2026-10-14	expense	Belanja	250000.00	QRIS	cek pengeluaran	2026-10-14 13:03:25.407197+07
+280	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-10-15	expense	Makanan	30500.00	Cash	Sarapan	2026-10-15 17:55:23.009992+07
+287	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-10-16	expense	Transportasi	30000.00	Cash	bensin pulang ke cisarua	2026-10-16 20:57:26.002454+07
+288	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-10-16	income	Investasi	200000.00	Cash	buat wifi dari mamah	2026-10-16 20:57:42.493138+07
+296	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-10-18	expense	Comifuro	200000.00	QRIS	Onsen Archive	2026-10-19 06:24:10.841041+07
+304	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-10-19	expense	Transportasi	25000.00	Transfer Bank	bensin	2026-10-19 10:26:44.423938+07
+311	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-10-22	income	Lainnya	264000.00	Transfer Bank	Jual Diecast R89C	2026-10-22 08:41:00.559847+07
+317	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-10-22	expense	Makanan	16000.00	Cash	Kembang Tahu	2026-10-22 16:21:28.633269+07
+324	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-10-24	expense	Transportasi	32000.00	Cash	Bensin	2026-10-25 05:38:35.514037+07
+325	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-10-24	expense	Belanja	20000.00	Cash	D fio beli ikan	2026-10-25 05:38:55.197374+07
+331	9cc4f707-42ad-4005-9edb-b0aee7921de4	2026-10-26	expense	Belanja	50.00	QRIS	tes 50	2026-10-26 01:08:36.386815+07
+226	9cc4f707-42ad-4005-9edb-b0aee7921de4	2026-10-09	income	Gaji	100000000.00	Transfer Bank	saldo cek	2026-10-09 23:52:25.718054+07
+352	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-10-28	expense	Makanan	56000.00	Cash	Sei	2026-10-28 21:08:06.51944+07
+360	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-10-30	expense	Comifuro	313000.00	Transfer Bank	Tiket Comifuro	2026-10-30 22:39:32.332338+07
+366	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-10-31	expense	Comifuro	350000.00	QRIS	Figure Toki + Artbook	2026-10-31 17:30:19.629303+07
+372	5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-11-01	expense	Comifuro	110000.00	QRIS	Artbook bang Greg	2026-11-01 20:29:12.618625+07
+380	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-11-03	expense	Kuliner	20500.00	QRIS	Beli minum sm sosis indomaret	2026-11-03 20:59:35.870746+07
+385	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-11-04	expense	Kesehatan	60000.00	E-Wallet	Cukur rambut vax wijaya	2026-11-04 14:22:16.269+07
+390	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-11-05	income	Bonus	35000.00	Transfer Bank	Gantiin uang ban dari arif	2026-11-05 18:34:10.059403+07
+395	9cc4f707-42ad-4005-9edb-b0aee7921de4	2026-11-09	income	Gaji	5000000.00	Transfer Bank	gaji bulanan	2026-11-09 15:13:13.892099+07
+396	9cc4f707-42ad-4005-9edb-b0aee7921de4	2026-11-09	expense	Hiburan	10000000.00	QRIS	jajan asuna 1:1	2026-11-09 15:13:41.139521+07
+401	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-11-09	expense	Kuliner	7500.00	Cash	Dumdum milktea indomaret	2026-11-09 18:38:59.524549+07
+\.
+
+
+--
+-- Data for Name: recurring_transaction_runs; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY "public"."recurring_transaction_runs" ("id", "user_id", "recurring_transaction_id", "month", "transaction_id", "created_at") FROM stdin;
+4	27d0f21a-efea-48e0-bc00-a1394c5dd3a8	7	2026-10-01	\N	2026-10-27 09:44:57.042185+07
+5	9cc4f707-42ad-4005-9edb-b0aee7921de4	8	2026-11-01	394	2026-11-09 14:49:03.892594+07
+\.
+
+
+--
+-- Data for Name: transaction_submission_limits; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY "public"."transaction_submission_limits" ("user_id", "last_submitted_at") FROM stdin;
+27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2026-11-09 18:38:59.524549+07
+9cc4f707-42ad-4005-9edb-b0aee7921de4	2026-11-10 14:11:49.657397+07
+5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2026-11-02 20:17:35.316089+07
+\.
+
+
+--
+-- Data for Name: user_categories; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY "public"."user_categories" ("user_id", "category_id", "custom_name", "type", "is_default", "is_hidden", "created_at") FROM stdin;
+9994be3f-31c9-497f-94f0-1c954547425a	1	\N	income	t	f	2026-11-03 21:13:36.384193+07
+9994be3f-31c9-497f-94f0-1c954547425a	2	\N	income	t	f	2026-11-03 21:13:36.384193+07
+9994be3f-31c9-497f-94f0-1c954547425a	4	\N	expense	t	f	2026-11-03 21:13:36.384193+07
+9994be3f-31c9-497f-94f0-1c954547425a	5	\N	expense	t	f	2026-11-03 21:13:36.384193+07
+9994be3f-31c9-497f-94f0-1c954547425a	7	\N	expense	t	f	2026-11-03 21:13:36.384193+07
+9994be3f-31c9-497f-94f0-1c954547425a	9	\N	expense	t	f	2026-11-03 21:13:36.384193+07
+9994be3f-31c9-497f-94f0-1c954547425a	11	\N	expense	t	f	2026-11-03 21:13:36.384193+07
+9994be3f-31c9-497f-94f0-1c954547425a	10	\N	expense	t	f	2026-11-03 21:13:36.384193+07
+9994be3f-31c9-497f-94f0-1c954547425a	6	\N	expense	t	f	2026-11-03 21:13:36.384193+07
+9994be3f-31c9-497f-94f0-1c954547425a	8	\N	expense	t	f	2026-11-03 21:13:36.384193+07
+9994be3f-31c9-497f-94f0-1c954547425a	3	\N	expense	t	f	2026-11-03 21:13:36.384193+07
+0941d6f4-4f0d-4dd1-8ca2-70fa36b59ccd	1	\N	income	t	f	2026-10-04 00:43:11.777143+07
+0941d6f4-4f0d-4dd1-8ca2-70fa36b59ccd	2	\N	income	t	f	2026-10-04 00:43:11.777143+07
+0941d6f4-4f0d-4dd1-8ca2-70fa36b59ccd	3	\N	expense	t	f	2026-10-04 00:43:11.777143+07
+0941d6f4-4f0d-4dd1-8ca2-70fa36b59ccd	4	\N	expense	t	f	2026-10-04 00:43:11.777143+07
+0941d6f4-4f0d-4dd1-8ca2-70fa36b59ccd	5	\N	expense	t	f	2026-10-04 00:43:11.777143+07
+0941d6f4-4f0d-4dd1-8ca2-70fa36b59ccd	6	\N	expense	t	f	2026-10-04 00:43:11.777143+07
+0941d6f4-4f0d-4dd1-8ca2-70fa36b59ccd	7	\N	expense	t	f	2026-10-04 00:43:11.777143+07
+0941d6f4-4f0d-4dd1-8ca2-70fa36b59ccd	8	\N	expense	t	f	2026-10-04 00:43:11.777143+07
+0941d6f4-4f0d-4dd1-8ca2-70fa36b59ccd	9	\N	expense	t	f	2026-10-04 00:43:11.777143+07
+0941d6f4-4f0d-4dd1-8ca2-70fa36b59ccd	10	\N	expense	t	f	2026-10-04 00:43:11.777143+07
+0941d6f4-4f0d-4dd1-8ca2-70fa36b59ccd	11	\N	expense	t	f	2026-10-04 00:43:11.777143+07
+0a4467f5-c6a0-4c35-8a6a-4eea1a220f0c	1	\N	income	t	f	2026-10-06 19:54:51.857657+07
+0a4467f5-c6a0-4c35-8a6a-4eea1a220f0c	2	\N	income	t	f	2026-10-06 19:54:51.857657+07
+0a4467f5-c6a0-4c35-8a6a-4eea1a220f0c	3	\N	expense	t	f	2026-10-06 19:54:51.857657+07
+0a4467f5-c6a0-4c35-8a6a-4eea1a220f0c	4	\N	expense	t	f	2026-10-06 19:54:51.857657+07
+0a4467f5-c6a0-4c35-8a6a-4eea1a220f0c	5	\N	expense	t	f	2026-10-06 19:54:51.857657+07
+0a4467f5-c6a0-4c35-8a6a-4eea1a220f0c	6	\N	expense	t	f	2026-10-06 19:54:51.857657+07
+0a4467f5-c6a0-4c35-8a6a-4eea1a220f0c	7	\N	expense	t	f	2026-10-06 19:54:51.857657+07
+0a4467f5-c6a0-4c35-8a6a-4eea1a220f0c	8	\N	expense	t	f	2026-10-06 19:54:51.857657+07
+0a4467f5-c6a0-4c35-8a6a-4eea1a220f0c	9	\N	expense	t	f	2026-10-06 19:54:51.857657+07
+0a4467f5-c6a0-4c35-8a6a-4eea1a220f0c	10	\N	expense	t	f	2026-10-06 19:54:51.857657+07
+0a4467f5-c6a0-4c35-8a6a-4eea1a220f0c	11	\N	expense	t	f	2026-10-06 19:54:51.857657+07
+0a4467f5-c6a0-4c35-8a6a-4eea1a220f0c	15	\N	income	f	f	2026-10-06 20:06:49.908735+07
+0a4467f5-c6a0-4c35-8a6a-4eea1a220f0c	24	\N	expense	f	f	2026-10-06 20:09:17.190323+07
+126faf31-b09e-4087-a462-540d81a3131e	1	\N	income	t	f	2026-09-25 23:44:16.980786+07
+126faf31-b09e-4087-a462-540d81a3131e	2	\N	income	t	f	2026-09-25 23:44:16.980786+07
+126faf31-b09e-4087-a462-540d81a3131e	3	\N	expense	t	f	2026-09-25 23:44:16.980786+07
+126faf31-b09e-4087-a462-540d81a3131e	4	\N	expense	t	f	2026-09-25 23:44:16.980786+07
+126faf31-b09e-4087-a462-540d81a3131e	5	\N	expense	t	f	2026-09-25 23:44:16.980786+07
+126faf31-b09e-4087-a462-540d81a3131e	6	\N	expense	t	f	2026-09-25 23:44:16.980786+07
+126faf31-b09e-4087-a462-540d81a3131e	7	\N	expense	t	f	2026-09-25 23:44:16.980786+07
+126faf31-b09e-4087-a462-540d81a3131e	8	\N	expense	t	f	2026-09-25 23:44:16.980786+07
+126faf31-b09e-4087-a462-540d81a3131e	9	\N	expense	t	f	2026-09-25 23:44:16.980786+07
+126faf31-b09e-4087-a462-540d81a3131e	10	\N	expense	t	f	2026-09-25 23:44:16.980786+07
+126faf31-b09e-4087-a462-540d81a3131e	11	\N	expense	t	f	2026-09-25 23:44:16.980786+07
+27d0f21a-efea-48e0-bc00-a1394c5dd3a8	1	\N	income	t	f	2026-09-24 02:26:44.828157+07
+27d0f21a-efea-48e0-bc00-a1394c5dd3a8	2	\N	income	t	f	2026-09-24 02:26:44.828157+07
+27d0f21a-efea-48e0-bc00-a1394c5dd3a8	4	\N	expense	t	f	2026-09-24 02:26:44.828157+07
+27d0f21a-efea-48e0-bc00-a1394c5dd3a8	5	\N	expense	t	f	2026-09-24 02:26:44.828157+07
+27d0f21a-efea-48e0-bc00-a1394c5dd3a8	6	\N	expense	t	f	2026-09-24 02:26:44.828157+07
+27d0f21a-efea-48e0-bc00-a1394c5dd3a8	7	\N	expense	t	f	2026-09-24 02:26:44.828157+07
+27d0f21a-efea-48e0-bc00-a1394c5dd3a8	8	\N	expense	t	f	2026-09-24 02:26:44.828157+07
+27d0f21a-efea-48e0-bc00-a1394c5dd3a8	9	\N	expense	t	f	2026-09-24 02:26:44.828157+07
+27d0f21a-efea-48e0-bc00-a1394c5dd3a8	11	\N	expense	t	f	2026-09-24 02:26:44.828157+07
+27d0f21a-efea-48e0-bc00-a1394c5dd3a8	26	\N	expense	f	f	2026-10-08 21:37:40.982377+07
+543c1512-85e1-49e3-803c-463e9dea8091	1	\N	income	t	f	2026-10-05 15:58:22.624697+07
+543c1512-85e1-49e3-803c-463e9dea8091	2	\N	income	t	f	2026-10-05 15:58:22.624697+07
+543c1512-85e1-49e3-803c-463e9dea8091	3	\N	expense	t	f	2026-10-05 15:58:22.624697+07
+543c1512-85e1-49e3-803c-463e9dea8091	4	\N	expense	t	f	2026-10-05 15:58:22.624697+07
+543c1512-85e1-49e3-803c-463e9dea8091	5	\N	expense	t	f	2026-10-05 15:58:22.624697+07
+543c1512-85e1-49e3-803c-463e9dea8091	6	\N	expense	t	f	2026-10-05 15:58:22.624697+07
+543c1512-85e1-49e3-803c-463e9dea8091	7	\N	expense	t	f	2026-10-05 15:58:22.624697+07
+543c1512-85e1-49e3-803c-463e9dea8091	8	\N	expense	t	f	2026-10-05 15:58:22.624697+07
+543c1512-85e1-49e3-803c-463e9dea8091	9	\N	expense	t	f	2026-10-05 15:58:22.624697+07
+543c1512-85e1-49e3-803c-463e9dea8091	10	\N	expense	t	f	2026-10-05 15:58:22.624697+07
+543c1512-85e1-49e3-803c-463e9dea8091	11	\N	expense	t	f	2026-10-05 15:58:22.624697+07
+5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	1	\N	income	t	f	2026-10-07 06:39:29.265516+07
+5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	2	\N	income	t	f	2026-10-07 06:39:37.991662+07
+5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	3	\N	expense	t	f	2026-10-06 23:40:03.293729+07
+5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	4	\N	expense	t	f	2026-10-06 23:40:03.293729+07
+5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	5	\N	expense	t	f	2026-10-06 23:40:03.293729+07
+5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	6	\N	expense	t	f	2026-10-06 23:40:03.293729+07
+5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	7	\N	expense	t	f	2026-10-06 23:40:03.293729+07
+5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	8	\N	expense	t	f	2026-10-09 20:20:25.146938+07
+5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	9	\N	expense	t	f	2026-10-09 20:20:27.994615+07
+5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	10	\N	expense	t	f	2026-10-10 20:46:12.440744+07
+5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	11	\N	expense	t	f	2026-10-06 23:40:03.293729+07
+5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	14	\N	expense	f	f	2026-10-09 20:41:57.848451+07
+5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	22	\N	expense	f	f	2026-10-08 11:44:43.156779+07
+71532f37-a14c-4909-b1fd-f499d8783a38	1	\N	income	t	f	2026-10-08 12:12:33.252618+07
+71532f37-a14c-4909-b1fd-f499d8783a38	2	\N	income	t	f	2026-10-08 12:12:33.252618+07
+71532f37-a14c-4909-b1fd-f499d8783a38	3	\N	expense	t	f	2026-10-08 12:12:33.252618+07
+71532f37-a14c-4909-b1fd-f499d8783a38	4	\N	expense	t	f	2026-10-08 12:12:33.252618+07
+71532f37-a14c-4909-b1fd-f499d8783a38	5	\N	expense	t	f	2026-10-08 12:12:33.252618+07
+71532f37-a14c-4909-b1fd-f499d8783a38	6	\N	expense	t	f	2026-10-08 12:12:33.252618+07
+71532f37-a14c-4909-b1fd-f499d8783a38	7	\N	expense	t	f	2026-10-08 12:12:33.252618+07
+71532f37-a14c-4909-b1fd-f499d8783a38	8	\N	expense	t	f	2026-10-08 12:12:33.252618+07
+71532f37-a14c-4909-b1fd-f499d8783a38	9	\N	expense	t	f	2026-10-08 12:12:33.252618+07
+71532f37-a14c-4909-b1fd-f499d8783a38	10	\N	expense	t	f	2026-10-08 12:12:33.252618+07
+71532f37-a14c-4909-b1fd-f499d8783a38	11	\N	expense	t	f	2026-10-08 12:12:33.252618+07
+8bd5441c-ad00-4d75-9651-cc4b61c0f942	1	\N	income	t	f	2026-10-06 19:30:32.386465+07
+8bd5441c-ad00-4d75-9651-cc4b61c0f942	2	\N	income	t	f	2026-10-06 19:30:32.386465+07
+8bd5441c-ad00-4d75-9651-cc4b61c0f942	3	\N	expense	t	f	2026-10-06 19:30:32.386465+07
+8bd5441c-ad00-4d75-9651-cc4b61c0f942	4	\N	expense	t	f	2026-10-06 19:30:32.386465+07
+8bd5441c-ad00-4d75-9651-cc4b61c0f942	5	\N	expense	t	f	2026-10-06 19:30:32.386465+07
+8bd5441c-ad00-4d75-9651-cc4b61c0f942	6	\N	expense	t	f	2026-10-06 19:30:32.386465+07
+8bd5441c-ad00-4d75-9651-cc4b61c0f942	7	\N	expense	t	f	2026-10-06 19:30:32.386465+07
+8bd5441c-ad00-4d75-9651-cc4b61c0f942	8	\N	expense	t	f	2026-10-06 19:30:32.386465+07
+8bd5441c-ad00-4d75-9651-cc4b61c0f942	9	\N	expense	t	f	2026-10-06 19:30:32.386465+07
+8bd5441c-ad00-4d75-9651-cc4b61c0f942	10	\N	expense	t	f	2026-10-06 19:30:32.386465+07
+8bd5441c-ad00-4d75-9651-cc4b61c0f942	11	\N	expense	t	f	2026-10-06 19:30:32.386465+07
+9cc4f707-42ad-4005-9edb-b0aee7921de4	1	\N	income	t	f	2026-09-23 05:10:21.874051+07
+9cc4f707-42ad-4005-9edb-b0aee7921de4	2	\N	income	t	f	2026-09-23 05:10:21.874051+07
+9cc4f707-42ad-4005-9edb-b0aee7921de4	3	\N	expense	t	f	2026-09-23 05:10:21.874051+07
+9cc4f707-42ad-4005-9edb-b0aee7921de4	4	\N	expense	t	f	2026-09-23 05:10:21.874051+07
+9cc4f707-42ad-4005-9edb-b0aee7921de4	5	\N	expense	t	f	2026-09-23 05:10:21.874051+07
+9cc4f707-42ad-4005-9edb-b0aee7921de4	7	\N	expense	t	f	2026-09-23 05:10:21.874051+07
+9cc4f707-42ad-4005-9edb-b0aee7921de4	9	\N	expense	t	f	2026-09-23 05:10:21.874051+07
+9cc4f707-42ad-4005-9edb-b0aee7921de4	11	\N	expense	t	f	2026-09-23 05:10:21.874051+07
+9cc4f707-42ad-4005-9edb-b0aee7921de4	6	\N	expense	t	f	2026-09-23 05:10:21.874051+07
+9cc4f707-42ad-4005-9edb-b0aee7921de4	10	\N	income	t	f	2026-10-13 00:48:09.113684+07
+27d0f21a-efea-48e0-bc00-a1394c5dd3a8	10	\N	income	t	f	2026-10-10 20:47:11.250124+07
+9cc4f707-42ad-4005-9edb-b0aee7921de4	8	\N	expense	t	f	2026-09-23 05:10:21.874051+07
+27d0f21a-efea-48e0-bc00-a1394c5dd3a8	3	\N	expense	t	f	2026-09-24 02:26:44.828157+07
+5bb36e5c-7283-4341-bc7f-de5b3c0fef5e	37	\N	expense	f	f	2026-10-27 10:24:54.317766+07
+\.
+
+
+--
+-- Name: refresh_tokens_id_seq; Type: SEQUENCE SET; Schema: auth; Owner: supabase_auth_admin
+--
+
+SELECT pg_catalog.setval('"auth"."refresh_tokens_id_seq"', 369, true);
+
+
+--
+-- Name: budgets_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('"public"."budgets_id_seq"', 11, true);
+
+
+--
+-- Name: categories_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('"public"."categories_id_seq"', 229, true);
+
+
+--
+-- Name: category_catalog_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('"public"."category_catalog_id_seq"', 37, true);
+
+
+--
+-- Name: financial_goals_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('"public"."financial_goals_id_seq"', 2, true);
+
+
+--
+-- Name: recurring_transaction_runs_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('"public"."recurring_transaction_runs_id_seq"', 6, true);
+
+
+--
+-- Name: recurring_transactions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('"public"."recurring_transactions_id_seq"', 8, true);
+
+
+--
+-- Name: transactions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('"public"."transactions_id_seq"', 402, true);
+
+
+--
+-- PostgreSQL database dump complete
+--
+
+-- \unrestrict 5sm6aqNf4YwfEx5iLe29WndKjuYjBnIQheCYeLnPsZfI9CoUsF4SSMZWqky63MZ
+
+RESET ALL;
