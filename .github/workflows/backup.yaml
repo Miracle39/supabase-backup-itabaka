@@ -31,6 +31,8 @@ jobs:
       - name: Checkout repository
         if: env.BACKUP_ENABLED == 'true'
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Memastikan seluruh riwayat git ditarik
 
       - name: Setup Supabase CLI
         if: env.BACKUP_ENABLED == 'true'
@@ -59,3 +61,4 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: Supabase backup
+          push_options: '--force' # MEMAKSA PUSH UNTUK MENGHINDARI ERROR NON-FAST-FORWARD
