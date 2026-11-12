@@ -4,7 +4,7 @@ SET session_replication_role = replica;
 -- PostgreSQL database dump
 --
 
--- \restrict aNEeUj4Jfg7djiVGjr4jk1170T7C7UafJtL1tVxPNK4EeTKK4qy4pcp7aMg91Wd
+-- \restrict 9xOfMilwgwD0EzZsXBqTniO2KRY7YjoAdlRiCQxEQOfGs8xV00HnJDvQig9gZS1
 
 -- Dumped from database version 17.11
 -- Dumped by pg_dump version 17.11
@@ -50,7 +50,7 @@ COPY "auth"."flow_state" ("id", "user_id", "auth_code", "code_challenge_method",
 --
 
 COPY "auth"."users" ("instance_id", "id", "aud", "role", "email", "encrypted_password", "email_confirmed_at", "invited_at", "confirmation_token", "confirmation_sent_at", "recovery_token", "recovery_sent_at", "email_change_token_new", "email_change", "email_change_sent_at", "last_sign_in_at", "raw_app_meta_data", "raw_user_meta_data", "is_super_admin", "created_at", "updated_at", "phone", "phone_confirmed_at", "phone_change", "phone_change_token", "phone_change_sent_at", "email_change_token_current", "email_change_confirm_status", "banned_until", "reauthentication_token", "reauthentication_sent_at", "is_sso_user", "deleted_at", "is_anonymous") FROM stdin;
-00000000-0000-0000-0000-000000000000	091bbc1b-3dde-4005-af30-6e309b8fdfeb	authenticated	authenticated	itabaka@gmail.com	$2a$10$bZCffyi5CQOvJe71wmSSzO6WHMtal1lEB6/1dNSzuwqRt1TkyFCAK	2026-09-23 12:09:08.996733+00	\N		\N		\N			\N	2026-11-11 18:43:49.827474+00	{"provider": "email", "providers": ["email"]}	{"email_verified": true}	\N	2026-09-23 12:09:08.980081+00	2026-11-11 20:58:19.671058+00	\N	\N			\N		0	\N		\N	f	\N	f
+00000000-0000-0000-0000-000000000000	091bbc1b-3dde-4005-af30-6e309b8fdfeb	authenticated	authenticated	itabaka@gmail.com	$2a$10$bZCffyi5CQOvJe71wmSSzO6WHMtal1lEB6/1dNSzuwqRt1TkyFCAK	2026-09-23 12:09:08.996733+00	\N		\N		\N			\N	2026-11-11 18:43:49.827474+00	{"provider": "email", "providers": ["email"]}	{"email_verified": true}	\N	2026-09-23 12:09:08.980081+00	2026-11-11 23:37:13.279305+00	\N	\N			\N		0	\N		\N	f	\N	f
 \.
 
 
@@ -88,11 +88,11 @@ COPY "auth"."sessions" ("id", "user_id", "created_at", "updated_at", "factor_id"
 e34d4c42-b2f7-4ff3-b72a-58e3d9dba6ed	091bbc1b-3dde-4005-af30-6e309b8fdfeb	2026-10-03 08:45:43.892907+00	2026-10-15 04:02:55.950983+00	\N	aal1	\N	2026-10-15 04:02:55.95086	Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Mobile Safari/537.36	114.122.68.226	\N	\N	\N	\N	\N
 91cf385c-87c5-4fdf-9192-63db0d4de2fc	091bbc1b-3dde-4005-af30-6e309b8fdfeb	2026-10-03 08:00:29.052669+00	2026-10-15 07:53:59.290785+00	\N	aal1	\N	2026-10-15 07:53:59.290674	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36	104.28.218.132	\N	\N	\N	\N	\N
 f6e4da56-7d32-4b59-9171-4db08617f9e8	091bbc1b-3dde-4005-af30-6e309b8fdfeb	2026-10-03 08:08:47.244459+00	2026-10-03 08:08:47.244459+00	\N	aal1	\N	\N	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36	103.168.46.70	\N	\N	\N	\N	\N
-e9ea1f56-c422-4e83-9e0f-63b80ded5f38	091bbc1b-3dde-4005-af30-6e309b8fdfeb	2026-11-11 11:41:32.888717+00	2026-11-11 18:35:18.645768+00	\N	aal1	\N	2026-11-11 18:35:18.645623	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36	104.28.218.132	\N	\N	\N	\N	\N
 065eaef9-3f5f-4bad-9220-b18d464e80d3	091bbc1b-3dde-4005-af30-6e309b8fdfeb	2026-10-03 11:42:45.188772+00	2026-10-03 11:42:45.188772+00	\N	aal1	\N	\N	Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Mobile Safari/537.36	182.5.136.140	\N	\N	\N	\N	\N
 31b0551e-c71b-4f6a-b764-3efcf67c0e68	091bbc1b-3dde-4005-af30-6e309b8fdfeb	2026-10-03 13:40:22.893035+00	2026-10-03 13:40:22.893035+00	\N	aal1	\N	\N	Mozilla/5.0 (Linux; Android 14; SM-A528B Build/UP1A.231005.007; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/153.0.8010.36 Mobile Safari/537.36 [FB_IAB/FB4A;FBAV/580.0.0.49.91;]	114.122.69.171	\N	\N	\N	\N	\N
 c40b3e16-0b73-4a5f-b202-270389404aaf	091bbc1b-3dde-4005-af30-6e309b8fdfeb	2026-11-11 18:43:49.828224+00	2026-11-11 18:43:49.828224+00	\N	aal1	\N	\N	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36	104.28.218.132	\N	\N	\N	\N	\N
-567ba47b-c796-4e7c-ab98-3f034667fbf1	091bbc1b-3dde-4005-af30-6e309b8fdfeb	2026-11-10 16:19:42.765108+00	2026-11-11 20:58:19.709428+00	\N	aal1	\N	2026-11-11 20:58:19.709299	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36	104.28.218.132	\N	\N	\N	\N	\N
+567ba47b-c796-4e7c-ab98-3f034667fbf1	091bbc1b-3dde-4005-af30-6e309b8fdfeb	2026-11-10 16:19:42.765108+00	2026-11-11 22:55:17.539545+00	\N	aal1	\N	2026-11-11 22:55:17.5394	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36	104.28.218.132	\N	\N	\N	\N	\N
+e9ea1f56-c422-4e83-9e0f-63b80ded5f38	091bbc1b-3dde-4005-af30-6e309b8fdfeb	2026-11-11 11:41:32.888717+00	2026-11-11 23:37:13.293272+00	\N	aal1	\N	2026-11-11 23:37:13.293185	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36	104.28.218.132	\N	\N	\N	\N	\N
 \.
 
 
@@ -198,7 +198,6 @@ COPY "auth"."refresh_tokens" ("instance_id", "id", "token", "user_id", "revoked"
 00000000-0000-0000-0000-000000000000	62	ri5jnetygqi3	091bbc1b-3dde-4005-af30-6e309b8fdfeb	t	2026-11-10 16:19:42.801256+00	2026-11-11 16:56:19.060755+00	\N	567ba47b-c796-4e7c-ab98-3f034667fbf1
 00000000-0000-0000-0000-000000000000	64	anqcvr5ujp6i	091bbc1b-3dde-4005-af30-6e309b8fdfeb	t	2026-11-11 16:56:19.079232+00	2026-11-11 17:55:20.842474+00	ri5jnetygqi3	567ba47b-c796-4e7c-ab98-3f034667fbf1
 00000000-0000-0000-0000-000000000000	63	hozcvhg37rqa	091bbc1b-3dde-4005-af30-6e309b8fdfeb	t	2026-11-11 11:41:32.927568+00	2026-11-11 18:35:18.625686+00	\N	e9ea1f56-c422-4e83-9e0f-63b80ded5f38
-00000000-0000-0000-0000-000000000000	66	zzzi65muorln	091bbc1b-3dde-4005-af30-6e309b8fdfeb	f	2026-11-11 18:35:18.634217+00	2026-11-11 18:35:18.634217+00	hozcvhg37rqa	e9ea1f56-c422-4e83-9e0f-63b80ded5f38
 00000000-0000-0000-0000-000000000000	67	6k5au6bwq2tr	091bbc1b-3dde-4005-af30-6e309b8fdfeb	f	2026-11-11 18:43:49.850302+00	2026-11-11 18:43:49.850302+00	\N	c40b3e16-0b73-4a5f-b202-270389404aaf
 00000000-0000-0000-0000-000000000000	65	ijb4unx7bplr	091bbc1b-3dde-4005-af30-6e309b8fdfeb	t	2026-11-11 17:55:20.857688+00	2026-11-11 18:59:31.593804+00	anqcvr5ujp6i	567ba47b-c796-4e7c-ab98-3f034667fbf1
 00000000-0000-0000-0000-000000000000	25	tothu6afqnh4	091bbc1b-3dde-4005-af30-6e309b8fdfeb	f	2026-10-03 08:08:47.263362+00	2026-10-03 08:08:47.263362+00	\N	f6e4da56-7d32-4b59-9171-4db08617f9e8
@@ -211,13 +210,17 @@ COPY "auth"."refresh_tokens" ("instance_id", "id", "token", "user_id", "revoked"
 00000000-0000-0000-0000-000000000000	28	lu62gzpbixk4	091bbc1b-3dde-4005-af30-6e309b8fdfeb	t	2026-10-03 10:02:19.000708+00	2026-10-03 16:21:03.584469+00	rhlwm6nk6aix	666b04e9-78af-4c13-8d1f-b22aaa783c20
 00000000-0000-0000-0000-000000000000	69	gnokyfwbrv4f	091bbc1b-3dde-4005-af30-6e309b8fdfeb	t	2026-11-11 19:59:42.891531+00	2026-11-11 20:58:19.650034+00	chu4ez6cj6in	567ba47b-c796-4e7c-ab98-3f034667fbf1
 00000000-0000-0000-0000-000000000000	24	wtxgzurvpbcp	091bbc1b-3dde-4005-af30-6e309b8fdfeb	t	2026-10-03 08:00:29.060753+00	2026-10-03 17:00:20.291504+00	\N	91cf385c-87c5-4fdf-9192-63db0d4de2fc
-00000000-0000-0000-0000-000000000000	70	4ieveqrftoun	091bbc1b-3dde-4005-af30-6e309b8fdfeb	f	2026-11-11 20:58:19.662596+00	2026-11-11 20:58:19.662596+00	gnokyfwbrv4f	567ba47b-c796-4e7c-ab98-3f034667fbf1
 00000000-0000-0000-0000-000000000000	32	pppaa47i77l7	091bbc1b-3dde-4005-af30-6e309b8fdfeb	t	2026-10-03 16:21:03.611582+00	2026-10-03 17:19:04.511355+00	lu62gzpbixk4	666b04e9-78af-4c13-8d1f-b22aaa783c20
+00000000-0000-0000-0000-000000000000	70	4ieveqrftoun	091bbc1b-3dde-4005-af30-6e309b8fdfeb	t	2026-11-11 20:58:19.662596+00	2026-11-11 21:57:08.200042+00	gnokyfwbrv4f	567ba47b-c796-4e7c-ab98-3f034667fbf1
 00000000-0000-0000-0000-000000000000	34	2tbglxp7wsrh	091bbc1b-3dde-4005-af30-6e309b8fdfeb	t	2026-10-03 17:19:04.520023+00	2026-10-03 18:17:22.369158+00	pppaa47i77l7	666b04e9-78af-4c13-8d1f-b22aaa783c20
 00000000-0000-0000-0000-000000000000	35	syc3ii4qt34a	091bbc1b-3dde-4005-af30-6e309b8fdfeb	t	2026-10-03 18:17:22.377617+00	2026-10-04 10:06:21.948272+00	2tbglxp7wsrh	666b04e9-78af-4c13-8d1f-b22aaa783c20
+00000000-0000-0000-0000-000000000000	71	nuxiyzqvxe6e	091bbc1b-3dde-4005-af30-6e309b8fdfeb	t	2026-11-11 21:57:08.208286+00	2026-11-11 22:55:17.491834+00	4ieveqrftoun	567ba47b-c796-4e7c-ab98-3f034667fbf1
 00000000-0000-0000-0000-000000000000	36	hjn6ijcv267i	091bbc1b-3dde-4005-af30-6e309b8fdfeb	t	2026-10-04 10:06:21.974403+00	2026-10-04 13:39:13.457884+00	syc3ii4qt34a	666b04e9-78af-4c13-8d1f-b22aaa783c20
+00000000-0000-0000-0000-000000000000	72	qjb5l4c4uwf4	091bbc1b-3dde-4005-af30-6e309b8fdfeb	f	2026-11-11 22:55:17.520615+00	2026-11-11 22:55:17.520615+00	nuxiyzqvxe6e	567ba47b-c796-4e7c-ab98-3f034667fbf1
 00000000-0000-0000-0000-000000000000	37	unrt7hemi7ic	091bbc1b-3dde-4005-af30-6e309b8fdfeb	t	2026-10-04 13:39:13.476568+00	2026-10-04 21:18:16.438824+00	hjn6ijcv267i	666b04e9-78af-4c13-8d1f-b22aaa783c20
+00000000-0000-0000-0000-000000000000	66	zzzi65muorln	091bbc1b-3dde-4005-af30-6e309b8fdfeb	t	2026-11-11 18:35:18.634217+00	2026-11-11 23:37:13.261598+00	hozcvhg37rqa	e9ea1f56-c422-4e83-9e0f-63b80ded5f38
 00000000-0000-0000-0000-000000000000	33	ohtp2wzg4oav	091bbc1b-3dde-4005-af30-6e309b8fdfeb	t	2026-10-03 17:00:20.306616+00	2026-10-04 21:29:12.338798+00	wtxgzurvpbcp	91cf385c-87c5-4fdf-9192-63db0d4de2fc
+00000000-0000-0000-0000-000000000000	73	v6berynyx2ph	091bbc1b-3dde-4005-af30-6e309b8fdfeb	f	2026-11-11 23:37:13.274716+00	2026-11-11 23:37:13.274716+00	zzzi65muorln	e9ea1f56-c422-4e83-9e0f-63b80ded5f38
 00000000-0000-0000-0000-000000000000	38	ptc4jrkuupf3	091bbc1b-3dde-4005-af30-6e309b8fdfeb	t	2026-10-04 21:18:16.454373+00	2026-10-05 02:00:57.105874+00	unrt7hemi7ic	666b04e9-78af-4c13-8d1f-b22aaa783c20
 00000000-0000-0000-0000-000000000000	40	uz6nyclcxl4d	091bbc1b-3dde-4005-af30-6e309b8fdfeb	t	2026-10-05 02:00:57.128878+00	2026-10-07 02:49:07.678169+00	ptc4jrkuupf3	666b04e9-78af-4c13-8d1f-b22aaa783c20
 00000000-0000-0000-0000-000000000000	41	g6tc3pbgic4i	091bbc1b-3dde-4005-af30-6e309b8fdfeb	t	2026-10-07 02:49:07.700715+00	2026-10-08 14:47:42.651965+00	uz6nyclcxl4d	666b04e9-78af-4c13-8d1f-b22aaa783c20
@@ -298,6 +301,17 @@ COPY "auth"."webauthn_credentials" ("id", "user_id", "credential_id", "public_ke
 
 
 --
+-- Data for Name: apparel_types; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY "public"."apparel_types" ("code", "name", "is_active", "sort_order", "created_at", "updated_at") FROM stdin;
+TSHIRT	Kaos	t	10	2026-11-11 21:36:31.391569+00	2026-11-11 21:36:31.391569+00
+JACKET	Jaket	t	20	2026-11-11 21:36:31.391569+00	2026-11-11 21:36:31.391569+00
+HOODIE	Hoodie	f	20	2026-11-11 21:46:32.990068+00	2026-11-11 21:46:32.990068+00
+\.
+
+
+--
 -- Data for Name: orders; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -319,16 +333,16 @@ efa96de8-fc77-4cf8-8396-3e7929256b03	ITB-PO-2026-000051	aduy	luqmankun9029@gmail
 -- Data for Name: products; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY "public"."products" ("id", "code", "name", "description", "price", "image_url", "stock", "active", "sort_order", "created_at", "updated_at", "category", "available_sizes") FROM stdin;
-7b84e2ce-3092-45b5-a88d-d442c1a3facd	ITB-004	Keychain Ichinose Asuna	Art by Oshii	30000	https://zzwmrvddaegjybsskmjv.supabase.co/storage/v1/object/public/product-images/products/b1f50c49-70be-4cff-b01d-f013db3964e3.png	0	t	0	2026-10-03 09:12:56.87318+00	2026-11-11 19:47:21.67335+00	MERCHANDISE	{}
-aca4e3e6-28d3-42d8-bad1-3ba8915a3bb4	ITB-003	C&C Sticker Pack	Art By Oshii	10000	https://zzwmrvddaegjybsskmjv.supabase.co/storage/v1/object/public/product-images/products/2aecb6c9-d2d3-410c-be71-7fbbe099470f.png	38	t	30	2026-09-23 12:03:15.698514+00	2026-11-11 19:50:02.230028+00	MERCHANDISE	{}
-03b97cd0-0eda-4b57-b740-99f2d68e5be4	ITB-005	Volkswagen Scirocco GT 24 Sunaookami Shiroko	Art by @hazaky	175000	https://zzwmrvddaegjybsskmjv.supabase.co/storage/v1/object/public/product-images/products/6c79e246-3528-4719-b5cf-92e326d3c524.png	0	t	0	2026-10-03 09:14:39.496659+00	2026-10-04 10:08:27.523227+00	MERCHANDISE	{}
-4c614771-69cf-4f8d-b4e2-3da8be684a49	ITB-001	Yvonne Acrylic Standee	Art By Hameru	140000	https://zzwmrvddaegjybsskmjv.supabase.co/storage/v1/object/public/product-images/products/3997379b-1b76-454f-a614-84d0ff871219.png	7	t	10	2026-09-23 12:03:15.698514+00	2026-10-14 07:11:34.707861+00	MERCHANDISE	{}
-712e41e7-8d86-499d-868e-c3f28e51b5af	APP-001	Jaket ARA Biru	alskdlaskhjdlasjd	500000	https://zzwmrvddaegjybsskmjv.supabase.co/storage/v1/object/public/product-images/products/6ca79ea9-496b-446c-9857-fca79dd28143.png	2	t	0	2026-10-02 23:45:30.642821+00	2026-11-11 20:51:06.483173+00	JACKET	{M,L,XL}
-6cf8ac72-c00a-4577-8535-138bca761e68	APP-003	Jaket ARA Merah	sdfsdfs	500000	https://zzwmrvddaegjybsskmjv.supabase.co/storage/v1/object/public/product-images/products/1f04210e-b89c-473d-9f9a-233efef4d7b9.png	5	t	0	2026-10-03 09:15:45.064886+00	2026-11-11 20:51:06.483173+00	JACKET	{L,XL,2XL}
-8a637a2e-2359-449e-80ff-69c79669730e	APP-002	Tshirt	asdasdsa	250000	https://zzwmrvddaegjybsskmjv.supabase.co/storage/v1/object/public/product-images/products/7efce189-5faf-4d2b-92d9-7333d5d56729.jpg	7	t	0	2026-10-03 09:12:05.99958+00	2026-11-11 20:51:06.483173+00	TSHIRT	{M,L,XL}
-2405f07d-b40c-4df2-a4ca-fb28f03219c2	ITB-006	Keychain GR Supra	art by.........	30000	https://zzwmrvddaegjybsskmjv.supabase.co/storage/v1/object/public/product-images/products/23601b3a-ac5a-4e75-8fcc-adf6884a5983.png	0	t	0	2026-10-03 17:33:52.146386+00	2026-10-12 13:34:02.284573+00	MERCHANDISE	{}
-5fcd1542-709e-4ee0-b011-f27a9e928c67	ITB-002	Asuma Toki (Armed) Standee	art by rlayuta	140000	https://zzwmrvddaegjybsskmjv.supabase.co/storage/v1/object/public/product-images/products/d704779a-bb52-453b-9cff-9cb08994757e.png	0	t	20	2026-09-23 12:03:15.698514+00	2026-10-12 13:43:13.25542+00	MERCHANDISE	{}
+COPY "public"."products" ("id", "code", "name", "description", "price", "image_url", "stock", "active", "sort_order", "created_at", "updated_at", "category", "available_sizes", "apparel_type") FROM stdin;
+7b84e2ce-3092-45b5-a88d-d442c1a3facd	ITB-004	Keychain Ichinose Asuna	Art by Oshii	30000	https://zzwmrvddaegjybsskmjv.supabase.co/storage/v1/object/public/product-images/products/b1f50c49-70be-4cff-b01d-f013db3964e3.png	0	t	0	2026-10-03 09:12:56.87318+00	2026-11-11 19:47:21.67335+00	MERCHANDISE	{}	\N
+712e41e7-8d86-499d-868e-c3f28e51b5af	APP-001	Jaket ARA Biru	alskdlaskhjdlasjd	500000	https://zzwmrvddaegjybsskmjv.supabase.co/storage/v1/object/public/product-images/products/6ca79ea9-496b-446c-9857-fca79dd28143.png	2	t	0	2026-10-02 23:45:30.642821+00	2026-11-11 21:27:10.693633+00	APPAREL	{M,L,XL}	JACKET
+6cf8ac72-c00a-4577-8535-138bca761e68	APP-003	Jaket ARA Merah	sdfsdfs	500000	https://zzwmrvddaegjybsskmjv.supabase.co/storage/v1/object/public/product-images/products/1f04210e-b89c-473d-9f9a-233efef4d7b9.png	5	t	0	2026-10-03 09:15:45.064886+00	2026-11-11 21:27:10.693633+00	APPAREL	{L,XL,2XL}	JACKET
+8a637a2e-2359-449e-80ff-69c79669730e	APP-002	Tshirt	asdasdsa	250000	https://zzwmrvddaegjybsskmjv.supabase.co/storage/v1/object/public/product-images/products/7efce189-5faf-4d2b-92d9-7333d5d56729.jpg	7	t	0	2026-10-03 09:12:05.99958+00	2026-11-11 21:27:10.693633+00	APPAREL	{M,L,XL}	TSHIRT
+aca4e3e6-28d3-42d8-bad1-3ba8915a3bb4	ITB-003	C&C Sticker Pack	Art By Oshii	10000	https://zzwmrvddaegjybsskmjv.supabase.co/storage/v1/object/public/product-images/products/2aecb6c9-d2d3-410c-be71-7fbbe099470f.png	38	t	30	2026-09-23 12:03:15.698514+00	2026-11-11 19:50:02.230028+00	MERCHANDISE	{}	\N
+03b97cd0-0eda-4b57-b740-99f2d68e5be4	ITB-005	Volkswagen Scirocco GT 24 Sunaookami Shiroko	Art by @hazaky	175000	https://zzwmrvddaegjybsskmjv.supabase.co/storage/v1/object/public/product-images/products/6c79e246-3528-4719-b5cf-92e326d3c524.png	0	t	0	2026-10-03 09:14:39.496659+00	2026-10-04 10:08:27.523227+00	MERCHANDISE	{}	\N
+4c614771-69cf-4f8d-b4e2-3da8be684a49	ITB-001	Yvonne Acrylic Standee	Art By Hameru	140000	https://zzwmrvddaegjybsskmjv.supabase.co/storage/v1/object/public/product-images/products/3997379b-1b76-454f-a614-84d0ff871219.png	7	t	10	2026-09-23 12:03:15.698514+00	2026-10-14 07:11:34.707861+00	MERCHANDISE	{}	\N
+2405f07d-b40c-4df2-a4ca-fb28f03219c2	ITB-006	Keychain GR Supra	art by.........	30000	https://zzwmrvddaegjybsskmjv.supabase.co/storage/v1/object/public/product-images/products/23601b3a-ac5a-4e75-8fcc-adf6884a5983.png	0	t	0	2026-10-03 17:33:52.146386+00	2026-10-12 13:34:02.284573+00	MERCHANDISE	{}	\N
+5fcd1542-709e-4ee0-b011-f27a9e928c67	ITB-002	Asuma Toki (Armed) Standee	art by rlayuta	140000	https://zzwmrvddaegjybsskmjv.supabase.co/storage/v1/object/public/product-images/products/d704779a-bb52-453b-9cff-9cb08994757e.png	0	t	20	2026-09-23 12:03:15.698514+00	2026-10-12 13:43:13.25542+00	MERCHANDISE	{}	\N
 \.
 
 
@@ -336,35 +350,35 @@ aca4e3e6-28d3-42d8-bad1-3ba8915a3bb4	ITB-003	C&C Sticker Pack	Art By Oshii	10000
 -- Data for Name: order_items; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY "public"."order_items" ("id", "order_id", "product_id", "product_name", "unit_price", "quantity", "product_category", "size") FROM stdin;
-820a0404-83d4-4a59-8016-c8aaff27ebf4	73257fa3-f4f2-4e1f-afe1-0d9ab0d52016	712e41e7-8d86-499d-868e-c3f28e51b5af	Jaket ARA Biru	500000	1	JACKET	M
-5ab32739-fd5b-4b7e-a7a4-9a0ef4157ea4	73257fa3-f4f2-4e1f-afe1-0d9ab0d52016	6cf8ac72-c00a-4577-8535-138bca761e68	Jaket ARA Merah	500000	1	JACKET	L
-ae717c4e-543a-49cc-8b16-218031d5c9ea	73257fa3-f4f2-4e1f-afe1-0d9ab0d52016	4c614771-69cf-4f8d-b4e2-3da8be684a49	Yvonne Acrylic Standee	140000	1	MERCHANDISE	\N
-53abf889-181a-4f5e-a205-1979e167cb6d	f8de8b0e-342f-4bbb-a243-c36768e6213d	712e41e7-8d86-499d-868e-c3f28e51b5af	Jaket ARA Biru	500000	1	JACKET	M
-c3b690cf-d896-4add-8a4a-f9471aa6230a	f8de8b0e-342f-4bbb-a243-c36768e6213d	7b84e2ce-3092-45b5-a88d-d442c1a3facd	Keychain Ichinose Asuna	30000	2	MERCHANDISE	\N
-d34f0e41-a2d0-4353-ab15-f3bb461b79ba	f8de8b0e-342f-4bbb-a243-c36768e6213d	aca4e3e6-28d3-42d8-bad1-3ba8915a3bb4	C&C Sticker Pack	10000	1	MERCHANDISE	\N
-289e8988-51c5-4171-90a6-27f3c9170b8b	49e5e7a0-786d-46be-9dcd-be1434ae7004	712e41e7-8d86-499d-868e-c3f28e51b5af	Jaket ARA Biru	500000	1	JACKET	L
-6bb44ca7-6663-451a-b8ca-b1e2fc91be57	eef4b711-fba2-4ba4-8f2d-6d835685c965	7b84e2ce-3092-45b5-a88d-d442c1a3facd	Keychain Ichinose Asuna	30000	1	MERCHANDISE	\N
-dfd5ac8e-d13f-4b44-8206-0461cb74fc17	eef4b711-fba2-4ba4-8f2d-6d835685c965	6cf8ac72-c00a-4577-8535-138bca761e68	Jaket ARA Merah	500000	1	JACKET	L
-f1f53a76-a7cf-451f-80cd-2d9e34d764eb	eef4b711-fba2-4ba4-8f2d-6d835685c965	8a637a2e-2359-449e-80ff-69c79669730e	Tshirt	250000	1	TSHIRT	M
-53c4ba14-ef01-4547-bdaf-e43067f19b8e	08e95d73-eaae-4acf-a487-2d33bdde800e	7b84e2ce-3092-45b5-a88d-d442c1a3facd	Keychain Ichinose Asuna	30000	3	MERCHANDISE	\N
-544bab27-1b62-4e4c-a71f-11d26139c444	08e95d73-eaae-4acf-a487-2d33bdde800e	712e41e7-8d86-499d-868e-c3f28e51b5af	Jaket ARA Biru	500000	1	JACKET	M
-5f267d23-f554-460e-964e-2581e6abdbe8	7a99e0ab-a86a-4a12-9d1b-e26eb3a2a6a7	712e41e7-8d86-499d-868e-c3f28e51b5af	Jaket ARA Biru	500000	1	JACKET	M
-082b24dd-6ea4-48e0-a780-4b1f2d606b27	7a99e0ab-a86a-4a12-9d1b-e26eb3a2a6a7	6cf8ac72-c00a-4577-8535-138bca761e68	Jaket ARA Merah	500000	1	JACKET	L
-7fe69918-6e89-473f-9bcc-749af765d3f5	c8208e68-2c38-4412-9be6-d307baa90203	8a637a2e-2359-449e-80ff-69c79669730e	Tshirt	250000	1	TSHIRT	M
-861ef3f5-d7cf-44b8-abc6-d6f8d3bcfa6b	c8208e68-2c38-4412-9be6-d307baa90203	6cf8ac72-c00a-4577-8535-138bca761e68	Jaket ARA Merah	500000	1	JACKET	L
-c0112e61-3193-4aa3-a7a1-334b1f486ec9	c8208e68-2c38-4412-9be6-d307baa90203	712e41e7-8d86-499d-868e-c3f28e51b5af	Jaket ARA Biru	500000	1	JACKET	M
-8856ddd0-6fa9-4e0b-a002-63b7df261e25	2f00dfef-b116-40a6-8150-56729c3b2ff9	7b84e2ce-3092-45b5-a88d-d442c1a3facd	Keychain Ichinose Asuna	30000	4	MERCHANDISE	\N
-4a6232b2-c305-4343-8947-9d6195c1c4c2	2f00dfef-b116-40a6-8150-56729c3b2ff9	712e41e7-8d86-499d-868e-c3f28e51b5af	Jaket ARA Biru	500000	1	JACKET	M
-c0b13e24-2c5c-4fff-a78d-29803318f81a	2f00dfef-b116-40a6-8150-56729c3b2ff9	6cf8ac72-c00a-4577-8535-138bca761e68	Jaket ARA Merah	500000	1	JACKET	L
-ddb3207c-36ea-4d58-8282-a6a2d6622643	2f00dfef-b116-40a6-8150-56729c3b2ff9	8a637a2e-2359-449e-80ff-69c79669730e	Tshirt	250000	1	TSHIRT	M
-16e7cc2a-8e09-4b54-b419-90cd143c0f59	a3cf662e-ee5e-4184-be06-94f3c840d8ca	aca4e3e6-28d3-42d8-bad1-3ba8915a3bb4	C&C Sticker Pack	10000	6	MERCHANDISE	\N
-e0259456-4feb-4408-b2ac-a957461f34fb	a3cf662e-ee5e-4184-be06-94f3c840d8ca	712e41e7-8d86-499d-868e-c3f28e51b5af	Jaket ARA Biru	500000	1	JACKET	M
-088717c4-4091-49e1-a9c1-1542f9d969c4	a3cf662e-ee5e-4184-be06-94f3c840d8ca	6cf8ac72-c00a-4577-8535-138bca761e68	Jaket ARA Merah	500000	1	JACKET	L
-cc8ac40e-c6ac-4ffb-89ef-afaaae5ae536	a3cf662e-ee5e-4184-be06-94f3c840d8ca	8a637a2e-2359-449e-80ff-69c79669730e	Tshirt	250000	1	TSHIRT	M
-165e97c6-68f1-472b-9d62-2952566f955b	efa96de8-fc77-4cf8-8396-3e7929256b03	712e41e7-8d86-499d-868e-c3f28e51b5af	Jaket ARA Biru	500000	2	JACKET	M
-6dd2f870-af6b-4b9b-9eb8-18afda3a8a65	efa96de8-fc77-4cf8-8396-3e7929256b03	6cf8ac72-c00a-4577-8535-138bca761e68	Jaket ARA Merah	500000	1	JACKET	L
-ff9a8545-1bbe-4c50-86c1-aedbdda7483f	efa96de8-fc77-4cf8-8396-3e7929256b03	8a637a2e-2359-449e-80ff-69c79669730e	Tshirt	250000	1	TSHIRT	M
+COPY "public"."order_items" ("id", "order_id", "product_id", "product_name", "unit_price", "quantity", "product_category", "size", "apparel_type") FROM stdin;
+ae717c4e-543a-49cc-8b16-218031d5c9ea	73257fa3-f4f2-4e1f-afe1-0d9ab0d52016	4c614771-69cf-4f8d-b4e2-3da8be684a49	Yvonne Acrylic Standee	140000	1	MERCHANDISE	\N	\N
+c3b690cf-d896-4add-8a4a-f9471aa6230a	f8de8b0e-342f-4bbb-a243-c36768e6213d	7b84e2ce-3092-45b5-a88d-d442c1a3facd	Keychain Ichinose Asuna	30000	2	MERCHANDISE	\N	\N
+d34f0e41-a2d0-4353-ab15-f3bb461b79ba	f8de8b0e-342f-4bbb-a243-c36768e6213d	aca4e3e6-28d3-42d8-bad1-3ba8915a3bb4	C&C Sticker Pack	10000	1	MERCHANDISE	\N	\N
+6bb44ca7-6663-451a-b8ca-b1e2fc91be57	eef4b711-fba2-4ba4-8f2d-6d835685c965	7b84e2ce-3092-45b5-a88d-d442c1a3facd	Keychain Ichinose Asuna	30000	1	MERCHANDISE	\N	\N
+53c4ba14-ef01-4547-bdaf-e43067f19b8e	08e95d73-eaae-4acf-a487-2d33bdde800e	7b84e2ce-3092-45b5-a88d-d442c1a3facd	Keychain Ichinose Asuna	30000	3	MERCHANDISE	\N	\N
+8856ddd0-6fa9-4e0b-a002-63b7df261e25	2f00dfef-b116-40a6-8150-56729c3b2ff9	7b84e2ce-3092-45b5-a88d-d442c1a3facd	Keychain Ichinose Asuna	30000	4	MERCHANDISE	\N	\N
+16e7cc2a-8e09-4b54-b419-90cd143c0f59	a3cf662e-ee5e-4184-be06-94f3c840d8ca	aca4e3e6-28d3-42d8-bad1-3ba8915a3bb4	C&C Sticker Pack	10000	6	MERCHANDISE	\N	\N
+820a0404-83d4-4a59-8016-c8aaff27ebf4	73257fa3-f4f2-4e1f-afe1-0d9ab0d52016	712e41e7-8d86-499d-868e-c3f28e51b5af	Jaket ARA Biru	500000	1	JACKET	M	JACKET
+5ab32739-fd5b-4b7e-a7a4-9a0ef4157ea4	73257fa3-f4f2-4e1f-afe1-0d9ab0d52016	6cf8ac72-c00a-4577-8535-138bca761e68	Jaket ARA Merah	500000	1	JACKET	L	JACKET
+53abf889-181a-4f5e-a205-1979e167cb6d	f8de8b0e-342f-4bbb-a243-c36768e6213d	712e41e7-8d86-499d-868e-c3f28e51b5af	Jaket ARA Biru	500000	1	JACKET	M	JACKET
+289e8988-51c5-4171-90a6-27f3c9170b8b	49e5e7a0-786d-46be-9dcd-be1434ae7004	712e41e7-8d86-499d-868e-c3f28e51b5af	Jaket ARA Biru	500000	1	JACKET	L	JACKET
+dfd5ac8e-d13f-4b44-8206-0461cb74fc17	eef4b711-fba2-4ba4-8f2d-6d835685c965	6cf8ac72-c00a-4577-8535-138bca761e68	Jaket ARA Merah	500000	1	JACKET	L	JACKET
+f1f53a76-a7cf-451f-80cd-2d9e34d764eb	eef4b711-fba2-4ba4-8f2d-6d835685c965	8a637a2e-2359-449e-80ff-69c79669730e	Tshirt	250000	1	TSHIRT	M	TSHIRT
+544bab27-1b62-4e4c-a71f-11d26139c444	08e95d73-eaae-4acf-a487-2d33bdde800e	712e41e7-8d86-499d-868e-c3f28e51b5af	Jaket ARA Biru	500000	1	JACKET	M	JACKET
+5f267d23-f554-460e-964e-2581e6abdbe8	7a99e0ab-a86a-4a12-9d1b-e26eb3a2a6a7	712e41e7-8d86-499d-868e-c3f28e51b5af	Jaket ARA Biru	500000	1	JACKET	M	JACKET
+082b24dd-6ea4-48e0-a780-4b1f2d606b27	7a99e0ab-a86a-4a12-9d1b-e26eb3a2a6a7	6cf8ac72-c00a-4577-8535-138bca761e68	Jaket ARA Merah	500000	1	JACKET	L	JACKET
+7fe69918-6e89-473f-9bcc-749af765d3f5	c8208e68-2c38-4412-9be6-d307baa90203	8a637a2e-2359-449e-80ff-69c79669730e	Tshirt	250000	1	TSHIRT	M	TSHIRT
+861ef3f5-d7cf-44b8-abc6-d6f8d3bcfa6b	c8208e68-2c38-4412-9be6-d307baa90203	6cf8ac72-c00a-4577-8535-138bca761e68	Jaket ARA Merah	500000	1	JACKET	L	JACKET
+c0112e61-3193-4aa3-a7a1-334b1f486ec9	c8208e68-2c38-4412-9be6-d307baa90203	712e41e7-8d86-499d-868e-c3f28e51b5af	Jaket ARA Biru	500000	1	JACKET	M	JACKET
+4a6232b2-c305-4343-8947-9d6195c1c4c2	2f00dfef-b116-40a6-8150-56729c3b2ff9	712e41e7-8d86-499d-868e-c3f28e51b5af	Jaket ARA Biru	500000	1	JACKET	M	JACKET
+c0b13e24-2c5c-4fff-a78d-29803318f81a	2f00dfef-b116-40a6-8150-56729c3b2ff9	6cf8ac72-c00a-4577-8535-138bca761e68	Jaket ARA Merah	500000	1	JACKET	L	JACKET
+ddb3207c-36ea-4d58-8282-a6a2d6622643	2f00dfef-b116-40a6-8150-56729c3b2ff9	8a637a2e-2359-449e-80ff-69c79669730e	Tshirt	250000	1	TSHIRT	M	TSHIRT
+e0259456-4feb-4408-b2ac-a957461f34fb	a3cf662e-ee5e-4184-be06-94f3c840d8ca	712e41e7-8d86-499d-868e-c3f28e51b5af	Jaket ARA Biru	500000	1	JACKET	M	JACKET
+088717c4-4091-49e1-a9c1-1542f9d969c4	a3cf662e-ee5e-4184-be06-94f3c840d8ca	6cf8ac72-c00a-4577-8535-138bca761e68	Jaket ARA Merah	500000	1	JACKET	L	JACKET
+cc8ac40e-c6ac-4ffb-89ef-afaaae5ae536	a3cf662e-ee5e-4184-be06-94f3c840d8ca	8a637a2e-2359-449e-80ff-69c79669730e	Tshirt	250000	1	TSHIRT	M	TSHIRT
+165e97c6-68f1-472b-9d62-2952566f955b	efa96de8-fc77-4cf8-8396-3e7929256b03	712e41e7-8d86-499d-868e-c3f28e51b5af	Jaket ARA Biru	500000	2	JACKET	M	JACKET
+6dd2f870-af6b-4b9b-9eb8-18afda3a8a65	efa96de8-fc77-4cf8-8396-3e7929256b03	6cf8ac72-c00a-4577-8535-138bca761e68	Jaket ARA Merah	500000	1	JACKET	L	JACKET
+ff9a8545-1bbe-4c50-86c1-aedbdda7483f	efa96de8-fc77-4cf8-8396-3e7929256b03	8a637a2e-2359-449e-80ff-69c79669730e	Tshirt	250000	1	TSHIRT	M	TSHIRT
 \.
 
 
@@ -424,7 +438,7 @@ COPY "public"."site_settings" ("id", "site_name", "site_title", "site_descriptio
 -- Name: refresh_tokens_id_seq; Type: SEQUENCE SET; Schema: auth; Owner: supabase_auth_admin
 --
 
-SELECT pg_catalog.setval('"auth"."refresh_tokens_id_seq"', 70, true);
+SELECT pg_catalog.setval('"auth"."refresh_tokens_id_seq"', 73, true);
 
 
 --
@@ -438,6 +452,6 @@ SELECT pg_catalog.setval('"public"."order_invoice_seq"', 51, true);
 -- PostgreSQL database dump complete
 --
 
--- \unrestrict aNEeUj4Jfg7djiVGjr4jk1170T7C7UafJtL1tVxPNK4EeTKK4qy4pcp7aMg91Wd
+-- \unrestrict 9xOfMilwgwD0EzZsXBqTniO2KRY7YjoAdlRiCQxEQOfGs8xV00HnJDvQig9gZS1
 
 RESET ALL;

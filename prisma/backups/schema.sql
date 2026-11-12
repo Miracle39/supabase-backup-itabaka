@@ -520,7 +520,7 @@ begin
       raise exception 'Produk tidak ditemukan atau tidak aktif';
     end if;
 
-    if v_product.category in ('TSHIRT','JACKET') then
+    if v_product.category = 'APPAREL' then
       v_size := nullif(upper(trim(coalesce(v_item->>'size',''))),'');
       if v_size is null then
         raise exception 'Ukuran wajib dipilih untuk %', v_product.name;
@@ -577,7 +577,7 @@ begin
     from public.products
     where id=(v_item->>'product_id')::uuid;
 
-    if v_product.category in ('TSHIRT','JACKET') then
+    if v_product.category = 'APPAREL' then
       v_size := nullif(upper(trim(coalesce(v_item->>'size',''))),'');
     else
       v_size := null;
@@ -615,6 +615,7 @@ begin
         'unit_price',oi.unit_price,
         'subtotal',oi.subtotal,
         'category',oi.product_category,
+        'apparel_type',oi.apparel_type,
         'size',oi.size
       ) order by oi.id)
       from public.order_items oi
@@ -637,97 +638,120 @@ CREATE OR REPLACE FUNCTION "public"."create_public_order"("p_customer_name" "tex
     LANGUAGE "plpgsql" SECURITY DEFINER
     SET "search_path" TO 'public', 'pg_temp'
     AS $$
-DECLARE
-  v_code text := upper(regexp_replace(trim(coalesce(p_promo_code,'')), '\s+', ' ', 'g'));
+declare
+  v_code text := upper(regexp_replace(trim(coalesce(p_promo_code, '')), '\s+', ' ', 'g'));
   v_member public.promo_members%rowtype;
   v_result jsonb;
   v_subtotal bigint := 0;
+  v_apparel_subtotal bigint := 0;
   v_discount bigint := 0;
   v_final_total bigint := 0;
   v_payment_due bigint := 0;
   v_dp_percentage integer := 50;
   v_order_id uuid;
-BEGIN
-  IF v_code <> '' THEN
-    SELECT * INTO v_member
-    FROM public.promo_members
-    WHERE plate_code = v_code
-    FOR UPDATE;
+begin
+  if v_code <> '' then
+    select * into v_member
+    from public.promo_members
+    where plate_code = v_code
+    for update;
 
-    IF NOT FOUND OR NOT v_member.is_active THEN
-      RAISE EXCEPTION 'Kode promo tidak ditemukan atau sedang nonaktif';
-    END IF;
-    IF v_member.is_used THEN
-      RAISE EXCEPTION 'Kode promo ini sudah pernah digunakan';
-    END IF;
-  END IF;
+    if not found or not v_member.is_active then
+      raise exception 'Kode promo tidak ditemukan atau sedang nonaktif.';
+    end if;
 
+    if v_member.is_used then
+      raise exception 'Kode promo ini sudah pernah digunakan.';
+    end if;
+  end if;
+
+  -- Core function keeps its existing validation and stock deduction behavior.
   v_result := public.create_public_order(
-    p_customer_name, p_customer_email, p_customer_address, p_customer_phone,
-    p_delivery_method, p_payment_plan, p_payment_method, p_items
+    p_customer_name,
+    p_customer_email,
+    p_customer_address,
+    p_customer_phone,
+    p_delivery_method,
+    p_payment_plan,
+    p_payment_method,
+    p_items
   );
 
   v_order_id := (v_result->>'id')::uuid;
-  SELECT o.total_amount INTO v_subtotal
-  FROM public.orders o WHERE o.id = v_order_id;
 
-  IF v_subtotal IS NULL OR v_subtotal <= 0 THEN
-    RAISE EXCEPTION 'Subtotal pesanan tidak valid';
-  END IF;
+  select
+    coalesce(sum(oi.subtotal), 0),
+    coalesce(sum(oi.subtotal) filter (where oi.product_category = 'APPAREL'), 0)
+  into v_subtotal, v_apparel_subtotal
+  from public.order_items oi
+  where oi.order_id = v_order_id;
 
-  IF v_code <> '' THEN
-    IF v_member.discount_type = 'PERCENT' THEN
-      v_discount := round(v_subtotal::numeric * v_member.discount_value / 100)::bigint;
-    ELSE
+  if v_subtotal <= 0 then
+    raise exception 'Subtotal pesanan tidak valid.';
+  end if;
+
+  if v_code <> '' then
+    if v_apparel_subtotal <= 0 then
+      raise exception 'Voucher hanya berlaku untuk produk Apparel.';
+    end if;
+
+    if v_member.discount_type = 'PERCENT' then
+      v_discount := round(v_apparel_subtotal::numeric * v_member.discount_value / 100)::bigint;
+    else
       v_discount := v_member.discount_value;
-    END IF;
-    v_discount := least(greatest(v_discount,0),greatest(v_subtotal-1,0));
-  END IF;
+    end if;
+
+    v_discount := least(greatest(v_discount, 0), greatest(least(v_apparel_subtotal, v_subtotal - 1), 0));
+  end if;
 
   v_final_total := v_subtotal - v_discount;
-  IF v_final_total <= 0 THEN
-    RAISE EXCEPTION 'Total setelah diskon harus lebih dari 0';
-  END IF;
+  if v_final_total <= 0 then
+    raise exception 'Total setelah diskon harus lebih dari 0.';
+  end if;
 
-  SELECT coalesce(dp_percentage,50) INTO v_dp_percentage
-  FROM public.site_settings WHERE id = 1;
-  v_dp_percentage := greatest(1,least(99,coalesce(v_dp_percentage,50)));
+  select coalesce(dp_percentage, 50)
+    into v_dp_percentage
+  from public.site_settings
+  where id = 1;
 
-  IF p_payment_plan = 'FULL' THEN
+  v_dp_percentage := greatest(1, least(99, coalesce(v_dp_percentage, 50)));
+
+  if p_payment_plan = 'FULL' then
     v_payment_due := v_final_total;
-  ELSIF p_payment_plan = 'DP' THEN
-    v_payment_due := greatest(1,ceil(v_final_total::numeric * v_dp_percentage / 100))::bigint;
-  ELSE
-    RAISE EXCEPTION 'Rencana pembayaran harus DP atau FULL';
-  END IF;
+  elsif p_payment_plan = 'DP' then
+    v_payment_due := greatest(1, ceil(v_final_total::numeric * v_dp_percentage / 100)::bigint);
+  else
+    raise exception 'Rencana pembayaran harus DP atau FULL.';
+  end if;
 
-  UPDATE public.orders
-  SET subtotal_amount = v_subtotal,
+  update public.orders
+  set subtotal_amount = v_subtotal,
       discount_amount = v_discount,
-      promo_code = nullif(v_code,''),
+      promo_code = nullif(v_code, ''),
       total_amount = v_final_total,
       payment_amount_due = v_payment_due,
-      customer_payment_status = CASE WHEN p_payment_plan = 'FULL' THEN 'LUNAS' ELSE 'DP' END
-  WHERE id = v_order_id;
+      customer_payment_status = case when p_payment_plan = 'FULL' then 'LUNAS' else 'DP' end
+  where id = v_order_id;
 
-  IF v_code <> '' THEN
-    UPDATE public.promo_members
-    SET is_used = true,
+  if v_code <> '' then
+    update public.promo_members
+    set is_used = true,
         used_order_id = v_order_id,
         used_at = now(),
         updated_at = now()
-    WHERE id = v_member.id;
-  END IF;
+    where id = v_member.id;
+  end if;
 
-  v_result := jsonb_set(v_result,'{subtotal_amount}',to_jsonb(v_subtotal),true);
-  v_result := jsonb_set(v_result,'{discount_amount}',to_jsonb(v_discount),true);
-  v_result := jsonb_set(v_result,'{promo_code}',coalesce(to_jsonb(nullif(v_code,'')),'null'::jsonb),true);
-  v_result := jsonb_set(v_result,'{total_amount}',to_jsonb(v_final_total),true);
-  v_result := jsonb_set(v_result,'{payment_amount_due}',to_jsonb(v_payment_due),true);
-  v_result := jsonb_set(v_result,'{remaining_amount}',to_jsonb(greatest(v_final_total - 0,0)),true);
-  v_result := jsonb_set(v_result,'{customer_payment_status}',to_jsonb(CASE WHEN p_payment_plan = 'FULL' THEN 'LUNAS' ELSE 'DP' END),true);
-  RETURN v_result;
-END;
+  v_result := jsonb_set(v_result, '{subtotal_amount}', to_jsonb(v_subtotal), true);
+  v_result := jsonb_set(v_result, '{discount_amount}', to_jsonb(v_discount), true);
+  v_result := jsonb_set(v_result, '{promo_code}', coalesce(to_jsonb(nullif(v_code, '')), 'null'::jsonb), true);
+  v_result := jsonb_set(v_result, '{total_amount}', to_jsonb(v_final_total), true);
+  v_result := jsonb_set(v_result, '{payment_amount_due}', to_jsonb(v_payment_due), true);
+  v_result := jsonb_set(v_result, '{remaining_amount}', to_jsonb(v_final_total), true);
+  v_result := jsonb_set(v_result, '{customer_payment_status}', to_jsonb(case when p_payment_plan = 'FULL' then 'LUNAS' else 'DP' end), true);
+
+  return v_result;
+end;
 $$;
 
 
@@ -938,17 +962,21 @@ begin return format('ITB-PO-%s-%s',to_char(now() at time zone 'Asia/Jakarta','YY
 ALTER FUNCTION "public"."next_invoice_no"() OWNER TO "postgres";
 
 
-CREATE OR REPLACE FUNCTION "public"."preview_public_promo"("p_code" "text", "p_subtotal" bigint) RETURNS "jsonb"
+CREATE OR REPLACE FUNCTION "public"."preview_public_promo"("p_code" "text", "p_items" "jsonb") RETURNS "jsonb"
     LANGUAGE "plpgsql" SECURITY DEFINER
     SET "search_path" TO 'public', 'pg_temp'
     AS $$
 declare
-  v_code text := upper(regexp_replace(trim(coalesce(p_code,'')), '\s+', ' ', 'g'));
+  v_code text := upper(regexp_replace(trim(coalesce(p_code, '')), '\s+', ' ', 'g'));
   v_member public.promo_members%rowtype;
+  v_item jsonb;
+  v_product public.products%rowtype;
+  v_quantity integer;
+  v_apparel_subtotal bigint := 0;
   v_discount bigint := 0;
 begin
   if v_code = '' then
-    return jsonb_build_object('valid',false,'message','Masukkan kode promo member.');
+    return jsonb_build_object('valid', false, 'message', 'Masukkan kode promo member.');
   end if;
 
   select * into v_member
@@ -956,34 +984,109 @@ begin
   where plate_code = v_code;
 
   if not found or not v_member.is_active then
-    return jsonb_build_object('valid',false,'message','Kode promo tidak ditemukan atau sedang nonaktif.');
+    return jsonb_build_object('valid', false, 'message', 'Kode promo tidak ditemukan atau sedang nonaktif.');
   end if;
+
   if v_member.is_used then
-    return jsonb_build_object('valid',false,'message','Kode promo ini sudah pernah digunakan. Hubungi admin jika ada kekeliruan.');
+    return jsonb_build_object('valid', false, 'message', 'Kode promo ini sudah pernah digunakan.');
   end if;
-  if coalesce(p_subtotal,0) <= 0 then
-    return jsonb_build_object('valid',false,'message','Subtotal pesanan tidak valid.');
+
+  if jsonb_typeof(p_items) is distinct from 'array' then
+    return jsonb_build_object('valid', false, 'message', 'Data keranjang tidak valid.');
+  end if;
+
+  if jsonb_array_length(p_items) = 0 then
+    return jsonb_build_object('valid', false, 'message', 'Keranjang masih kosong.');
+  end if;
+
+  for v_item in select value from jsonb_array_elements(p_items)
+  loop
+    if coalesce(v_item->>'product_id', '') = '' then
+      return jsonb_build_object('valid', false, 'message', 'Ada produk pada keranjang yang tidak valid.');
+    end if;
+
+    begin
+      select * into v_product
+      from public.products
+      where id = (v_item->>'product_id')::uuid
+        and active = true;
+    exception when invalid_text_representation then
+      return jsonb_build_object('valid', false, 'message', 'Ada produk pada keranjang yang tidak valid.');
+    end;
+
+    if not found then
+      return jsonb_build_object('valid', false, 'message', 'Ada produk yang sudah tidak tersedia.');
+    end if;
+
+    begin
+      v_quantity := (v_item->>'quantity')::integer;
+    exception when others then
+      return jsonb_build_object('valid', false, 'message', 'Jumlah produk pada keranjang tidak valid.');
+    end;
+
+    if v_quantity is null or v_quantity < 1 then
+      return jsonb_build_object('valid', false, 'message', 'Jumlah produk pada keranjang tidak valid.');
+    end if;
+
+    if v_product.category = 'APPAREL' then
+      v_apparel_subtotal := v_apparel_subtotal + (v_product.price * v_quantity);
+    end if;
+  end loop;
+
+  if v_apparel_subtotal <= 0 then
+    return jsonb_build_object('valid', false, 'message', 'Voucher hanya berlaku untuk produk Apparel.');
   end if;
 
   if v_member.discount_type = 'PERCENT' then
-    v_discount := round(p_subtotal::numeric * v_member.discount_value / 100)::bigint;
+    v_discount := round(v_apparel_subtotal::numeric * v_member.discount_value / 100)::bigint;
   else
     v_discount := v_member.discount_value;
   end if;
-  v_discount := least(greatest(v_discount,0),greatest(p_subtotal-1,0));
+
+  -- Keep the final order total above zero, including Apparel-only carts.
+  v_discount := least(greatest(v_discount, 0), greatest(v_apparel_subtotal - 1, 0));
 
   return jsonb_build_object(
-    'valid',true,
-    'code',v_member.plate_code,
-    'discount_type',v_member.discount_type,
-    'discount_value',v_member.discount_value,
-    'discount_amount',v_discount
+    'valid', true,
+    'code', v_member.plate_code,
+    'member_name', v_member.member_name,
+    'discount_type', v_member.discount_type,
+    'discount_value', v_member.discount_value,
+    'apparel_subtotal', v_apparel_subtotal,
+    'discount_amount', v_discount
   );
 end;
 $$;
 
 
-ALTER FUNCTION "public"."preview_public_promo"("p_code" "text", "p_subtotal" bigint) OWNER TO "postgres";
+ALTER FUNCTION "public"."preview_public_promo"("p_code" "text", "p_items" "jsonb") OWNER TO "postgres";
+
+
+CREATE OR REPLACE FUNCTION "public"."set_order_item_product_category"() RETURNS "trigger"
+    LANGUAGE "plpgsql" SECURITY DEFINER
+    SET "search_path" TO 'public', 'pg_temp'
+    AS $$
+declare
+  v_category text;
+  v_apparel_type text;
+begin
+  select p.category, p.apparel_type
+    into v_category, v_apparel_type
+  from public.products p
+  where p.id = new.product_id;
+
+  if not found then
+    raise exception 'Produk tidak ditemukan.';
+  end if;
+
+  new.product_category := v_category;
+  new.apparel_type := v_apparel_type;
+  return new;
+end;
+$$;
+
+
+ALTER FUNCTION "public"."set_order_item_product_category"() OWNER TO "postgres";
 
 
 CREATE OR REPLACE FUNCTION "public"."set_updated_at"() RETURNS "trigger"
@@ -1034,6 +1137,25 @@ $$;
 
 ALTER FUNCTION "public"."sync_order_payment_verification"() OWNER TO "postgres";
 
+SET default_tablespace = '';
+
+SET default_table_access_method = "heap";
+
+
+CREATE TABLE IF NOT EXISTS "public"."apparel_types" (
+    "code" "text" NOT NULL,
+    "name" "text" NOT NULL,
+    "is_active" boolean DEFAULT true NOT NULL,
+    "sort_order" integer DEFAULT 0 NOT NULL,
+    "created_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    "updated_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    CONSTRAINT "apparel_types_code_check" CHECK (("code" ~ '^[A-Z0-9_]{1,40}$'::"text")),
+    CONSTRAINT "apparel_types_name_check" CHECK ((("char_length"(TRIM(BOTH FROM "name")) >= 1) AND ("char_length"(TRIM(BOTH FROM "name")) <= 50)))
+);
+
+
+ALTER TABLE "public"."apparel_types" OWNER TO "postgres";
+
 
 CREATE SEQUENCE IF NOT EXISTS "public"."order_invoice_seq"
     START WITH 1
@@ -1044,10 +1166,6 @@ CREATE SEQUENCE IF NOT EXISTS "public"."order_invoice_seq"
 
 
 ALTER SEQUENCE "public"."order_invoice_seq" OWNER TO "postgres";
-
-SET default_tablespace = '';
-
-SET default_table_access_method = "heap";
 
 
 CREATE TABLE IF NOT EXISTS "public"."order_items" (
@@ -1060,6 +1178,7 @@ CREATE TABLE IF NOT EXISTS "public"."order_items" (
     "subtotal" bigint GENERATED ALWAYS AS (("unit_price" * "quantity")) STORED,
     "product_category" "text" DEFAULT 'MERCHANDISE'::"text" NOT NULL,
     "size" "text",
+    "apparel_type" "text",
     CONSTRAINT "order_items_quantity_check" CHECK (("quantity" > 0)),
     CONSTRAINT "order_items_unit_price_check" CHECK (("unit_price" >= 0))
 );
@@ -1152,7 +1271,9 @@ CREATE TABLE IF NOT EXISTS "public"."products" (
     "updated_at" timestamp with time zone DEFAULT "now"() NOT NULL,
     "category" "text" DEFAULT 'MERCHANDISE'::"text" NOT NULL,
     "available_sizes" "text"[] DEFAULT '{}'::"text"[] NOT NULL,
-    CONSTRAINT "products_category_check" CHECK (("category" = ANY (ARRAY['MERCHANDISE'::"text", 'TSHIRT'::"text", 'JACKET'::"text"]))),
+    "apparel_type" "text",
+    CONSTRAINT "products_apparel_type_check" CHECK (((("category" = 'MERCHANDISE'::"text") AND ("apparel_type" IS NULL)) OR (("category" = 'APPAREL'::"text") AND ("apparel_type" IS NOT NULL)))),
+    CONSTRAINT "products_category_check" CHECK (("category" = ANY (ARRAY['MERCHANDISE'::"text", 'APPAREL'::"text"]))),
     CONSTRAINT "products_price_check" CHECK (("price" >= 0)),
     CONSTRAINT "products_stock_check" CHECK ((("stock" IS NULL) OR ("stock" >= 0)))
 );
@@ -1214,6 +1335,16 @@ CREATE TABLE IF NOT EXISTS "public"."site_settings" (
 
 
 ALTER TABLE "public"."site_settings" OWNER TO "postgres";
+
+
+ALTER TABLE ONLY "public"."apparel_types"
+    ADD CONSTRAINT "apparel_types_name_key" UNIQUE ("name");
+
+
+
+ALTER TABLE ONLY "public"."apparel_types"
+    ADD CONSTRAINT "apparel_types_pkey" PRIMARY KEY ("code");
+
 
 
 ALTER TABLE ONLY "public"."order_items"
@@ -1279,6 +1410,10 @@ CREATE INDEX "products_category_idx" ON "public"."products" USING "btree" ("cate
 
 
 
+CREATE OR REPLACE TRIGGER "order_items_set_product_category" BEFORE INSERT ON "public"."order_items" FOR EACH ROW EXECUTE FUNCTION "public"."set_order_item_product_category"();
+
+
+
 CREATE OR REPLACE TRIGGER "order_payments_sync_verification" AFTER INSERT OR DELETE OR UPDATE OF "internal_status", "reported_amount" ON "public"."order_payments" FOR EACH ROW EXECUTE FUNCTION "public"."sync_order_payment_verification"();
 
 
@@ -1319,6 +1454,11 @@ ALTER TABLE ONLY "public"."order_payments"
 
 
 
+ALTER TABLE ONLY "public"."products"
+    ADD CONSTRAINT "products_apparel_type_fkey" FOREIGN KEY ("apparel_type") REFERENCES "public"."apparel_types"("code") ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+
 ALTER TABLE ONLY "public"."profiles"
     ADD CONSTRAINT "profiles_id_fkey" FOREIGN KEY ("id") REFERENCES "auth"."users"("id") ON DELETE CASCADE;
 
@@ -1326,6 +1466,21 @@ ALTER TABLE ONLY "public"."profiles"
 
 ALTER TABLE ONLY "public"."promo_members"
     ADD CONSTRAINT "promo_members_used_order_id_fkey" FOREIGN KEY ("used_order_id") REFERENCES "public"."orders"("id") ON DELETE SET NULL;
+
+
+
+ALTER TABLE "public"."apparel_types" ENABLE ROW LEVEL SECURITY;
+
+
+CREATE POLICY "apparel_types_admin_insert" ON "public"."apparel_types" FOR INSERT TO "authenticated" WITH CHECK ("public"."is_admin"());
+
+
+
+CREATE POLICY "apparel_types_admin_update" ON "public"."apparel_types" FOR UPDATE TO "authenticated" USING ("public"."is_admin"()) WITH CHECK ("public"."is_admin"());
+
+
+
+CREATE POLICY "apparel_types_public_select" ON "public"."apparel_types" FOR SELECT TO "authenticated", "anon" USING (("is_active" OR "public"."is_admin"()));
 
 
 
@@ -1686,10 +1841,16 @@ GRANT ALL ON FUNCTION "public"."next_invoice_no"() TO "service_role";
 
 
 
-REVOKE ALL ON FUNCTION "public"."preview_public_promo"("p_code" "text", "p_subtotal" bigint) FROM PUBLIC;
-GRANT ALL ON FUNCTION "public"."preview_public_promo"("p_code" "text", "p_subtotal" bigint) TO "anon";
-GRANT ALL ON FUNCTION "public"."preview_public_promo"("p_code" "text", "p_subtotal" bigint) TO "authenticated";
-GRANT ALL ON FUNCTION "public"."preview_public_promo"("p_code" "text", "p_subtotal" bigint) TO "service_role";
+REVOKE ALL ON FUNCTION "public"."preview_public_promo"("p_code" "text", "p_items" "jsonb") FROM PUBLIC;
+GRANT ALL ON FUNCTION "public"."preview_public_promo"("p_code" "text", "p_items" "jsonb") TO "anon";
+GRANT ALL ON FUNCTION "public"."preview_public_promo"("p_code" "text", "p_items" "jsonb") TO "authenticated";
+GRANT ALL ON FUNCTION "public"."preview_public_promo"("p_code" "text", "p_items" "jsonb") TO "service_role";
+
+
+
+GRANT ALL ON FUNCTION "public"."set_order_item_product_category"() TO "anon";
+GRANT ALL ON FUNCTION "public"."set_order_item_product_category"() TO "authenticated";
+GRANT ALL ON FUNCTION "public"."set_order_item_product_category"() TO "service_role";
 
 
 
@@ -1717,6 +1878,12 @@ GRANT ALL ON FUNCTION "public"."sync_order_payment_verification"() TO "service_r
 
 
 
+
+
+
+GRANT ALL ON TABLE "public"."apparel_types" TO "anon";
+GRANT ALL ON TABLE "public"."apparel_types" TO "authenticated";
+GRANT ALL ON TABLE "public"."apparel_types" TO "service_role";
 
 
 
