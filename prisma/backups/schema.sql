@@ -1309,7 +1309,7 @@ CREATE TABLE IF NOT EXISTS "public"."promo_members" (
     CONSTRAINT "promo_members_discount_type_check" CHECK (("discount_type" = ANY (ARRAY['PERCENT'::"text", 'FIXED'::"text"]))),
     CONSTRAINT "promo_members_discount_value_check" CHECK (("discount_value" > 0)),
     CONSTRAINT "promo_members_percent_range" CHECK ((("discount_type" <> 'PERCENT'::"text") OR (("discount_value" >= 1) AND ("discount_value" <= 99)))),
-    CONSTRAINT "promo_members_plate_code_format" CHECK (("plate_code" = "upper"("regexp_replace"(TRIM(BOTH FROM "plate_code"), '\s+'::"text", ' '::"text", 'g'::"text"))))
+    CONSTRAINT "promo_members_plate_code_format" CHECK ((("plate_code" = "upper"("regexp_replace"(TRIM(BOTH FROM "plate_code"), '\s+'::"text", ''::"text", 'g'::"text"))) AND ("plate_code" <> ''::"text")))
 );
 
 
@@ -1330,6 +1330,7 @@ CREATE TABLE IF NOT EXISTS "public"."site_settings" (
     "bca_account_name" "text",
     "bca_account_number" "text",
     "dp_percentage" integer,
+    "full_payment_enabled" boolean DEFAULT true NOT NULL,
     CONSTRAINT "site_settings_id_check" CHECK (("id" = 1))
 );
 
@@ -1470,6 +1471,10 @@ ALTER TABLE ONLY "public"."promo_members"
 
 
 ALTER TABLE "public"."apparel_types" ENABLE ROW LEVEL SECURITY;
+
+
+CREATE POLICY "apparel_types_admin_delete" ON "public"."apparel_types" FOR DELETE TO "authenticated" USING ("public"."is_admin"());
+
 
 
 CREATE POLICY "apparel_types_admin_insert" ON "public"."apparel_types" FOR INSERT TO "authenticated" WITH CHECK ("public"."is_admin"());
