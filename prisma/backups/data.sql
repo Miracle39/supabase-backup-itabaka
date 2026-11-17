@@ -4,10 +4,10 @@ SET session_replication_role = replica;
 -- PostgreSQL database dump
 --
 
--- \restrict WFOypwqC33YxFc8FYa6NotKcpNa3zNK4XdMhsP4uIzn0AqJ68Ba4ngZAnvIB8Gz
+-- \restrict f1L14JWKgIqLz1pKc5IJfdGPyXDjBGzj3ww8ziPmuLOxaHN03VSeWgdS5C3h4Ds
 
 -- Dumped from database version 17.11
--- Dumped by pg_dump version 17.11
+-- Dumped by pg_dump version 17.12
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -50,7 +50,7 @@ COPY "auth"."flow_state" ("id", "user_id", "auth_code", "code_challenge_method",
 --
 
 COPY "auth"."users" ("instance_id", "id", "aud", "role", "email", "encrypted_password", "email_confirmed_at", "invited_at", "confirmation_token", "confirmation_sent_at", "recovery_token", "recovery_sent_at", "email_change_token_new", "email_change", "email_change_sent_at", "last_sign_in_at", "raw_app_meta_data", "raw_user_meta_data", "is_super_admin", "created_at", "updated_at", "phone", "phone_confirmed_at", "phone_change", "phone_change_token", "phone_change_sent_at", "email_change_token_current", "email_change_confirm_status", "banned_until", "reauthentication_token", "reauthentication_sent_at", "is_sso_user", "deleted_at", "is_anonymous") FROM stdin;
-00000000-0000-0000-0000-000000000000	091bbc1b-3dde-4005-af30-6e309b8fdfeb	authenticated	authenticated	itabaka@gmail.com	$2a$10$bZCffyi5CQOvJe71wmSSzO6WHMtal1lEB6/1dNSzuwqRt1TkyFCAK	2026-09-23 12:09:08.996733+00	\N		\N		\N			\N	2026-11-14 22:42:29.359055+00	{"provider": "email", "providers": ["email"]}	{"email_verified": true}	\N	2026-09-23 12:09:08.980081+00	2026-11-14 22:42:29.375921+00	\N	\N			\N		0	\N		\N	f	\N	f
+00000000-0000-0000-0000-000000000000	091bbc1b-3dde-4005-af30-6e309b8fdfeb	authenticated	authenticated	itabaka@gmail.com	$2a$10$bZCffyi5CQOvJe71wmSSzO6WHMtal1lEB6/1dNSzuwqRt1TkyFCAK	2026-09-23 12:09:08.996733+00	\N		\N		\N			\N	2026-11-14 22:42:29.359055+00	{"provider": "email", "providers": ["email"]}	{"email_verified": true}	\N	2026-09-23 12:09:08.980081+00	2026-11-16 10:47:56.204212+00	\N	\N			\N		0	\N		\N	f	\N	f
 \.
 
 
@@ -84,9 +84,9 @@ COPY "auth"."oauth_clients" ("id", "client_secret_hash", "registration_type", "r
 --
 
 COPY "auth"."sessions" ("id", "user_id", "created_at", "updated_at", "factor_id", "aal", "not_after", "refreshed_at", "user_agent", "ip", "tag", "oauth_client_id", "refresh_token_hmac_key", "refresh_token_counter", "scopes") FROM stdin;
-47785fd1-72ce-4846-a455-670cd0ab31c7	091bbc1b-3dde-4005-af30-6e309b8fdfeb	2026-11-14 19:18:31.479372+00	2026-11-14 22:12:48.711518+00	\N	aal1	\N	2026-11-14 22:12:48.711437	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36	104.28.250.136	\N	\N	\N	\N	\N
 1b2ffbf1-44df-4047-9af0-9b04cc8ba75f	091bbc1b-3dde-4005-af30-6e309b8fdfeb	2026-11-14 19:28:00.769232+00	2026-11-14 22:33:29.066204+00	\N	aal1	\N	2026-11-14 22:33:29.066109	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36	104.28.250.136	\N	\N	\N	\N	\N
 08eb3861-d1b6-4fdb-94d0-631ded32e7de	091bbc1b-3dde-4005-af30-6e309b8fdfeb	2026-11-14 22:42:29.361107+00	2026-11-14 22:42:29.361107+00	\N	aal1	\N	\N	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36	104.28.250.136	\N	\N	\N	\N	\N
+47785fd1-72ce-4846-a455-670cd0ab31c7	091bbc1b-3dde-4005-af30-6e309b8fdfeb	2026-11-14 19:18:31.479372+00	2026-11-16 10:47:56.224039+00	\N	aal1	\N	2026-11-16 10:47:56.223949	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36	104.28.218.132	\N	\N	\N	\N	\N
 \.
 
 
@@ -161,7 +161,7 @@ COPY "auth"."oauth_consents" ("id", "user_id", "client_id", "scopes", "granted_a
 -- Data for Name: one_time_tokens; Type: TABLE DATA; Schema: auth; Owner: supabase_auth_admin
 --
 
-COPY "auth"."one_time_tokens" ("id", "user_id", "token_type", "token_hash", "relates_to", "created_at", "updated_at", "expires_at") FROM stdin;
+COPY "auth"."one_time_tokens" ("id", "user_id", "token_type", "token_hash", "relates_to", "created_at", "updated_at", "expires_at", "link_token_hash") FROM stdin;
 \.
 
 
@@ -174,10 +174,11 @@ COPY "auth"."refresh_tokens" ("instance_id", "id", "token", "user_id", "revoked"
 00000000-0000-0000-0000-000000000000	82	vkkhezb7bc6g	091bbc1b-3dde-4005-af30-6e309b8fdfeb	t	2026-11-14 19:28:00.788412+00	2026-11-14 20:26:09.914754+00	\N	1b2ffbf1-44df-4047-9af0-9b04cc8ba75f
 00000000-0000-0000-0000-000000000000	84	ddwzaeufloki	091bbc1b-3dde-4005-af30-6e309b8fdfeb	t	2026-11-14 20:26:09.920566+00	2026-11-14 21:24:15.398574+00	vkkhezb7bc6g	1b2ffbf1-44df-4047-9af0-9b04cc8ba75f
 00000000-0000-0000-0000-000000000000	83	uf6mobh4ndv2	091bbc1b-3dde-4005-af30-6e309b8fdfeb	t	2026-11-14 20:17:02.075627+00	2026-11-14 22:12:48.675223+00	uozjkcqt4zt3	47785fd1-72ce-4846-a455-670cd0ab31c7
-00000000-0000-0000-0000-000000000000	86	o75gfavve5zq	091bbc1b-3dde-4005-af30-6e309b8fdfeb	f	2026-11-14 22:12:48.688374+00	2026-11-14 22:12:48.688374+00	uf6mobh4ndv2	47785fd1-72ce-4846-a455-670cd0ab31c7
 00000000-0000-0000-0000-000000000000	85	qa42zrgvekpp	091bbc1b-3dde-4005-af30-6e309b8fdfeb	t	2026-11-14 21:24:15.415327+00	2026-11-14 22:33:29.035618+00	ddwzaeufloki	1b2ffbf1-44df-4047-9af0-9b04cc8ba75f
 00000000-0000-0000-0000-000000000000	87	pkph5xqtbkwq	091bbc1b-3dde-4005-af30-6e309b8fdfeb	f	2026-11-14 22:33:29.04294+00	2026-11-14 22:33:29.04294+00	qa42zrgvekpp	1b2ffbf1-44df-4047-9af0-9b04cc8ba75f
 00000000-0000-0000-0000-000000000000	88	bjvkjxk6wy6e	091bbc1b-3dde-4005-af30-6e309b8fdfeb	f	2026-11-14 22:42:29.374258+00	2026-11-14 22:42:29.374258+00	\N	08eb3861-d1b6-4fdb-94d0-631ded32e7de
+00000000-0000-0000-0000-000000000000	86	o75gfavve5zq	091bbc1b-3dde-4005-af30-6e309b8fdfeb	t	2026-11-14 22:12:48.688374+00	2026-11-16 10:47:56.167054+00	uf6mobh4ndv2	47785fd1-72ce-4846-a455-670cd0ab31c7
+00000000-0000-0000-0000-000000000000	89	m67fhtnncipc	091bbc1b-3dde-4005-af30-6e309b8fdfeb	f	2026-11-16 10:47:56.192193+00	2026-11-16 10:47:56.192193+00	o75gfavve5zq	47785fd1-72ce-4846-a455-670cd0ab31c7
 \.
 
 
@@ -193,7 +194,7 @@ COPY "auth"."sso_providers" ("id", "resource_id", "created_at", "updated_at", "d
 -- Data for Name: saml_providers; Type: TABLE DATA; Schema: auth; Owner: supabase_auth_admin
 --
 
-COPY "auth"."saml_providers" ("id", "sso_provider_id", "entity_id", "metadata_xml", "metadata_url", "attribute_mapping", "created_at", "updated_at", "name_id_format") FROM stdin;
+COPY "auth"."saml_providers" ("id", "sso_provider_id", "entity_id", "metadata_xml", "metadata_url", "attribute_mapping", "created_at", "updated_at", "name_id_format", "dedicated_scope") FROM stdin;
 \.
 
 
@@ -442,7 +443,7 @@ COPY "public"."site_settings" ("id", "site_name", "site_title", "site_descriptio
 -- Name: refresh_tokens_id_seq; Type: SEQUENCE SET; Schema: auth; Owner: supabase_auth_admin
 --
 
-SELECT pg_catalog.setval('"auth"."refresh_tokens_id_seq"', 88, true);
+SELECT pg_catalog.setval('"auth"."refresh_tokens_id_seq"', 89, true);
 
 
 --
@@ -456,6 +457,6 @@ SELECT pg_catalog.setval('"public"."order_invoice_seq"', 58, true);
 -- PostgreSQL database dump complete
 --
 
--- \unrestrict WFOypwqC33YxFc8FYa6NotKcpNa3zNK4XdMhsP4uIzn0AqJ68Ba4ngZAnvIB8Gz
+-- \unrestrict f1L14JWKgIqLz1pKc5IJfdGPyXDjBGzj3ww8ziPmuLOxaHN03VSeWgdS5C3h4Ds
 
 RESET ALL;
