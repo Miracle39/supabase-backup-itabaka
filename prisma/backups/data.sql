@@ -4,7 +4,7 @@ SET session_replication_role = replica;
 -- PostgreSQL database dump
 --
 
--- \restrict OShsnC7dTMp5lw65Lu4gA2Kt6sLAfP70Cp2W9hcTBTDnap6K6makBxR47IETBIu
+-- \restrict ySW5tCXzWalpPP3589bdEIuSM0lgT3N4wtqi48F1BGV5bTvbNc0TCPdiemyHBSu
 
 -- Dumped from database version 17.11
 -- Dumped by pg_dump version 17.12
@@ -50,7 +50,7 @@ COPY "auth"."flow_state" ("id", "user_id", "auth_code", "code_challenge_method",
 --
 
 COPY "auth"."users" ("instance_id", "id", "aud", "role", "email", "encrypted_password", "email_confirmed_at", "invited_at", "confirmation_token", "confirmation_sent_at", "recovery_token", "recovery_sent_at", "email_change_token_new", "email_change", "email_change_sent_at", "last_sign_in_at", "raw_app_meta_data", "raw_user_meta_data", "is_super_admin", "created_at", "updated_at", "phone", "phone_confirmed_at", "phone_change", "phone_change_token", "phone_change_sent_at", "email_change_token_current", "email_change_confirm_status", "banned_until", "reauthentication_token", "reauthentication_sent_at", "is_sso_user", "deleted_at", "is_anonymous") FROM stdin;
-00000000-0000-0000-0000-000000000000	091bbc1b-3dde-4005-af30-6e309b8fdfeb	authenticated	authenticated	itabaka@gmail.com	$2a$10$bZCffyi5CQOvJe71wmSSzO6WHMtal1lEB6/1dNSzuwqRt1TkyFCAK	2026-09-23 12:09:08.996733+00	\N		\N		\N			\N	2026-11-14 22:42:29.359055+00	{"provider": "email", "providers": ["email"]}	{"email_verified": true}	\N	2026-09-23 12:09:08.980081+00	2026-11-16 10:47:56.204212+00	\N	\N			\N		0	\N		\N	f	\N	f
+00000000-0000-0000-0000-000000000000	091bbc1b-3dde-4005-af30-6e309b8fdfeb	authenticated	authenticated	itabaka@gmail.com	$2a$10$bZCffyi5CQOvJe71wmSSzO6WHMtal1lEB6/1dNSzuwqRt1TkyFCAK	2026-09-23 12:09:08.996733+00	\N		\N		\N			\N	2026-11-19 22:10:49.140439+00	{"provider": "email", "providers": ["email"]}	{"email_verified": true}	\N	2026-09-23 12:09:08.980081+00	2026-11-20 01:52:03.94217+00	\N	\N			\N		0	\N		\N	f	\N	f
 \.
 
 
@@ -87,6 +87,11 @@ COPY "auth"."sessions" ("id", "user_id", "created_at", "updated_at", "factor_id"
 1b2ffbf1-44df-4047-9af0-9b04cc8ba75f	091bbc1b-3dde-4005-af30-6e309b8fdfeb	2026-11-14 19:28:00.769232+00	2026-11-14 22:33:29.066204+00	\N	aal1	\N	2026-11-14 22:33:29.066109	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36	104.28.250.136	\N	\N	\N	\N	\N
 08eb3861-d1b6-4fdb-94d0-631ded32e7de	091bbc1b-3dde-4005-af30-6e309b8fdfeb	2026-11-14 22:42:29.361107+00	2026-11-14 22:42:29.361107+00	\N	aal1	\N	\N	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36	104.28.250.136	\N	\N	\N	\N	\N
 47785fd1-72ce-4846-a455-670cd0ab31c7	091bbc1b-3dde-4005-af30-6e309b8fdfeb	2026-11-14 19:18:31.479372+00	2026-11-16 10:47:56.224039+00	\N	aal1	\N	2026-11-16 10:47:56.223949	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36	104.28.218.132	\N	\N	\N	\N	\N
+08d4b75b-51e9-4667-9848-9052b3601b7c	091bbc1b-3dde-4005-af30-6e309b8fdfeb	2026-11-19 22:10:49.002212+00	2026-11-19 22:10:49.002212+00	\N	aal1	\N	\N	Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/27.2 Mobile/15E148 Safari/604.1	104.28.218.132	\N	\N	\N	\N	\N
+9dc962d1-8299-4d87-8d0b-0c9e79f54ab2	091bbc1b-3dde-4005-af30-6e309b8fdfeb	2026-11-19 22:10:49.110899+00	2026-11-19 22:10:49.110899+00	\N	aal1	\N	\N	Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/27.2 Mobile/15E148 Safari/604.1	104.28.218.132	\N	\N	\N	\N	\N
+c5d53ff9-6a3b-44c1-b0e9-717faee61f7b	091bbc1b-3dde-4005-af30-6e309b8fdfeb	2026-11-19 22:10:49.130857+00	2026-11-19 22:10:49.130857+00	\N	aal1	\N	\N	Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/27.2 Mobile/15E148 Safari/604.1	104.28.218.132	\N	\N	\N	\N	\N
+654598b8-667e-45b3-8d35-e9ca9779a64e	091bbc1b-3dde-4005-af30-6e309b8fdfeb	2026-11-19 22:10:49.140537+00	2026-11-19 22:10:49.140537+00	\N	aal1	\N	\N	Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/27.2 Mobile/15E148 Safari/604.1	104.28.218.132	\N	\N	\N	\N	\N
+c6c89255-1eb0-494e-ba4f-9c4395c98c2e	091bbc1b-3dde-4005-af30-6e309b8fdfeb	2026-11-19 22:10:49.122076+00	2026-11-20 01:52:03.96834+00	\N	aal1	\N	2026-11-20 01:52:03.968234	Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/27.2 Mobile/15E148 Safari/604.1	104.28.218.132	\N	\N	\N	\N	\N
 \.
 
 
@@ -98,6 +103,11 @@ COPY "auth"."mfa_amr_claims" ("session_id", "created_at", "updated_at", "authent
 47785fd1-72ce-4846-a455-670cd0ab31c7	2026-11-14 19:18:31.504464+00	2026-11-14 19:18:31.504464+00	password	b6828454-0650-4f6e-82c2-9d8a27dc46d1
 1b2ffbf1-44df-4047-9af0-9b04cc8ba75f	2026-11-14 19:28:00.79286+00	2026-11-14 19:28:00.79286+00	password	63db67ff-3af9-4ae8-8805-3daa882a54d7
 08eb3861-d1b6-4fdb-94d0-631ded32e7de	2026-11-14 22:42:29.38289+00	2026-11-14 22:42:29.38289+00	password	355dabf3-214a-4fbf-9b75-0cc1fec78615
+08d4b75b-51e9-4667-9848-9052b3601b7c	2026-11-19 22:10:49.078731+00	2026-11-19 22:10:49.078731+00	password	2ebf1781-0b6b-49ca-86a6-7a245394422a
+9dc962d1-8299-4d87-8d0b-0c9e79f54ab2	2026-11-19 22:10:49.117704+00	2026-11-19 22:10:49.117704+00	password	7f2c1678-e3cc-4050-ace0-1c964b9851bd
+c6c89255-1eb0-494e-ba4f-9c4395c98c2e	2026-11-19 22:10:49.127372+00	2026-11-19 22:10:49.127372+00	password	d11ed66b-cb02-41f9-928a-01f91b9a59d7
+c5d53ff9-6a3b-44c1-b0e9-717faee61f7b	2026-11-19 22:10:49.136354+00	2026-11-19 22:10:49.136354+00	password	0105b2fc-5c4e-4bd4-8fc2-051fbf0cc7a9
+654598b8-667e-45b3-8d35-e9ca9779a64e	2026-11-19 22:10:49.146632+00	2026-11-19 22:10:49.146632+00	password	42d7a4bb-dda1-4f5b-99dc-2400f61728cc
 \.
 
 
@@ -179,6 +189,12 @@ COPY "auth"."refresh_tokens" ("instance_id", "id", "token", "user_id", "revoked"
 00000000-0000-0000-0000-000000000000	88	bjvkjxk6wy6e	091bbc1b-3dde-4005-af30-6e309b8fdfeb	f	2026-11-14 22:42:29.374258+00	2026-11-14 22:42:29.374258+00	\N	08eb3861-d1b6-4fdb-94d0-631ded32e7de
 00000000-0000-0000-0000-000000000000	86	o75gfavve5zq	091bbc1b-3dde-4005-af30-6e309b8fdfeb	t	2026-11-14 22:12:48.688374+00	2026-11-16 10:47:56.167054+00	uf6mobh4ndv2	47785fd1-72ce-4846-a455-670cd0ab31c7
 00000000-0000-0000-0000-000000000000	89	m67fhtnncipc	091bbc1b-3dde-4005-af30-6e309b8fdfeb	f	2026-11-16 10:47:56.192193+00	2026-11-16 10:47:56.192193+00	o75gfavve5zq	47785fd1-72ce-4846-a455-670cd0ab31c7
+00000000-0000-0000-0000-000000000000	90	z4cesm5szojs	091bbc1b-3dde-4005-af30-6e309b8fdfeb	f	2026-11-19 22:10:49.036234+00	2026-11-19 22:10:49.036234+00	\N	08d4b75b-51e9-4667-9848-9052b3601b7c
+00000000-0000-0000-0000-000000000000	91	fsn2fvtpgxaz	091bbc1b-3dde-4005-af30-6e309b8fdfeb	f	2026-11-19 22:10:49.114185+00	2026-11-19 22:10:49.114185+00	\N	9dc962d1-8299-4d87-8d0b-0c9e79f54ab2
+00000000-0000-0000-0000-000000000000	93	u3bpdtobq276	091bbc1b-3dde-4005-af30-6e309b8fdfeb	f	2026-11-19 22:10:49.133027+00	2026-11-19 22:10:49.133027+00	\N	c5d53ff9-6a3b-44c1-b0e9-717faee61f7b
+00000000-0000-0000-0000-000000000000	94	ftbnqylz7lot	091bbc1b-3dde-4005-af30-6e309b8fdfeb	f	2026-11-19 22:10:49.142666+00	2026-11-19 22:10:49.142666+00	\N	654598b8-667e-45b3-8d35-e9ca9779a64e
+00000000-0000-0000-0000-000000000000	92	vnvvrtjnzfpf	091bbc1b-3dde-4005-af30-6e309b8fdfeb	t	2026-11-19 22:10:49.124019+00	2026-11-20 01:52:03.91296+00	\N	c6c89255-1eb0-494e-ba4f-9c4395c98c2e
+00000000-0000-0000-0000-000000000000	95	nwoul56ed3aj	091bbc1b-3dde-4005-af30-6e309b8fdfeb	f	2026-11-20 01:52:03.933895+00	2026-11-20 01:52:03.933895+00	vnvvrtjnzfpf	c6c89255-1eb0-494e-ba4f-9c4395c98c2e
 \.
 
 
@@ -279,6 +295,7 @@ c614cd78-232d-4c75-a2fa-5a4e1a92ec63	ITB-PO-2026-000056	Bambang	meh@gmail.com	Al
 d5d68efd-3496-4178-af05-eab4eb5f0fe8	ITB-PO-2026-000055	Miracle	luqmankun9029@gmail.com	\N	123523452353453	DP	450000	0	2026-11-14 20:24:57.489323+00	2026-11-14 20:24:57.9135+00	123523452353453	FULL	QRIS	450000	orders/d5d68efd-3496-4178-af05-eab4eb5f0fe8/3f0e5c31-596f-4012-bc15-e4367dab6d4e.jpg	2026-11-14 20:24:57.9135+00	3f0e5c31-596f-4012-bc15-e4367dab6d4e	BOOTH_CF24	\N	\N	550000	100000	D 2556 UDN	LUNAS	4506fa8e-f4c8-4650-9d8c-29bac875ed1e	\N	\N
 e37db794-9fea-4778-9e41-fcbe8684f557	ITB-PO-2026-000057	luqman	luqman@gmail.com	wefwfjweifhjsldhfneosnosncosinvslkniofseofns	039485034859083	DP	500000	0	2026-11-14 22:36:58.506948+00	2026-11-14 22:36:58.885684+00	039485034859083	FULL	QRIS	500000	orders/e37db794-9fea-4778-9e41-fcbe8684f557/83b0b91a-6032-42ee-a902-6fdb64d4bd5b.png	2026-11-14 22:36:58.885684+00	83b0b91a-6032-42ee-a902-6fdb64d4bd5b	SHIP_TO_ADDRESS	\N	\N	500000	0	\N	LUNAS	075afbbb-562e-4043-be77-f811aba11a7c	\N	\N
 dfd1e6c9-e3ca-41cc-86ac-194cb11d5a2f	ITB-PO-2026-000058	riski	asjdaslkj@gmail.com	\N	238523534905834	DP	550000	0	2026-11-14 22:42:09.492487+00	2026-11-14 22:42:09.795226+00	238523534905834	FULL	QRIS	550000	orders/dfd1e6c9-e3ca-41cc-86ac-194cb11d5a2f/58e50464-c61b-4a62-b123-aceaec910ede.jpg	2026-11-14 22:42:09.795226+00	58e50464-c61b-4a62-b123-aceaec910ede	BOOTH_CF24	\N	\N	650000	100000	D3508UCC	LUNAS	45a3b8d3-4c88-4c08-af25-3a85bd2fac3a	\N	\N
+c3aa1732-887f-4c6b-91c5-0ad3d41a702c	ITB-PO-2026-000059	Luqman ahmad	39luqman.ahmad@gmail.com	Jl hegarmanah 1b	082134656255	DP	290000	0	2026-11-19 22:06:25.085527+00	2026-11-19 22:06:25.883254+00	082134656255	FULL	QRIS	290000	orders/c3aa1732-887f-4c6b-91c5-0ad3d41a702c/394f25bf-5de6-45e7-a411-6c0746b444ad.png	2026-11-19 22:06:25.883254+00	394f25bf-5de6-45e7-a411-6c0746b444ad	SHIP_TO_ADDRESS	\N	\N	390000	100000	F4382FHS	LUNAS	fa747633-9772-4613-9d06-1e94ec98c967	\N	\N
 \.
 
 
@@ -292,10 +309,10 @@ aca4e3e6-28d3-42d8-bad1-3ba8915a3bb4	ITB-003	C&C Sticker Pack	Art By Oshii	10000
 03b97cd0-0eda-4b57-b740-99f2d68e5be4	ITB-005	Volkswagen Scirocco GT 24 Sunaookami Shiroko	Art by @hazaky	175000	https://zzwmrvddaegjybsskmjv.supabase.co/storage/v1/object/public/product-images/products/6c79e246-3528-4719-b5cf-92e326d3c524.png	0	t	0	2026-10-03 09:14:39.496659+00	2026-10-04 10:08:27.523227+00	MERCHANDISE	{}	\N
 712e41e7-8d86-499d-868e-c3f28e51b5af	APP-001	Jaket ARA Biru	alskdlaskhjdlasjd	500000	https://zzwmrvddaegjybsskmjv.supabase.co/storage/v1/object/public/product-images/products/6ca79ea9-496b-446c-9857-fca79dd28143.png	0	t	0	2026-10-02 23:45:30.642821+00	2026-11-14 18:02:16.447865+00	APPAREL	{M,L,XL}	JACKET
 04cdbbdf-07db-44f4-bcac-e6c9d12145c1	ITB-002	Ichinose Asuna School w R125 itansha photocard	askdjhawohaowhdalshdlawhdoihawod	50000	https://zzwmrvddaegjybsskmjv.supabase.co/storage/v1/object/public/product-images/products/2c1a05e9-a9c2-4985-95a3-a6934e1e9211.png	6	t	0	2026-11-14 22:05:24.654612+00	2026-11-14 22:42:09.492487+00	MERCHANDISE	{}	\N
-8a637a2e-2359-449e-80ff-69c79669730e	APP-002	Tshirt	asdasdsa	250000	https://zzwmrvddaegjybsskmjv.supabase.co/storage/v1/object/public/product-images/products/7efce189-5faf-4d2b-92d9-7333d5d56729.jpg	2	t	0	2026-10-03 09:12:05.99958+00	2026-11-14 22:42:09.492487+00	APPAREL	{M,L,XL}	TSHIRT
+8a637a2e-2359-449e-80ff-69c79669730e	APP-002	Tshirt	asdasdsa	250000	https://zzwmrvddaegjybsskmjv.supabase.co/storage/v1/object/public/product-images/products/7efce189-5faf-4d2b-92d9-7333d5d56729.jpg	1	t	0	2026-10-03 09:12:05.99958+00	2026-11-19 22:06:25.085527+00	APPAREL	{M,L,XL}	TSHIRT
+4c614771-69cf-4f8d-b4e2-3da8be684a49	ITB-001	Yvonne Acrylic Standee	Art By Hameru	140000	https://zzwmrvddaegjybsskmjv.supabase.co/storage/v1/object/public/product-images/products/3997379b-1b76-454f-a614-84d0ff871219.png	2	t	10	2026-09-23 12:03:15.698514+00	2026-11-19 22:06:25.085527+00	MERCHANDISE	{}	\N
 2405f07d-b40c-4df2-a4ca-fb28f03219c2	ITB-006	Keychain GR Supra	art by.........	30000	https://zzwmrvddaegjybsskmjv.supabase.co/storage/v1/object/public/product-images/products/23601b3a-ac5a-4e75-8fcc-adf6884a5983.png	0	t	0	2026-10-03 17:33:52.146386+00	2026-10-12 13:34:02.284573+00	MERCHANDISE	{}	\N
 6cf8ac72-c00a-4577-8535-138bca761e68	APP-003	Jaket ARA Merah	sdfsdfs	500000	https://zzwmrvddaegjybsskmjv.supabase.co/storage/v1/object/public/product-images/products/1f04210e-b89c-473d-9f9a-233efef4d7b9.png	0	t	0	2026-10-03 09:15:45.064886+00	2026-11-14 20:09:14.511923+00	APPAREL	{L,XL,2XL}	JACKET
-4c614771-69cf-4f8d-b4e2-3da8be684a49	ITB-001	Yvonne Acrylic Standee	Art By Hameru	140000	https://zzwmrvddaegjybsskmjv.supabase.co/storage/v1/object/public/product-images/products/3997379b-1b76-454f-a614-84d0ff871219.png	3	t	10	2026-09-23 12:03:15.698514+00	2026-11-14 20:24:57.489323+00	MERCHANDISE	{}	\N
 \.
 
 
@@ -345,6 +362,8 @@ c7f40813-507e-4cd9-99df-dedf0df4957d	c614cd78-232d-4c75-a2fa-5a4e1a92ec63	04cdbb
 3bdbe7af-d835-4474-bee0-337050cca85c	e37db794-9fea-4778-9e41-fcbe8684f557	8a637a2e-2359-449e-80ff-69c79669730e	Tshirt	250000	2	APPAREL	M	TSHIRT
 2dff6ef0-a9a6-4329-8038-ef2d92ce011c	dfd1e6c9-e3ca-41cc-86ac-194cb11d5a2f	04cdbbdf-07db-44f4-bcac-e6c9d12145c1	Ichinose Asuna School w R125 itansha photocard	50000	3	MERCHANDISE	\N	\N
 32b91c81-0a2f-4c36-9acb-9d03b88b7d40	dfd1e6c9-e3ca-41cc-86ac-194cb11d5a2f	8a637a2e-2359-449e-80ff-69c79669730e	Tshirt	250000	2	APPAREL	M	TSHIRT
+30664cee-cf85-4529-a818-e3a54455db91	c3aa1732-887f-4c6b-91c5-0ad3d41a702c	8a637a2e-2359-449e-80ff-69c79669730e	Tshirt	250000	1	APPAREL	M	TSHIRT
+5f480b3a-755a-4821-9132-b9616a3aa2a6	c3aa1732-887f-4c6b-91c5-0ad3d41a702c	4c614771-69cf-4f8d-b4e2-3da8be684a49	Yvonne Acrylic Standee	140000	1	MERCHANDISE	\N	\N
 \.
 
 
@@ -376,6 +395,7 @@ e227cddc-43b1-445a-a39e-201c5ba9461b	d5d68efd-3496-4178-af05-eab4eb5f0fe8	INITIA
 f65bead9-39ea-4116-8719-497cc2139689	c614cd78-232d-4c75-a2fa-5a4e1a92ec63	INITIAL	50000	50000	orders/c614cd78-232d-4c75-a2fa-5a4e1a92ec63/0e0f3ead-afd8-4c0a-9eb2-a59e27e59fcd.png	PENDING	\N	2026-11-14 22:27:55.443381+00	\N	\N
 462a419b-38e5-4575-b510-273bb8a588e9	e37db794-9fea-4778-9e41-fcbe8684f557	INITIAL	500000	500000	orders/e37db794-9fea-4778-9e41-fcbe8684f557/83b0b91a-6032-42ee-a902-6fdb64d4bd5b.png	PENDING	\N	2026-11-14 22:36:58.885684+00	\N	\N
 509a924b-3313-472e-b6f8-9a6e7e7edafd	dfd1e6c9-e3ca-41cc-86ac-194cb11d5a2f	INITIAL	550000	550000	orders/dfd1e6c9-e3ca-41cc-86ac-194cb11d5a2f/58e50464-c61b-4a62-b123-aceaec910ede.jpg	PENDING	\N	2026-11-14 22:42:09.795226+00	\N	\N
+6d14e8f3-e0e4-4f62-a6db-198719b3aa44	c3aa1732-887f-4c6b-91c5-0ad3d41a702c	INITIAL	290000	290000	orders/c3aa1732-887f-4c6b-91c5-0ad3d41a702c/394f25bf-5de6-45e7-a411-6c0746b444ad.png	PENDING	\N	2026-11-19 22:06:25.883254+00	\N	\N
 \.
 
 
@@ -394,12 +414,12 @@ COPY "public"."profiles" ("id", "role", "display_name", "created_at") FROM stdin
 
 COPY "public"."promo_members" ("id", "plate_code", "member_name", "discount_type", "discount_value", "is_active", "is_used", "used_order_id", "used_at", "created_at", "updated_at") FROM stdin;
 6d57bd6d-4d8e-41bd-b878-ec889fc15326	D3508UCC	FATHUR RIZQI	FIXED	100000	t	t	dfd1e6c9-e3ca-41cc-86ac-194cb11d5a2f	2026-11-14 22:42:09.492487+00	2026-11-14 20:21:05.513538+00	2026-11-14 22:42:09.492487+00
+bbc7b69b-b0fc-4b2c-b4d8-21470cfe6973	F4382FHS	LUQMAN AHMAD	FIXED	100000	t	t	c3aa1732-887f-4c6b-91c5-0ad3d41a702c	2026-11-19 22:06:25.085527+00	2026-11-14 20:21:05.513538+00	2026-11-19 22:06:25.085527+00
 a96d61e3-391e-4a95-83f4-3072028dd7d3	D1586YVL	ALFINDI	FIXED	100000	t	f	\N	\N	2026-11-14 20:21:05.513538+00	2026-11-14 22:26:21.303594+00
 55dab504-e829-4d37-b926-5a7ed080c4d8	D4056ZCU	ERLANGGA FERDIANSYAH	FIXED	100000	t	f	\N	\N	2026-11-14 20:21:05.513538+00	2026-11-14 22:26:21.303594+00
 be7885f2-c502-4be9-bda2-201259b6f9a7	D4520SBM	KLEINDA FATIMA	FIXED	100000	t	f	\N	\N	2026-11-14 20:21:05.513538+00	2026-11-14 22:26:21.303594+00
 3ec0076a-e1b1-443a-be5d-25ebb3247466	D6982ZDP	MUHAMAD RIZKI	FIXED	100000	t	f	\N	\N	2026-11-14 20:21:05.513538+00	2026-11-14 22:26:21.303594+00
 72772e83-c15f-4ec7-b914-bac05d387b54	D2582SBQ	HANSEL	FIXED	100000	t	f	\N	\N	2026-11-14 20:21:05.513538+00	2026-11-14 22:26:21.303594+00
-bbc7b69b-b0fc-4b2c-b4d8-21470cfe6973	F4382FHS	LUQMAN AHMAD	FIXED	100000	t	f	\N	\N	2026-11-14 20:21:05.513538+00	2026-11-14 22:26:21.303594+00
 1f43e2ad-2e6d-4584-88a5-5529c5cfb9dd	D6087ZTT	MUHAMMAD IQBAL MAULANA FIRDAUS	FIXED	100000	t	f	\N	\N	2026-11-14 20:21:05.513538+00	2026-11-14 22:26:21.303594+00
 9009f605-62f7-44fd-94bd-bbc9aa40cb9a	D2445SBE	MURTI LABIB MUSLIM	FIXED	100000	t	f	\N	\N	2026-11-14 20:21:05.513538+00	2026-11-14 22:26:21.303594+00
 46fe7bcc-0c00-421c-8a2c-6d8b38ea611d	D4142ACP	RAKHA DITIA	FIXED	100000	t	f	\N	\N	2026-11-14 20:21:05.513538+00	2026-11-14 22:26:21.303594+00
@@ -435,7 +455,7 @@ a1a7a17b-8a13-4357-8699-d45979050024	D4112GW	PANGESTU MUHAMAD RIZKI	FIXED	100000
 --
 
 COPY "public"."site_settings" ("id", "site_name", "site_title", "site_description", "logo_url", "banner_url", "primary_color", "accent_color", "updated_at", "qris_image_url", "bca_account_name", "bca_account_number", "dp_percentage", "full_payment_enabled") FROM stdin;
-1	ITABAKA	Pre-Order Itabaka CF24-A53		https://zzwmrvddaegjybsskmjv.supabase.co/storage/v1/object/public/site-media/logo/248ef2ea-573d-42aa-987d-1b6ed139df5e.png	https://zzwmrvddaegjybsskmjv.supabase.co/storage/v1/object/public/site-media/banner/a352ee6c-8985-4a07-84ea-9975ed98e6bc.png	#ffffff	#ff0000	2026-11-14 22:02:14.088856+00	https://zzwmrvddaegjybsskmjv.supabase.co/storage/v1/object/public/site-media/qris/36c6f124-c788-4aff-83c5-27d5b13a09e5.png	Fauzi Agung Gumelar	3462518142	50	t
+1	ITABAKA	Itabaka Pre-Order	Search, Add, Pay, Weeb	https://zzwmrvddaegjybsskmjv.supabase.co/storage/v1/object/public/site-media/logo/248ef2ea-573d-42aa-987d-1b6ed139df5e.png	https://zzwmrvddaegjybsskmjv.supabase.co/storage/v1/object/public/site-media/banner/a352ee6c-8985-4a07-84ea-9975ed98e6bc.png	#ffffff	#ff0000	2026-11-20 02:21:20.839715+00	https://zzwmrvddaegjybsskmjv.supabase.co/storage/v1/object/public/site-media/qris/36c6f124-c788-4aff-83c5-27d5b13a09e5.png	Fauzi Agung Gumelar	3462518142	50	t
 \.
 
 
@@ -443,20 +463,20 @@ COPY "public"."site_settings" ("id", "site_name", "site_title", "site_descriptio
 -- Name: refresh_tokens_id_seq; Type: SEQUENCE SET; Schema: auth; Owner: supabase_auth_admin
 --
 
-SELECT pg_catalog.setval('"auth"."refresh_tokens_id_seq"', 89, true);
+SELECT pg_catalog.setval('"auth"."refresh_tokens_id_seq"', 95, true);
 
 
 --
 -- Name: order_invoice_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('"public"."order_invoice_seq"', 58, true);
+SELECT pg_catalog.setval('"public"."order_invoice_seq"', 59, true);
 
 
 --
 -- PostgreSQL database dump complete
 --
 
--- \unrestrict OShsnC7dTMp5lw65Lu4gA2Kt6sLAfP70Cp2W9hcTBTDnap6K6makBxR47IETBIu
+-- \unrestrict ySW5tCXzWalpPP3589bdEIuSM0lgT3N4wtqi48F1BGV5bTvbNc0TCPdiemyHBSu
 
 RESET ALL;
