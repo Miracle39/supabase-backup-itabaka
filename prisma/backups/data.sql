@@ -4,7 +4,7 @@ SET session_replication_role = replica;
 -- PostgreSQL database dump
 --
 
--- \restrict ySW5tCXzWalpPP3589bdEIuSM0lgT3N4wtqi48F1BGV5bTvbNc0TCPdiemyHBSu
+-- \restrict aHrMm6yFmIslGW5XIckpdnB2mr0YVbxe7vCjsseGcxoQXYmJRuARicHkeqOCxRp
 
 -- Dumped from database version 17.11
 -- Dumped by pg_dump version 17.12
@@ -50,7 +50,7 @@ COPY "auth"."flow_state" ("id", "user_id", "auth_code", "code_challenge_method",
 --
 
 COPY "auth"."users" ("instance_id", "id", "aud", "role", "email", "encrypted_password", "email_confirmed_at", "invited_at", "confirmation_token", "confirmation_sent_at", "recovery_token", "recovery_sent_at", "email_change_token_new", "email_change", "email_change_sent_at", "last_sign_in_at", "raw_app_meta_data", "raw_user_meta_data", "is_super_admin", "created_at", "updated_at", "phone", "phone_confirmed_at", "phone_change", "phone_change_token", "phone_change_sent_at", "email_change_token_current", "email_change_confirm_status", "banned_until", "reauthentication_token", "reauthentication_sent_at", "is_sso_user", "deleted_at", "is_anonymous") FROM stdin;
-00000000-0000-0000-0000-000000000000	091bbc1b-3dde-4005-af30-6e309b8fdfeb	authenticated	authenticated	itabaka@gmail.com	$2a$10$bZCffyi5CQOvJe71wmSSzO6WHMtal1lEB6/1dNSzuwqRt1TkyFCAK	2026-09-23 12:09:08.996733+00	\N		\N		\N			\N	2026-11-19 22:10:49.140439+00	{"provider": "email", "providers": ["email"]}	{"email_verified": true}	\N	2026-09-23 12:09:08.980081+00	2026-11-20 01:52:03.94217+00	\N	\N			\N		0	\N		\N	f	\N	f
+00000000-0000-0000-0000-000000000000	091bbc1b-3dde-4005-af30-6e309b8fdfeb	authenticated	authenticated	itabaka@gmail.com	$2a$10$bZCffyi5CQOvJe71wmSSzO6WHMtal1lEB6/1dNSzuwqRt1TkyFCAK	2026-09-23 12:09:08.996733+00	\N		\N		\N			\N	2026-11-19 22:10:49.140439+00	{"provider": "email", "providers": ["email"]}	{"email_verified": true}	\N	2026-09-23 12:09:08.980081+00	2026-11-20 04:59:48.778981+00	\N	\N			\N		0	\N		\N	f	\N	f
 \.
 
 
@@ -91,7 +91,7 @@ COPY "auth"."sessions" ("id", "user_id", "created_at", "updated_at", "factor_id"
 9dc962d1-8299-4d87-8d0b-0c9e79f54ab2	091bbc1b-3dde-4005-af30-6e309b8fdfeb	2026-11-19 22:10:49.110899+00	2026-11-19 22:10:49.110899+00	\N	aal1	\N	\N	Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/27.2 Mobile/15E148 Safari/604.1	104.28.218.132	\N	\N	\N	\N	\N
 c5d53ff9-6a3b-44c1-b0e9-717faee61f7b	091bbc1b-3dde-4005-af30-6e309b8fdfeb	2026-11-19 22:10:49.130857+00	2026-11-19 22:10:49.130857+00	\N	aal1	\N	\N	Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/27.2 Mobile/15E148 Safari/604.1	104.28.218.132	\N	\N	\N	\N	\N
 654598b8-667e-45b3-8d35-e9ca9779a64e	091bbc1b-3dde-4005-af30-6e309b8fdfeb	2026-11-19 22:10:49.140537+00	2026-11-19 22:10:49.140537+00	\N	aal1	\N	\N	Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/27.2 Mobile/15E148 Safari/604.1	104.28.218.132	\N	\N	\N	\N	\N
-c6c89255-1eb0-494e-ba4f-9c4395c98c2e	091bbc1b-3dde-4005-af30-6e309b8fdfeb	2026-11-19 22:10:49.122076+00	2026-11-20 01:52:03.96834+00	\N	aal1	\N	2026-11-20 01:52:03.968234	Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/27.2 Mobile/15E148 Safari/604.1	104.28.218.132	\N	\N	\N	\N	\N
+c6c89255-1eb0-494e-ba4f-9c4395c98c2e	091bbc1b-3dde-4005-af30-6e309b8fdfeb	2026-11-19 22:10:49.122076+00	2026-11-20 04:59:48.798505+00	\N	aal1	\N	2026-11-20 04:59:48.798399	Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/27.2 Mobile/15E148 Safari/604.1	104.28.218.135	\N	\N	\N	\N	\N
 \.
 
 
@@ -194,7 +194,8 @@ COPY "auth"."refresh_tokens" ("instance_id", "id", "token", "user_id", "revoked"
 00000000-0000-0000-0000-000000000000	93	u3bpdtobq276	091bbc1b-3dde-4005-af30-6e309b8fdfeb	f	2026-11-19 22:10:49.133027+00	2026-11-19 22:10:49.133027+00	\N	c5d53ff9-6a3b-44c1-b0e9-717faee61f7b
 00000000-0000-0000-0000-000000000000	94	ftbnqylz7lot	091bbc1b-3dde-4005-af30-6e309b8fdfeb	f	2026-11-19 22:10:49.142666+00	2026-11-19 22:10:49.142666+00	\N	654598b8-667e-45b3-8d35-e9ca9779a64e
 00000000-0000-0000-0000-000000000000	92	vnvvrtjnzfpf	091bbc1b-3dde-4005-af30-6e309b8fdfeb	t	2026-11-19 22:10:49.124019+00	2026-11-20 01:52:03.91296+00	\N	c6c89255-1eb0-494e-ba4f-9c4395c98c2e
-00000000-0000-0000-0000-000000000000	95	nwoul56ed3aj	091bbc1b-3dde-4005-af30-6e309b8fdfeb	f	2026-11-20 01:52:03.933895+00	2026-11-20 01:52:03.933895+00	vnvvrtjnzfpf	c6c89255-1eb0-494e-ba4f-9c4395c98c2e
+00000000-0000-0000-0000-000000000000	95	nwoul56ed3aj	091bbc1b-3dde-4005-af30-6e309b8fdfeb	t	2026-11-20 01:52:03.933895+00	2026-11-20 04:59:48.758806+00	vnvvrtjnzfpf	c6c89255-1eb0-494e-ba4f-9c4395c98c2e
+00000000-0000-0000-0000-000000000000	96	tijqj5p6bay7	091bbc1b-3dde-4005-af30-6e309b8fdfeb	f	2026-11-20 04:59:48.773648+00	2026-11-20 04:59:48.773648+00	nwoul56ed3aj	c6c89255-1eb0-494e-ba4f-9c4395c98c2e
 \.
 
 
@@ -463,7 +464,7 @@ COPY "public"."site_settings" ("id", "site_name", "site_title", "site_descriptio
 -- Name: refresh_tokens_id_seq; Type: SEQUENCE SET; Schema: auth; Owner: supabase_auth_admin
 --
 
-SELECT pg_catalog.setval('"auth"."refresh_tokens_id_seq"', 95, true);
+SELECT pg_catalog.setval('"auth"."refresh_tokens_id_seq"', 96, true);
 
 
 --
@@ -477,6 +478,6 @@ SELECT pg_catalog.setval('"public"."order_invoice_seq"', 59, true);
 -- PostgreSQL database dump complete
 --
 
--- \unrestrict ySW5tCXzWalpPP3589bdEIuSM0lgT3N4wtqi48F1BGV5bTvbNc0TCPdiemyHBSu
+-- \unrestrict aHrMm6yFmIslGW5XIckpdnB2mr0YVbxe7vCjsseGcxoQXYmJRuARicHkeqOCxRp
 
 RESET ALL;
