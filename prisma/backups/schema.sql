@@ -1157,6 +1157,32 @@ CREATE TABLE IF NOT EXISTS "public"."apparel_types" (
 ALTER TABLE "public"."apparel_types" OWNER TO "postgres";
 
 
+CREATE TABLE IF NOT EXISTS "public"."midtrans_transactions" (
+    "id" "uuid" DEFAULT "gen_random_uuid"() NOT NULL,
+    "order_id" "uuid" NOT NULL,
+    "midtrans_order_id" "text" NOT NULL,
+    "snap_token" "text",
+    "redirect_url" "text",
+    "gross_amount" bigint NOT NULL,
+    "transaction_status" "text" DEFAULT 'CREATING'::"text" NOT NULL,
+    "transaction_id" "text",
+    "payment_type" "text",
+    "bank" "text",
+    "fraud_status" "text",
+    "status_code" "text",
+    "transaction_time" timestamp with time zone,
+    "settlement_time" timestamp with time zone,
+    "notification_payload" "jsonb",
+    "signature_verified_at" timestamp with time zone,
+    "created_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    "updated_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    CONSTRAINT "midtrans_transactions_gross_amount_check" CHECK (("gross_amount" > 0))
+);
+
+
+ALTER TABLE "public"."midtrans_transactions" OWNER TO "postgres";
+
+
 CREATE SEQUENCE IF NOT EXISTS "public"."order_invoice_seq"
     START WITH 1
     INCREMENT BY 1
@@ -1239,6 +1265,14 @@ CREATE TABLE IF NOT EXISTS "public"."orders" (
     "settlement_token" "uuid" DEFAULT "gen_random_uuid"() NOT NULL,
     "settlement_proof_path" "text",
     "settlement_proof_uploaded_at" timestamp with time zone,
+    "payment_provider" "text" DEFAULT 'MANUAL'::"text" NOT NULL,
+    "payment_gateway_status" "text",
+    "payment_gateway_payment_type" "text",
+    "payment_gateway_bank" "text",
+    "payment_gateway_order_id" "text",
+    "payment_gateway_transaction_id" "text",
+    "payment_gateway_transaction_time" timestamp with time zone,
+    "payment_gateway_settlement_time" timestamp with time zone,
     CONSTRAINT "orders_customer_address_check" CHECK ((("customer_address" IS NULL) OR (("char_length"("btrim"("customer_address")) >= 1) AND ("char_length"("btrim"("customer_address")) <= 500)))),
     CONSTRAINT "orders_customer_email_check" CHECK ((("char_length"(TRIM(BOTH FROM "customer_email")) >= 3) AND ("char_length"(TRIM(BOTH FROM "customer_email")) <= 160))),
     CONSTRAINT "orders_customer_name_check" CHECK ((("char_length"(TRIM(BOTH FROM "customer_name")) >= 1) AND ("char_length"(TRIM(BOTH FROM "customer_name")) <= 120))),
@@ -1249,6 +1283,7 @@ CREATE TABLE IF NOT EXISTS "public"."orders" (
     CONSTRAINT "orders_payment_due_check" CHECK ((("payment_amount_due" IS NULL) OR (("payment_amount_due" > 0) AND ("payment_amount_due" <= "total_amount")))),
     CONSTRAINT "orders_payment_method_check" CHECK ((("payment_method" IS NULL) OR ("payment_method" = ANY (ARRAY['QRIS'::"text", 'BCA_TRANSFER'::"text"])))),
     CONSTRAINT "orders_payment_plan_check" CHECK ((("payment_plan" IS NULL) OR ("payment_plan" = ANY (ARRAY['DP'::"text", 'FULL'::"text"])))),
+    CONSTRAINT "orders_payment_provider_check" CHECK (("payment_provider" = ANY (ARRAY['MANUAL'::"text", 'MIDTRANS'::"text"]))),
     CONSTRAINT "orders_payment_status_check" CHECK (((("payment_status" = 'DP'::"text") AND ("paid_amount" >= 0) AND ("paid_amount" < "total_amount")) OR (("payment_status" = 'LUNAS'::"text") AND ("paid_amount" = "total_amount")))),
     CONSTRAINT "orders_total_amount_check" CHECK (("total_amount" > 0))
 );
@@ -1331,6 +1366,7 @@ CREATE TABLE IF NOT EXISTS "public"."site_settings" (
     "bca_account_number" "text",
     "dp_percentage" integer,
     "full_payment_enabled" boolean DEFAULT true NOT NULL,
+    "midtrans_enabled" boolean DEFAULT false NOT NULL,
     CONSTRAINT "site_settings_id_check" CHECK (("id" = 1))
 );
 
@@ -1345,6 +1381,16 @@ ALTER TABLE ONLY "public"."apparel_types"
 
 ALTER TABLE ONLY "public"."apparel_types"
     ADD CONSTRAINT "apparel_types_pkey" PRIMARY KEY ("code");
+
+
+
+ALTER TABLE ONLY "public"."midtrans_transactions"
+    ADD CONSTRAINT "midtrans_transactions_midtrans_order_id_key" UNIQUE ("midtrans_order_id");
+
+
+
+ALTER TABLE ONLY "public"."midtrans_transactions"
+    ADD CONSTRAINT "midtrans_transactions_pkey" PRIMARY KEY ("id");
 
 
 
@@ -1403,6 +1449,18 @@ ALTER TABLE ONLY "public"."site_settings"
 
 
 
+CREATE UNIQUE INDEX "midtrans_transactions_one_active_per_order_idx" ON "public"."midtrans_transactions" USING "btree" ("order_id") WHERE ("transaction_status" = ANY (ARRAY['CREATING'::"text", 'PENDING'::"text"]));
+
+
+
+CREATE INDEX "midtrans_transactions_order_created_idx" ON "public"."midtrans_transactions" USING "btree" ("order_id", "created_at" DESC);
+
+
+
+CREATE UNIQUE INDEX "midtrans_transactions_transaction_id_idx" ON "public"."midtrans_transactions" USING "btree" ("transaction_id") WHERE ("transaction_id" IS NOT NULL);
+
+
+
 CREATE INDEX "order_items_category_size_idx" ON "public"."order_items" USING "btree" ("product_category", "size");
 
 
@@ -1432,6 +1490,11 @@ CREATE OR REPLACE TRIGGER "products_set_updated_at" BEFORE UPDATE ON "public"."p
 
 
 CREATE OR REPLACE TRIGGER "settings_set_updated_at" BEFORE UPDATE ON "public"."site_settings" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
+
+
+
+ALTER TABLE ONLY "public"."midtrans_transactions"
+    ADD CONSTRAINT "midtrans_transactions_order_id_fkey" FOREIGN KEY ("order_id") REFERENCES "public"."orders"("id") ON DELETE CASCADE;
 
 
 
@@ -1486,6 +1549,13 @@ CREATE POLICY "apparel_types_admin_update" ON "public"."apparel_types" FOR UPDAT
 
 
 CREATE POLICY "apparel_types_public_select" ON "public"."apparel_types" FOR SELECT TO "authenticated", "anon" USING (("is_active" OR "public"."is_admin"()));
+
+
+
+ALTER TABLE "public"."midtrans_transactions" ENABLE ROW LEVEL SECURITY;
+
+
+CREATE POLICY "midtrans_transactions_admin_select" ON "public"."midtrans_transactions" FOR SELECT TO "authenticated" USING ("public"."is_admin"());
 
 
 
@@ -1889,6 +1959,11 @@ GRANT ALL ON FUNCTION "public"."sync_order_payment_verification"() TO "service_r
 GRANT ALL ON TABLE "public"."apparel_types" TO "anon";
 GRANT ALL ON TABLE "public"."apparel_types" TO "authenticated";
 GRANT ALL ON TABLE "public"."apparel_types" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."midtrans_transactions" TO "service_role";
+GRANT SELECT ON TABLE "public"."midtrans_transactions" TO "authenticated";
 
 
 
