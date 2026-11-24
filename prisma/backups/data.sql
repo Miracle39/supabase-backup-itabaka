@@ -4,7 +4,7 @@ SET session_replication_role = replica;
 -- PostgreSQL database dump
 --
 
--- \restrict eopnPLbtFqpXqnBzeh3FMGcLOovKBPtYgIaChUBovbZftEeReZEeybX5Lj7oF4t
+-- \restrict fYeSJPeJAS3ARXMM3HahbHNd5qqhjPtFTY4JlCYbs3mKcPJWSIyUGXUYu6Rtpbe
 
 -- Dumped from database version 17.11
 -- Dumped by pg_dump version 17.12
@@ -498,6 +498,6 @@ SELECT pg_catalog.setval('"public"."order_invoice_seq"', 61, true);
 -- PostgreSQL database dump complete
 --
 
--- \unrestrict eopnPLbtFqpXqnBzeh3FMGcLOovKBPtYgIaChUBovbZftEeReZEeybX5Lj7oF4t
+-- \unrestrict fYeSJPeJAS3ARXMM3HahbHNd5qqhjPtFTY4JlCYbs3mKcPJWSIyUGXUYu6Rtpbe
 
 RESET ALL;
