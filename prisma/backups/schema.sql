@@ -1292,6 +1292,28 @@ CREATE TABLE IF NOT EXISTS "public"."orders" (
 ALTER TABLE "public"."orders" OWNER TO "postgres";
 
 
+CREATE TABLE IF NOT EXISTS "public"."product_search_events" (
+    "id" "uuid" DEFAULT "gen_random_uuid"() NOT NULL,
+    "search_term" "text" NOT NULL,
+    "created_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    CONSTRAINT "product_search_events_search_term_check" CHECK ((("char_length"("search_term") >= 1) AND ("char_length"("search_term") <= 120)))
+);
+
+
+ALTER TABLE "public"."product_search_events" OWNER TO "postgres";
+
+
+CREATE TABLE IF NOT EXISTS "public"."product_view_events" (
+    "id" "uuid" DEFAULT "gen_random_uuid"() NOT NULL,
+    "product_id" "uuid" NOT NULL,
+    "created_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    "search_term" "text"
+);
+
+
+ALTER TABLE "public"."product_view_events" OWNER TO "postgres";
+
+
 CREATE TABLE IF NOT EXISTS "public"."products" (
     "id" "uuid" DEFAULT "gen_random_uuid"() NOT NULL,
     "code" "text" NOT NULL,
@@ -1307,6 +1329,7 @@ CREATE TABLE IF NOT EXISTS "public"."products" (
     "category" "text" DEFAULT 'MERCHANDISE'::"text" NOT NULL,
     "available_sizes" "text"[] DEFAULT '{}'::"text"[] NOT NULL,
     "apparel_type" "text",
+    "featured" boolean DEFAULT false NOT NULL,
     CONSTRAINT "products_apparel_type_check" CHECK (((("category" = 'MERCHANDISE'::"text") AND ("apparel_type" IS NULL)) OR (("category" = 'APPAREL'::"text") AND ("apparel_type" IS NOT NULL)))),
     CONSTRAINT "products_category_check" CHECK (("category" = ANY (ARRAY['MERCHANDISE'::"text", 'APPAREL'::"text"]))),
     CONSTRAINT "products_price_check" CHECK (("price" >= 0)),
@@ -1349,6 +1372,36 @@ CREATE TABLE IF NOT EXISTS "public"."promo_members" (
 
 
 ALTER TABLE "public"."promo_members" OWNER TO "postgres";
+
+
+CREATE TABLE IF NOT EXISTS "public"."site_hero_slides" (
+    "id" "uuid" DEFAULT "gen_random_uuid"() NOT NULL,
+    "image_url" "text",
+    "title" "text" DEFAULT ''::"text" NOT NULL,
+    "subtitle" "text" DEFAULT ''::"text" NOT NULL,
+    "button_text" "text" DEFAULT ''::"text" NOT NULL,
+    "button_url" "text" DEFAULT ''::"text" NOT NULL,
+    "sort_order" integer DEFAULT 0 NOT NULL,
+    "is_active" boolean DEFAULT true NOT NULL,
+    "created_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    "updated_at" timestamp with time zone DEFAULT "now"() NOT NULL
+);
+
+
+ALTER TABLE "public"."site_hero_slides" OWNER TO "postgres";
+
+
+CREATE TABLE IF NOT EXISTS "public"."site_pages" (
+    "slug" "text" NOT NULL,
+    "title" "text" NOT NULL,
+    "content" "text" DEFAULT ''::"text" NOT NULL,
+    "active" boolean DEFAULT true NOT NULL,
+    "sort_order" integer DEFAULT 0 NOT NULL,
+    "updated_at" timestamp with time zone DEFAULT "now"() NOT NULL
+);
+
+
+ALTER TABLE "public"."site_pages" OWNER TO "postgres";
 
 
 CREATE TABLE IF NOT EXISTS "public"."site_settings" (
@@ -1419,6 +1472,16 @@ ALTER TABLE ONLY "public"."orders"
 
 
 
+ALTER TABLE ONLY "public"."product_search_events"
+    ADD CONSTRAINT "product_search_events_pkey" PRIMARY KEY ("id");
+
+
+
+ALTER TABLE ONLY "public"."product_view_events"
+    ADD CONSTRAINT "product_view_events_pkey" PRIMARY KEY ("id");
+
+
+
 ALTER TABLE ONLY "public"."products"
     ADD CONSTRAINT "products_code_key" UNIQUE ("code");
 
@@ -1444,6 +1507,16 @@ ALTER TABLE ONLY "public"."promo_members"
 
 
 
+ALTER TABLE ONLY "public"."site_hero_slides"
+    ADD CONSTRAINT "site_hero_slides_pkey" PRIMARY KEY ("id");
+
+
+
+ALTER TABLE ONLY "public"."site_pages"
+    ADD CONSTRAINT "site_pages_pkey" PRIMARY KEY ("slug");
+
+
+
 ALTER TABLE ONLY "public"."site_settings"
     ADD CONSTRAINT "site_settings_pkey" PRIMARY KEY ("id");
 
@@ -1465,7 +1538,23 @@ CREATE INDEX "order_items_category_size_idx" ON "public"."order_items" USING "bt
 
 
 
+CREATE INDEX "product_search_events_created_at_idx" ON "public"."product_search_events" USING "btree" ("created_at" DESC);
+
+
+
+CREATE INDEX "product_view_events_product_created_idx" ON "public"."product_view_events" USING "btree" ("product_id", "created_at" DESC);
+
+
+
+CREATE INDEX "product_view_events_search_term_created_idx" ON "public"."product_view_events" USING "btree" ("search_term", "created_at" DESC) WHERE ("search_term" IS NOT NULL);
+
+
+
 CREATE INDEX "products_category_idx" ON "public"."products" USING "btree" ("category");
+
+
+
+CREATE INDEX "site_hero_slides_active_order_idx" ON "public"."site_hero_slides" USING "btree" ("is_active", "sort_order", "created_at");
 
 
 
@@ -1515,6 +1604,11 @@ ALTER TABLE ONLY "public"."order_payments"
 
 ALTER TABLE ONLY "public"."order_payments"
     ADD CONSTRAINT "order_payments_order_id_fkey" FOREIGN KEY ("order_id") REFERENCES "public"."orders"("id") ON DELETE CASCADE;
+
+
+
+ALTER TABLE ONLY "public"."product_view_events"
+    ADD CONSTRAINT "product_view_events_product_id_fkey" FOREIGN KEY ("product_id") REFERENCES "public"."products"("id") ON DELETE CASCADE;
 
 
 
@@ -1588,6 +1682,30 @@ CREATE POLICY "orders_admin_update" ON "public"."orders" FOR UPDATE TO "authenti
 
 
 
+ALTER TABLE "public"."product_search_events" ENABLE ROW LEVEL SECURITY;
+
+
+CREATE POLICY "product_search_events_admin_select" ON "public"."product_search_events" FOR SELECT TO "authenticated" USING ("public"."is_admin"());
+
+
+
+CREATE POLICY "product_search_events_public_insert" ON "public"."product_search_events" FOR INSERT TO "authenticated", "anon" WITH CHECK (true);
+
+
+
+ALTER TABLE "public"."product_view_events" ENABLE ROW LEVEL SECURITY;
+
+
+CREATE POLICY "product_view_events_admin_select" ON "public"."product_view_events" FOR SELECT TO "authenticated" USING ("public"."is_admin"());
+
+
+
+CREATE POLICY "product_view_events_public_insert" ON "public"."product_view_events" FOR INSERT TO "authenticated", "anon" WITH CHECK ((EXISTS ( SELECT 1
+   FROM "public"."products" "p"
+  WHERE (("p"."id" = "product_view_events"."product_id") AND ("p"."active" = true)))));
+
+
+
 ALTER TABLE "public"."products" ENABLE ROW LEVEL SECURITY;
 
 
@@ -1652,6 +1770,44 @@ CREATE POLICY "settings_admin_update" ON "public"."site_settings" FOR UPDATE TO 
 
 
 CREATE POLICY "settings_public_select" ON "public"."site_settings" FOR SELECT TO "authenticated", "anon" USING (true);
+
+
+
+ALTER TABLE "public"."site_hero_slides" ENABLE ROW LEVEL SECURITY;
+
+
+CREATE POLICY "site_hero_slides_admin_delete" ON "public"."site_hero_slides" FOR DELETE TO "authenticated" USING ("public"."is_admin"());
+
+
+
+CREATE POLICY "site_hero_slides_admin_insert" ON "public"."site_hero_slides" FOR INSERT TO "authenticated" WITH CHECK ("public"."is_admin"());
+
+
+
+CREATE POLICY "site_hero_slides_admin_update" ON "public"."site_hero_slides" FOR UPDATE TO "authenticated" USING ("public"."is_admin"()) WITH CHECK ("public"."is_admin"());
+
+
+
+CREATE POLICY "site_hero_slides_public_select" ON "public"."site_hero_slides" FOR SELECT TO "authenticated", "anon" USING ((("is_active" = true) OR "public"."is_admin"()));
+
+
+
+ALTER TABLE "public"."site_pages" ENABLE ROW LEVEL SECURITY;
+
+
+CREATE POLICY "site_pages_admin_delete" ON "public"."site_pages" FOR DELETE TO "authenticated" USING ("public"."is_admin"());
+
+
+
+CREATE POLICY "site_pages_admin_insert" ON "public"."site_pages" FOR INSERT TO "authenticated" WITH CHECK ("public"."is_admin"());
+
+
+
+CREATE POLICY "site_pages_admin_update" ON "public"."site_pages" FOR UPDATE TO "authenticated" USING ("public"."is_admin"()) WITH CHECK ("public"."is_admin"());
+
+
+
+CREATE POLICY "site_pages_public_select" ON "public"."site_pages" FOR SELECT TO "authenticated", "anon" USING ((("active" = true) OR "public"."is_admin"()));
 
 
 
@@ -1988,6 +2144,18 @@ GRANT ALL ON TABLE "public"."orders" TO "service_role";
 
 
 
+GRANT ALL ON TABLE "public"."product_search_events" TO "anon";
+GRANT ALL ON TABLE "public"."product_search_events" TO "authenticated";
+GRANT ALL ON TABLE "public"."product_search_events" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."product_view_events" TO "anon";
+GRANT ALL ON TABLE "public"."product_view_events" TO "authenticated";
+GRANT ALL ON TABLE "public"."product_view_events" TO "service_role";
+
+
+
 GRANT ALL ON TABLE "public"."products" TO "anon";
 GRANT ALL ON TABLE "public"."products" TO "authenticated";
 GRANT ALL ON TABLE "public"."products" TO "service_role";
@@ -2002,6 +2170,18 @@ GRANT ALL ON TABLE "public"."profiles" TO "service_role";
 GRANT ALL ON TABLE "public"."promo_members" TO "anon";
 GRANT ALL ON TABLE "public"."promo_members" TO "authenticated";
 GRANT ALL ON TABLE "public"."promo_members" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."site_hero_slides" TO "anon";
+GRANT ALL ON TABLE "public"."site_hero_slides" TO "authenticated";
+GRANT ALL ON TABLE "public"."site_hero_slides" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."site_pages" TO "anon";
+GRANT ALL ON TABLE "public"."site_pages" TO "authenticated";
+GRANT ALL ON TABLE "public"."site_pages" TO "service_role";
 
 
 

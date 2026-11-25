@@ -4,7 +4,7 @@ SET session_replication_role = replica;
 -- PostgreSQL database dump
 --
 
--- \restrict fYeSJPeJAS3ARXMM3HahbHNd5qqhjPtFTY4JlCYbs3mKcPJWSIyUGXUYu6Rtpbe
+-- \restrict HtR867UhBaICdf1BUq4pfidgvSEedkhis3Ego7nz5TZPBbW0xowEaMrSZSpCeXO
 
 -- Dumped from database version 17.11
 -- Dumped by pg_dump version 17.12
@@ -50,7 +50,7 @@ COPY "auth"."flow_state" ("id", "user_id", "auth_code", "code_challenge_method",
 --
 
 COPY "auth"."users" ("instance_id", "id", "aud", "role", "email", "encrypted_password", "email_confirmed_at", "invited_at", "confirmation_token", "confirmation_sent_at", "recovery_token", "recovery_sent_at", "email_change_token_new", "email_change", "email_change_sent_at", "last_sign_in_at", "raw_app_meta_data", "raw_user_meta_data", "is_super_admin", "created_at", "updated_at", "phone", "phone_confirmed_at", "phone_change", "phone_change_token", "phone_change_sent_at", "email_change_token_current", "email_change_confirm_status", "banned_until", "reauthentication_token", "reauthentication_sent_at", "is_sso_user", "deleted_at", "is_anonymous") FROM stdin;
-00000000-0000-0000-0000-000000000000	091bbc1b-3dde-4005-af30-6e309b8fdfeb	authenticated	authenticated	itabaka@gmail.com	$2a$10$bZCffyi5CQOvJe71wmSSzO6WHMtal1lEB6/1dNSzuwqRt1TkyFCAK	2026-09-23 12:09:08.996733+00	\N		\N		\N			\N	2026-11-19 22:10:49.140439+00	{"provider": "email", "providers": ["email"]}	{"email_verified": true}	\N	2026-09-23 12:09:08.980081+00	2026-11-22 18:13:28.647845+00	\N	\N			\N		0	\N		\N	f	\N	f
+00000000-0000-0000-0000-000000000000	091bbc1b-3dde-4005-af30-6e309b8fdfeb	authenticated	authenticated	itabaka@gmail.com	$2a$10$bZCffyi5CQOvJe71wmSSzO6WHMtal1lEB6/1dNSzuwqRt1TkyFCAK	2026-09-23 12:09:08.996733+00	\N		\N		\N			\N	2026-11-19 22:10:49.140439+00	{"provider": "email", "providers": ["email"]}	{"email_verified": true}	\N	2026-09-23 12:09:08.980081+00	2026-11-24 22:00:03.277401+00	\N	\N			\N		0	\N		\N	f	\N	f
 \.
 
 
@@ -89,9 +89,9 @@ COPY "auth"."sessions" ("id", "user_id", "created_at", "updated_at", "factor_id"
 9dc962d1-8299-4d87-8d0b-0c9e79f54ab2	091bbc1b-3dde-4005-af30-6e309b8fdfeb	2026-11-19 22:10:49.110899+00	2026-11-19 22:10:49.110899+00	\N	aal1	\N	\N	Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/27.2 Mobile/15E148 Safari/604.1	104.28.218.132	\N	\N	\N	\N	\N
 c5d53ff9-6a3b-44c1-b0e9-717faee61f7b	091bbc1b-3dde-4005-af30-6e309b8fdfeb	2026-11-19 22:10:49.130857+00	2026-11-19 22:10:49.130857+00	\N	aal1	\N	\N	Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/27.2 Mobile/15E148 Safari/604.1	104.28.218.132	\N	\N	\N	\N	\N
 654598b8-667e-45b3-8d35-e9ca9779a64e	091bbc1b-3dde-4005-af30-6e309b8fdfeb	2026-11-19 22:10:49.140537+00	2026-11-19 22:10:49.140537+00	\N	aal1	\N	\N	Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/27.2 Mobile/15E148 Safari/604.1	104.28.218.132	\N	\N	\N	\N	\N
-c6c89255-1eb0-494e-ba4f-9c4395c98c2e	091bbc1b-3dde-4005-af30-6e309b8fdfeb	2026-11-19 22:10:49.122076+00	2026-11-20 04:59:48.798505+00	\N	aal1	\N	2026-11-20 04:59:48.798399	Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/27.2 Mobile/15E148 Safari/604.1	104.28.218.135	\N	\N	\N	\N	\N
-1b2ffbf1-44df-4047-9af0-9b04cc8ba75f	091bbc1b-3dde-4005-af30-6e309b8fdfeb	2026-11-14 19:28:00.769232+00	2026-11-22 17:14:38.780218+00	\N	aal1	\N	2026-11-22 17:14:38.780135	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/158.0.0.0 Safari/537.36	104.28.218.132	\N	\N	\N	\N	\N
 47785fd1-72ce-4846-a455-670cd0ab31c7	091bbc1b-3dde-4005-af30-6e309b8fdfeb	2026-11-14 19:18:31.479372+00	2026-11-22 18:13:28.657736+00	\N	aal1	\N	2026-11-22 18:13:28.657651	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/158.0.0.0 Safari/537.36	104.28.218.132	\N	\N	\N	\N	\N
+1b2ffbf1-44df-4047-9af0-9b04cc8ba75f	091bbc1b-3dde-4005-af30-6e309b8fdfeb	2026-11-14 19:28:00.769232+00	2026-11-24 18:48:51.973389+00	\N	aal1	\N	2026-11-24 18:48:51.973304	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/158.0.0.0 Safari/537.36	104.28.218.132	\N	\N	\N	\N	\N
+c6c89255-1eb0-494e-ba4f-9c4395c98c2e	091bbc1b-3dde-4005-af30-6e309b8fdfeb	2026-11-19 22:10:49.122076+00	2026-11-24 22:00:03.29798+00	\N	aal1	\N	2026-11-24 22:00:03.297882	Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/27.2 Mobile/15E148 Safari/604.1	104.28.218.132	\N	\N	\N	\N	\N
 \.
 
 
@@ -193,13 +193,18 @@ COPY "auth"."refresh_tokens" ("instance_id", "id", "token", "user_id", "revoked"
 00000000-0000-0000-0000-000000000000	94	ftbnqylz7lot	091bbc1b-3dde-4005-af30-6e309b8fdfeb	f	2026-11-19 22:10:49.142666+00	2026-11-19 22:10:49.142666+00	\N	654598b8-667e-45b3-8d35-e9ca9779a64e
 00000000-0000-0000-0000-000000000000	92	vnvvrtjnzfpf	091bbc1b-3dde-4005-af30-6e309b8fdfeb	t	2026-11-19 22:10:49.124019+00	2026-11-20 01:52:03.91296+00	\N	c6c89255-1eb0-494e-ba4f-9c4395c98c2e
 00000000-0000-0000-0000-000000000000	95	nwoul56ed3aj	091bbc1b-3dde-4005-af30-6e309b8fdfeb	t	2026-11-20 01:52:03.933895+00	2026-11-20 04:59:48.758806+00	vnvvrtjnzfpf	c6c89255-1eb0-494e-ba4f-9c4395c98c2e
-00000000-0000-0000-0000-000000000000	96	tijqj5p6bay7	091bbc1b-3dde-4005-af30-6e309b8fdfeb	f	2026-11-20 04:59:48.773648+00	2026-11-20 04:59:48.773648+00	nwoul56ed3aj	c6c89255-1eb0-494e-ba4f-9c4395c98c2e
 00000000-0000-0000-0000-000000000000	89	m67fhtnncipc	091bbc1b-3dde-4005-af30-6e309b8fdfeb	t	2026-11-16 10:47:56.192193+00	2026-11-22 15:05:30.375788+00	o75gfavve5zq	47785fd1-72ce-4846-a455-670cd0ab31c7
 00000000-0000-0000-0000-000000000000	97	4es636usudds	091bbc1b-3dde-4005-af30-6e309b8fdfeb	t	2026-11-22 15:05:30.397048+00	2026-11-22 17:12:45.278178+00	m67fhtnncipc	47785fd1-72ce-4846-a455-670cd0ab31c7
 00000000-0000-0000-0000-000000000000	87	pkph5xqtbkwq	091bbc1b-3dde-4005-af30-6e309b8fdfeb	t	2026-11-14 22:33:29.04294+00	2026-11-22 17:14:38.76815+00	qa42zrgvekpp	1b2ffbf1-44df-4047-9af0-9b04cc8ba75f
-00000000-0000-0000-0000-000000000000	99	ra3waxys5gvo	091bbc1b-3dde-4005-af30-6e309b8fdfeb	f	2026-11-22 17:14:38.770648+00	2026-11-22 17:14:38.770648+00	pkph5xqtbkwq	1b2ffbf1-44df-4047-9af0-9b04cc8ba75f
 00000000-0000-0000-0000-000000000000	98	tzyugqnk74pa	091bbc1b-3dde-4005-af30-6e309b8fdfeb	t	2026-11-22 17:12:45.28654+00	2026-11-22 18:13:28.631271+00	4es636usudds	47785fd1-72ce-4846-a455-670cd0ab31c7
 00000000-0000-0000-0000-000000000000	100	odam46c3jav7	091bbc1b-3dde-4005-af30-6e309b8fdfeb	f	2026-11-22 18:13:28.64325+00	2026-11-22 18:13:28.64325+00	tzyugqnk74pa	47785fd1-72ce-4846-a455-670cd0ab31c7
+00000000-0000-0000-0000-000000000000	99	ra3waxys5gvo	091bbc1b-3dde-4005-af30-6e309b8fdfeb	t	2026-11-22 17:14:38.770648+00	2026-11-24 15:41:15.022888+00	pkph5xqtbkwq	1b2ffbf1-44df-4047-9af0-9b04cc8ba75f
+00000000-0000-0000-0000-000000000000	101	qpqfmuj5xh6q	091bbc1b-3dde-4005-af30-6e309b8fdfeb	t	2026-11-24 15:41:15.047115+00	2026-11-24 16:44:47.815138+00	ra3waxys5gvo	1b2ffbf1-44df-4047-9af0-9b04cc8ba75f
+00000000-0000-0000-0000-000000000000	102	5amrip2phykm	091bbc1b-3dde-4005-af30-6e309b8fdfeb	t	2026-11-24 16:44:47.821941+00	2026-11-24 17:45:17.781434+00	qpqfmuj5xh6q	1b2ffbf1-44df-4047-9af0-9b04cc8ba75f
+00000000-0000-0000-0000-000000000000	103	uvrbwbbfr4jp	091bbc1b-3dde-4005-af30-6e309b8fdfeb	t	2026-11-24 17:45:17.794459+00	2026-11-24 18:48:51.924868+00	5amrip2phykm	1b2ffbf1-44df-4047-9af0-9b04cc8ba75f
+00000000-0000-0000-0000-000000000000	104	eqypfnop3xpu	091bbc1b-3dde-4005-af30-6e309b8fdfeb	f	2026-11-24 18:48:51.942815+00	2026-11-24 18:48:51.942815+00	uvrbwbbfr4jp	1b2ffbf1-44df-4047-9af0-9b04cc8ba75f
+00000000-0000-0000-0000-000000000000	96	tijqj5p6bay7	091bbc1b-3dde-4005-af30-6e309b8fdfeb	t	2026-11-20 04:59:48.773648+00	2026-11-24 22:00:03.257503+00	nwoul56ed3aj	c6c89255-1eb0-494e-ba4f-9c4395c98c2e
+00000000-0000-0000-0000-000000000000	105	3p4klqodmzzs	091bbc1b-3dde-4005-af30-6e309b8fdfeb	f	2026-11-24 22:00:03.271223+00	2026-11-24 22:00:03.271223+00	tijqj5p6bay7	c6c89255-1eb0-494e-ba4f-9c4395c98c2e
 \.
 
 
@@ -302,7 +307,16 @@ e37db794-9fea-4778-9e41-fcbe8684f557	ITB-PO-2026-000057	luqman	luqman@gmail.com	
 dfd1e6c9-e3ca-41cc-86ac-194cb11d5a2f	ITB-PO-2026-000058	riski	asjdaslkj@gmail.com	\N	238523534905834	DP	550000	0	2026-11-14 22:42:09.492487+00	2026-11-14 22:42:09.795226+00	238523534905834	FULL	QRIS	550000	orders/dfd1e6c9-e3ca-41cc-86ac-194cb11d5a2f/58e50464-c61b-4a62-b123-aceaec910ede.jpg	2026-11-14 22:42:09.795226+00	58e50464-c61b-4a62-b123-aceaec910ede	BOOTH_CF24	\N	\N	650000	100000	D3508UCC	LUNAS	45a3b8d3-4c88-4c08-af25-3a85bd2fac3a	\N	\N	MANUAL	\N	\N	\N	\N	\N	\N	\N
 c3aa1732-887f-4c6b-91c5-0ad3d41a702c	ITB-PO-2026-000059	Luqman ahmad	39luqman.ahmad@gmail.com	Jl hegarmanah 1b	082134656255	DP	290000	0	2026-11-19 22:06:25.085527+00	2026-11-19 22:06:25.883254+00	082134656255	FULL	QRIS	290000	orders/c3aa1732-887f-4c6b-91c5-0ad3d41a702c/394f25bf-5de6-45e7-a411-6c0746b444ad.png	2026-11-19 22:06:25.883254+00	394f25bf-5de6-45e7-a411-6c0746b444ad	SHIP_TO_ADDRESS	\N	\N	390000	100000	F4382FHS	LUNAS	fa747633-9772-4613-9d06-1e94ec98c967	\N	\N	MANUAL	\N	\N	\N	\N	\N	\N	\N
 dae51826-81bb-4443-81ac-a6908de96707	ITB-PO-2026-000061	tes midtrans  va	luqmankun9029@gmail.com	\N	6282134656255	LUNAS	200000	200000	2026-11-22 18:23:07.827701+00	2026-11-22 18:23:56.150852+00	6282134656255	FULL	QRIS	200000	\N	\N	37505cb5-e991-41ed-9afe-485a2031bfb4	BOOTH_CF24	2026-11-22 18:23:56.048+00	\N	200000	0	\N	LUNAS	03e2d415-e0e2-4c84-906f-8f4536de203a	\N	\N	MIDTRANS	SETTLEMENT	bank_transfer	bca	ITB-PO-2026-000061-M1	cb5a8614-e5fd-4139-ba31-84be0d3030ff	2026-11-22 18:23:45+00	2026-11-22 18:23:55+00
+88004298-8aea-4e16-9fd8-5f2f97044459	ITB-PO-2026-000064	cek midtrans payment	luqmankun9029@gmail.com	\N	6282134656255	LUNAS	120000	120000	2026-11-24 15:46:29.654671+00	2026-11-24 15:46:47.645501+00	6282134656255	FULL	QRIS	120000	\N	\N	5e6f34d3-694f-47e1-b252-9eb56b640926	BOOTH_CF24	2026-11-24 15:46:47.324+00	\N	120000	0	\N	LUNAS	08d606be-c676-48f7-9425-58f8c8eb9fee	\N	\N	MIDTRANS	SETTLEMENT	bank_transfer	bca	ITB-PO-2026-000064-M1	a04f83aa-d912-46d9-9b9b-939ef3203bf8	2026-11-24 15:46:36+00	2026-11-24 15:46:46+00
+25571122-075f-47df-ae64-f0d342d2c531	ITB-PO-2026-000062	ngetes midtrans baru	luqmankun9029@gmail.com	\N	6282134656255	LUNAS	300000	300000	2026-11-24 15:41:47.170688+00	2026-11-24 15:42:20.623704+00	6282134656255	FULL	QRIS	300000	\N	\N	a5a2c21b-f32d-4a08-9f27-a7dddba43c93	BOOTH_CF24	2026-11-24 15:42:20.525+00	\N	300000	0	\N	LUNAS	a0fa879f-4301-4f60-86cf-19a83e3810f7	\N	\N	MIDTRANS	SETTLEMENT	qris	\N	ITB-PO-2026-000062-M1	7072ab45-5626-4b07-bb66-bbc44a417f55	2026-11-24 15:42:01+00	2026-11-24 15:42:18+00
+f4b530ed-67cf-4212-bc27-537cb1aa9e29	ITB-PO-2026-000067	cek manual	manual@gmail.com	\N	209384023840238	DP	450000	0	2026-11-24 17:50:13.597043+00	2026-11-24 17:50:14.116643+00	209384023840238	FULL	QRIS	450000	orders/f4b530ed-67cf-4212-bc27-537cb1aa9e29/c78e2b5b-d961-40b5-aaea-70db83344939.jpg	2026-11-24 17:50:14.116643+00	c78e2b5b-d961-40b5-aaea-70db83344939	BOOTH_CF24	\N	\N	450000	0	\N	LUNAS	0f14f794-1a76-4725-bc6f-5f9e77a5e737	\N	\N	MANUAL	\N	\N	\N	\N	\N	\N	\N
+a45a2d36-41a2-427e-a1c9-e191a2ff015b	ITB-PO-2026-000069	tes loading lagi	tes@gmail.com	\N	235235235234234	LUNAS	400000	400000	2026-11-24 18:03:21.776037+00	2026-11-24 18:03:32.102457+00	235235235234234	FULL	QRIS	400000	\N	\N	5e4e2768-9c54-4ea2-ba9d-e8ec57efc08a	BOOTH_CF24	2026-11-24 18:03:31.981+00	\N	400000	0	\N	LUNAS	ce5c12d3-bfc3-4371-8d82-2b6908190598	\N	\N	MIDTRANS	SETTLEMENT	bank_transfer	bca	ITB-PO-2026-000069-M1	b07e6eb7-ded9-482a-a34f-2ae8212791ba	2026-11-24 18:03:26+00	2026-11-24 18:03:31+00
+221cf316-6346-414d-8a1c-8748058a3378	ITB-PO-2026-000065	nazma kauysar	nazma@gmail.com	\N	456849864756945	LUNAS	100000	100000	2026-11-24 15:54:29.473792+00	2026-11-24 15:54:48.857627+00	456849864756945	FULL	QRIS	100000	\N	\N	5b85a363-9400-4988-9329-e0fe85fda0f1	BOOTH_CF24	2026-11-24 15:54:48.738+00	\N	100000	0	\N	LUNAS	91e09fde-c8cb-4c7e-a8bf-e2f5e473de63	\N	\N	MIDTRANS	SETTLEMENT	bank_transfer	bca	ITB-PO-2026-000065-M1	9b715d23-54dd-45df-b72b-3c78e07e7bca	2026-11-24 15:54:37+00	2026-11-24 15:54:47+00
+e7a749fb-cd50-451c-9819-894a05374693	ITB-PO-2026-000063	hmm cek lagi midtrans	luqmankun9029@gmail.com	\N	6282134656255	LUNAS	100000	100000	2026-11-24 15:43:04.127358+00	2026-11-24 15:44:27.11008+00	6282134656255	FULL	QRIS	100000	\N	\N	d4a9abe2-79f3-4b8b-b02b-b8b52e7f5f37	BOOTH_CF24	2026-11-24 15:44:26.996+00	\N	100000	0	\N	LUNAS	5a196e1d-a988-4dab-acee-1db8d5a73933	\N	\N	MIDTRANS	SETTLEMENT	echannel	\N	ITB-PO-2026-000063-M1	8bb46fd2-b975-412b-855a-e375dfd46516	2026-11-24 15:43:57+00	2026-11-24 15:44:25+00
 728df606-6ffb-4dca-9a70-09273e69d6ff	ITB-PO-2026-000060	midtrans sandbox	luqmankun9029@gmail.com	\N	6282134656255	LUNAS	250000	250000	2026-11-22 17:26:06.16507+00	2026-11-22 18:14:07.941685+00	6282134656255	FULL	QRIS	250000	\N	\N	fcd8333e-4dec-4b73-a6f7-a2c350bd584f	BOOTH_CF24	2026-11-22 18:14:07.811+00	\N	350000	100000	F4382FHS	LUNAS	8c3ae488-ae08-42f4-8433-0d9a0cb9cb77	\N	\N	MIDTRANS	SETTLEMENT	qris	\N	ITB-PO-2026-000060-M2	e26cc6e0-540a-474a-b163-113326e4822b	2026-11-22 17:54:23+00	2026-11-22 18:14:06+00
+0b4f143b-9cbe-47c2-a91b-b3e4ef72dae8	ITB-PO-2026-000070	Luqman dari hp	luqmanhp@gmail.com	\N	515181881815518	DP	400000	0	2026-11-24 22:01:56.03772+00	2026-11-24 22:02:30.469148+00	515181881815518	FULL	QRIS	400000	\N	\N	4d6a03c7-e5d7-4ea1-a476-fe88980f4623	BOOTH_CF24	\N	\N	400000	0	\N	DP	7b6c9319-2fa5-424d-bdea-e0c081319b54	\N	\N	MIDTRANS	PENDING	\N	\N	ITB-PO-2026-000070-M1	\N	\N	\N
+50c2e18d-4023-4532-b667-77381d621851	ITB-PO-2026-000068	tes animasi invoice	invoice@gmail.com	\N	230028502384029	LUNAS	400000	400000	2026-11-24 17:57:57.991115+00	2026-11-24 17:58:10.627582+00	230028502384029	FULL	QRIS	400000	\N	\N	32d71f56-d205-4e7f-b2ba-fc7be482a7af	BOOTH_CF24	2026-11-24 17:58:10.54+00	\N	400000	0	\N	LUNAS	c7e194b6-add5-4fe0-9d2d-87a0cc562411	\N	\N	MIDTRANS	SETTLEMENT	bank_transfer	bca	ITB-PO-2026-000068-M1	c5a76b96-1844-4c4d-8d84-ce8e5a9bae19	2026-11-24 17:58:01+00	2026-11-24 17:58:09+00
+dea31f2a-49a1-488a-bede-65a6833144b7	ITB-PO-2026-000066	tes setelah ganti layout	tes@gmail.com	\N	235235235235235	LUNAS	600000	600000	2026-11-24 17:48:14.421189+00	2026-11-24 17:48:37.562926+00	235235235235235	FULL	QRIS	600000	\N	\N	12b0d38f-dd63-4b78-9a8b-a161e7600c6f	BOOTH_CF24	2026-11-24 17:48:37.41+00	\N	700000	100000	F4382FHS	LUNAS	63882af3-7fdf-4a6c-be1d-20889a7ef9b0	\N	\N	MIDTRANS	SETTLEMENT	bank_transfer	bca	ITB-PO-2026-000066-M1	0f3b9aaf-036a-407c-bf9b-1c68a5b841d1	2026-11-24 17:48:29+00	2026-11-24 17:48:36+00
 \.
 
 
@@ -314,6 +328,14 @@ COPY "public"."midtrans_transactions" ("id", "order_id", "midtrans_order_id", "s
 4da2a1ec-3147-4be2-b8dd-b61ebc4a8848	728df606-6ffb-4dca-9a70-09273e69d6ff	ITB-PO-2026-000060-M1	\N	\N	250000	FAILURE	\N	\N	\N	\N	\N	\N	\N	{"error": "Unauthorized"}	\N	2026-11-22 17:37:15.024435+00	2026-11-22 17:37:15.344+00
 d0f3e01b-264f-480e-af7f-c8cce55d7c20	728df606-6ffb-4dca-9a70-09273e69d6ff	ITB-PO-2026-000060-M2	9327e538-46b2-47ae-a7e7-bb4946120030	https://app.sandbox.midtrans.com/snap/v4/redirection/9327e538-46b2-47ae-a7e7-bb4946120030	250000	SETTLEMENT	e26cc6e0-540a-474a-b163-113326e4822b	qris	\N	accept	200	2026-11-22 17:54:23+00	2026-11-22 18:14:06+00	{"issuer": "gopay", "pop_id": "e022cc5e-1196-4870-a30a-8fb151f5a310", "acquirer": "gopay", "currency": "IDR", "order_id": "ITB-PO-2026-000060-M2", "expiry_time": "2026-11-24 00:54:23", "merchant_id": "M664486389", "status_code": "200", "fraud_status": "accept", "gross_amount": "250000.00", "payment_type": "qris", "signature_key": "f6c8a0c6a6e438a9acb72162965cc3bb1dfc743400d557b4e50dd5bd43894709a9af500ce707f00d3b43118bc4fa6d2af6adc46363583f77969ad3dceb4cf121", "status_message": "midtrans payment notification", "transaction_id": "e26cc6e0-540a-474a-b163-113326e4822b", "settlement_time": "2026-11-23 01:14:06", "customer_details": {"email": "luqmankun9029@gmail.com", "phone": "+6282134656255", "full_name": "midtrans sandbox"}, "transaction_time": "2026-11-23 00:54:23", "transaction_type": "on-us", "transaction_status": "settlement", "merchant_cross_reference_id": "01bd330b-b459-499b-b626-47f8a5dfc358"}	2026-11-22 18:14:07.811+00	2026-11-22 17:52:26.243512+00	2026-11-22 18:14:07.811+00
 fdb154f9-8f70-4e9d-9792-0c56301ccbb3	dae51826-81bb-4443-81ac-a6908de96707	ITB-PO-2026-000061-M1	5bfb1ffa-47e1-443a-97cd-27bce7cab042	https://app.sandbox.midtrans.com/snap/v4/redirection/5bfb1ffa-47e1-443a-97cd-27bce7cab042	200000	SETTLEMENT	cb5a8614-e5fd-4139-ba31-84be0d3030ff	bank_transfer	bca	accept	200	2026-11-22 18:23:45+00	2026-11-22 18:23:55+00	{"currency": "IDR", "order_id": "ITB-PO-2026-000061-M1", "va_numbers": [{"bank": "bca", "va_number": "86389398589400770241820"}], "expiry_time": "2026-11-24 01:23:45", "merchant_id": "M664486389", "status_code": "200", "fraud_status": "accept", "gross_amount": "200000.00", "payment_type": "bank_transfer", "signature_key": "7ece305db6e0fa0d3807409e783b3dff59b01cc0dbd8a03d18c49c17c1ca32b11afa80f0622d3647c401a34f5d4003d4f31441718192daaaff34576e8353a572", "status_message": "midtrans payment notification", "transaction_id": "cb5a8614-e5fd-4139-ba31-84be0d3030ff", "payment_amounts": [], "settlement_time": "2026-11-23 01:23:55", "customer_details": {"email": "luqmankun9029@gmail.com", "phone": "+6282134656255", "full_name": "tes midtrans  va"}, "transaction_time": "2026-11-23 01:23:45", "transaction_status": "settlement"}	2026-11-22 18:23:56.048+00	2026-11-22 18:23:08.978178+00	2026-11-22 18:23:56.048+00
+b0a12301-b264-41c4-81d8-62e5f4aa6d9c	e7a749fb-cd50-451c-9819-894a05374693	ITB-PO-2026-000063-M1	60766441-9f46-4ddf-bba8-d4cf71012e10	https://app.sandbox.midtrans.com/snap/v4/redirection/60766441-9f46-4ddf-bba8-d4cf71012e10	100000	SETTLEMENT	8bb46fd2-b975-412b-855a-e375dfd46516	echannel	\N	accept	200	2026-11-24 15:43:57+00	2026-11-24 15:44:25+00	{"bill_key": "578057533971", "currency": "IDR", "order_id": "ITB-PO-2026-000063-M1", "biller_code": "70012", "expiry_time": "2026-11-25 22:43:57", "merchant_id": "M664486389", "status_code": "200", "fraud_status": "accept", "gross_amount": "100000.00", "payment_type": "echannel", "signature_key": "b14715516009e9a687c9dcd958e53e2973aa8f0861135b33d1e4592057ffb507358646435ecc51eb5de2ca0eec12f841540a07f43ba623da3e4102374fb042dc", "status_message": "midtrans payment notification", "transaction_id": "8bb46fd2-b975-412b-855a-e375dfd46516", "settlement_time": "2026-11-24 22:44:25", "customer_details": {"email": "luqmankun9029@gmail.com", "phone": "+6282134656255", "full_name": "hmm cek lagi midtrans"}, "transaction_time": "2026-11-24 22:43:57", "transaction_status": "settlement"}	2026-11-24 15:44:26.996+00	2026-11-24 15:43:04.852089+00	2026-11-24 15:44:26.996+00
+6bfe0d03-e891-434a-a841-8d198e235529	25571122-075f-47df-ae64-f0d342d2c531	ITB-PO-2026-000062-M1	3aae9a50-98ab-42b1-a954-e77976b44884	https://app.sandbox.midtrans.com/snap/v4/redirection/3aae9a50-98ab-42b1-a954-e77976b44884	300000	SETTLEMENT	7072ab45-5626-4b07-bb66-bbc44a417f55	qris	\N	accept	200	2026-11-24 15:42:01+00	2026-11-24 15:42:18+00	{"issuer": "gopay", "pop_id": "e022cc5e-1196-4870-a30a-8fb151f5a310", "acquirer": "gopay", "currency": "IDR", "order_id": "ITB-PO-2026-000062-M1", "expiry_time": "2026-11-25 22:42:01", "merchant_id": "M664486389", "status_code": "200", "fraud_status": "accept", "gross_amount": "300000.00", "payment_type": "qris", "signature_key": "e998d3356848faaf18b4db065d650c7e28319d8de24496a0deb82955fc409566d539ca511f47a3947d9869523dd69bb02f1ca855177965298ddd21126e44ec08", "status_message": "midtrans payment notification", "transaction_id": "7072ab45-5626-4b07-bb66-bbc44a417f55", "settlement_time": "2026-11-24 22:42:18", "customer_details": {"email": "luqmankun9029@gmail.com", "phone": "+6282134656255", "full_name": "ngetes midtrans baru"}, "transaction_time": "2026-11-24 22:42:01", "transaction_type": "on-us", "transaction_status": "settlement", "merchant_cross_reference_id": "01bd330b-b459-499b-b626-47f8a5dfc358"}	2026-11-24 15:42:20.525+00	2026-11-24 15:41:48.627883+00	2026-11-24 15:42:20.525+00
+aae984a0-d633-43c5-8ec1-ae883f2711a3	88004298-8aea-4e16-9fd8-5f2f97044459	ITB-PO-2026-000064-M1	033c1f1b-9556-4819-8cc1-e426527ecdce	https://app.sandbox.midtrans.com/snap/v4/redirection/033c1f1b-9556-4819-8cc1-e426527ecdce	120000	SETTLEMENT	a04f83aa-d912-46d9-9b9b-939ef3203bf8	bank_transfer	bca	accept	200	2026-11-24 15:46:36+00	2026-11-24 15:46:46+00	{"currency": "IDR", "order_id": "ITB-PO-2026-000064-M1", "va_numbers": [{"bank": "bca", "va_number": "86389892679226316505534"}], "expiry_time": "2026-11-25 22:46:36", "merchant_id": "M664486389", "status_code": "200", "fraud_status": "accept", "gross_amount": "120000.00", "payment_type": "bank_transfer", "signature_key": "13ff3d8b9a2a1a70db9f09ba55781cf8a9fc261472bccf63991934076fe366858e21c8d241636fae7555993eb177d8ee946787162fdd20669b24fedb34a9d5ed", "status_message": "midtrans payment notification", "transaction_id": "a04f83aa-d912-46d9-9b9b-939ef3203bf8", "payment_amounts": [], "settlement_time": "2026-11-24 22:46:46", "customer_details": {"email": "luqmankun9029@gmail.com", "phone": "+6282134656255", "full_name": "cek midtrans payment"}, "transaction_time": "2026-11-24 22:46:36", "transaction_status": "settlement"}	2026-11-24 15:46:47.324+00	2026-11-24 15:46:30.4013+00	2026-11-24 15:46:47.324+00
+4d255abc-336e-4e5d-9b36-1b0080e25a08	221cf316-6346-414d-8a1c-8748058a3378	ITB-PO-2026-000065-M1	c8aaabf0-7374-43e9-8eb9-54e6dd9d01b6	https://app.sandbox.midtrans.com/snap/v4/redirection/c8aaabf0-7374-43e9-8eb9-54e6dd9d01b6	100000	SETTLEMENT	9b715d23-54dd-45df-b72b-3c78e07e7bca	bank_transfer	bca	accept	200	2026-11-24 15:54:37+00	2026-11-24 15:54:47+00	{"currency": "IDR", "order_id": "ITB-PO-2026-000065-M1", "va_numbers": [{"bank": "bca", "va_number": "86389904119587007199312"}], "expiry_time": "2026-11-25 22:54:37", "merchant_id": "M664486389", "status_code": "200", "fraud_status": "accept", "gross_amount": "100000.00", "payment_type": "bank_transfer", "signature_key": "bf876fd0ae8401aeeb618d1c51fb718a7fb7e0d89517df453bc95d3ee45beda96860e41c259126f276167384949ffa23a181edba83494ece0cb9e03384872182", "status_message": "midtrans payment notification", "transaction_id": "9b715d23-54dd-45df-b72b-3c78e07e7bca", "payment_amounts": [], "settlement_time": "2026-11-24 22:54:47", "customer_details": {"email": "nazma@gmail.com", "phone": "456849864756945", "full_name": "nazma kauysar"}, "transaction_time": "2026-11-24 22:54:37", "transaction_status": "settlement"}	2026-11-24 15:54:48.738+00	2026-11-24 15:54:30.564932+00	2026-11-24 15:54:48.738+00
+6706175b-b02e-478b-8714-b343886bdc51	dea31f2a-49a1-488a-bede-65a6833144b7	ITB-PO-2026-000066-M1	b1b0d4da-4909-4c6b-b12d-32c8ba00d9fd	https://app.sandbox.midtrans.com/snap/v4/redirection/b1b0d4da-4909-4c6b-b12d-32c8ba00d9fd	600000	SETTLEMENT	0f3b9aaf-036a-407c-bf9b-1c68a5b841d1	bank_transfer	bca	accept	200	2026-11-24 17:48:29+00	2026-11-24 17:48:36+00	{"currency": "IDR", "order_id": "ITB-PO-2026-000066-M1", "va_numbers": [{"bank": "bca", "va_number": "86389605409889903006956"}], "expiry_time": "2026-11-26 00:48:29", "merchant_id": "M664486389", "status_code": "200", "fraud_status": "accept", "gross_amount": "600000.00", "payment_type": "bank_transfer", "signature_key": "be1d6bee6ff175bdbfc3de6c698848758ed8cb263e12a54ed446a2fa6ec2b89f13fe80faa395ad89cd6a734f093445f1dd5e156b92555a31bbca3388201ea571", "status_message": "midtrans payment notification", "transaction_id": "0f3b9aaf-036a-407c-bf9b-1c68a5b841d1", "payment_amounts": [], "settlement_time": "2026-11-25 00:48:36", "customer_details": {"email": "tes@gmail.com", "phone": "235235235235235", "full_name": "tes setelah ganti layout"}, "transaction_time": "2026-11-25 00:48:29", "transaction_status": "settlement"}	2026-11-24 17:48:37.41+00	2026-11-24 17:48:15.508031+00	2026-11-24 17:48:37.41+00
+eb1b3f3a-19ad-4cbb-bd67-fa1ba9e2b484	50c2e18d-4023-4532-b667-77381d621851	ITB-PO-2026-000068-M1	62adcc5f-131e-4f38-9f03-d32a0e8cde1c	https://app.sandbox.midtrans.com/snap/v4/redirection/62adcc5f-131e-4f38-9f03-d32a0e8cde1c	400000	SETTLEMENT	c5a76b96-1844-4c4d-8d84-ce8e5a9bae19	bank_transfer	bca	accept	200	2026-11-24 17:58:01+00	2026-11-24 17:58:09+00	{"currency": "IDR", "order_id": "ITB-PO-2026-000068-M1", "va_numbers": [{"bank": "bca", "va_number": "86389655017935070696889"}], "expiry_time": "2026-11-26 00:58:01", "merchant_id": "M664486389", "status_code": "200", "fraud_status": "accept", "gross_amount": "400000.00", "payment_type": "bank_transfer", "signature_key": "fb11fe2a3fcae1153cb0c5e7b12b98b4e5e190719bdb943110c52853e2ff1a0adc03dff377301a53ede2f10c0110d4c6eea28e798d556c0cc7a9045520b0b507", "status_message": "midtrans payment notification", "transaction_id": "c5a76b96-1844-4c4d-8d84-ce8e5a9bae19", "payment_amounts": [], "settlement_time": "2026-11-25 00:58:09", "customer_details": {"email": "invoice@gmail.com", "phone": "230028502384029", "full_name": "tes animasi invoice"}, "transaction_time": "2026-11-25 00:58:01", "transaction_status": "settlement"}	2026-11-24 17:58:10.54+00	2026-11-24 17:57:59.042192+00	2026-11-24 17:58:10.54+00
+fe3307a6-fff7-4948-b05d-e3448d0ba7b9	a45a2d36-41a2-427e-a1c9-e191a2ff015b	ITB-PO-2026-000069-M1	6af9608a-f64b-4bbc-8bab-12ad2782c4c6	https://app.sandbox.midtrans.com/snap/v4/redirection/6af9608a-f64b-4bbc-8bab-12ad2782c4c6	400000	SETTLEMENT	b07e6eb7-ded9-482a-a34f-2ae8212791ba	bank_transfer	bca	accept	200	2026-11-24 18:03:26+00	2026-11-24 18:03:31+00	{"currency": "IDR", "order_id": "ITB-PO-2026-000069-M1", "va_numbers": [{"bank": "bca", "va_number": "86389262233291095779033"}], "expiry_time": "2026-11-26 01:03:26", "merchant_id": "M664486389", "status_code": "200", "fraud_status": "accept", "gross_amount": "400000.00", "payment_type": "bank_transfer", "signature_key": "8047634b5f55e5b59559b3fd184dcf449fe32d4f9dc28f5fad44178640f9d0314826eea2bc82a25cd7e3b435a79acb2c8427f2a7a74743f53938c28bc1d8a5eb", "status_message": "midtrans payment notification", "transaction_id": "b07e6eb7-ded9-482a-a34f-2ae8212791ba", "payment_amounts": [], "settlement_time": "2026-11-25 01:03:31", "customer_details": {"email": "tes@gmail.com", "phone": "235235235234234", "full_name": "tes loading lagi"}, "transaction_time": "2026-11-25 01:03:26", "transaction_status": "settlement"}	2026-11-24 18:03:31.981+00	2026-11-24 18:03:22.982372+00	2026-11-24 18:03:31.981+00
+4ba71c3f-7df6-4cbf-9177-201b30addd84	0b4f143b-9cbe-47c2-a91b-b3e4ef72dae8	ITB-PO-2026-000070-M1	154eb80f-fe88-4786-91e1-463d4880689a	https://app.sandbox.midtrans.com/snap/v4/redirection/154eb80f-fe88-4786-91e1-463d4880689a	400000	PENDING	\N	\N	\N	\N	\N	\N	\N	\N	\N	2026-11-24 22:01:57.114653+00	2026-11-24 22:01:57.596+00
 \.
 
 
@@ -321,16 +343,20 @@ fdb154f9-8f70-4e9d-9792-0c56301ccbb3	dae51826-81bb-4443-81ac-a6908de96707	ITB-PO
 -- Data for Name: products; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY "public"."products" ("id", "code", "name", "description", "price", "image_url", "stock", "active", "sort_order", "created_at", "updated_at", "category", "available_sizes", "apparel_type") FROM stdin;
-7b84e2ce-3092-45b5-a88d-d442c1a3facd	ITB-004	Keychain Ichinose Asuna	Art by Oshii	30000	https://zzwmrvddaegjybsskmjv.supabase.co/storage/v1/object/public/product-images/products/b1f50c49-70be-4cff-b01d-f013db3964e3.png	0	t	0	2026-10-03 09:12:56.87318+00	2026-11-11 19:47:21.67335+00	MERCHANDISE	{}	\N
-aca4e3e6-28d3-42d8-bad1-3ba8915a3bb4	ITB-003	C&C Sticker Pack	Art By Oshii	10000	https://zzwmrvddaegjybsskmjv.supabase.co/storage/v1/object/public/product-images/products/2aecb6c9-d2d3-410c-be71-7fbbe099470f.png	34	t	30	2026-09-23 12:03:15.698514+00	2026-11-14 20:24:57.489323+00	MERCHANDISE	{}	\N
-03b97cd0-0eda-4b57-b740-99f2d68e5be4	ITB-005	Volkswagen Scirocco GT 24 Sunaookami Shiroko	Art by @hazaky	175000	https://zzwmrvddaegjybsskmjv.supabase.co/storage/v1/object/public/product-images/products/6c79e246-3528-4719-b5cf-92e326d3c524.png	0	t	0	2026-10-03 09:14:39.496659+00	2026-10-04 10:08:27.523227+00	MERCHANDISE	{}	\N
-712e41e7-8d86-499d-868e-c3f28e51b5af	APP-001	Jaket ARA Biru	alskdlaskhjdlasjd	500000	https://zzwmrvddaegjybsskmjv.supabase.co/storage/v1/object/public/product-images/products/6ca79ea9-496b-446c-9857-fca79dd28143.png	0	t	0	2026-10-02 23:45:30.642821+00	2026-11-14 18:02:16.447865+00	APPAREL	{M,L,XL}	JACKET
-4c614771-69cf-4f8d-b4e2-3da8be684a49	ITB-001	Yvonne Acrylic Standee	Art By Hameru	140000	https://zzwmrvddaegjybsskmjv.supabase.co/storage/v1/object/public/product-images/products/3997379b-1b76-454f-a614-84d0ff871219.png	2	t	10	2026-09-23 12:03:15.698514+00	2026-11-19 22:06:25.085527+00	MERCHANDISE	{}	\N
-2405f07d-b40c-4df2-a4ca-fb28f03219c2	ITB-006	Keychain GR Supra	art by.........	30000	https://zzwmrvddaegjybsskmjv.supabase.co/storage/v1/object/public/product-images/products/23601b3a-ac5a-4e75-8fcc-adf6884a5983.png	0	t	0	2026-10-03 17:33:52.146386+00	2026-10-12 13:34:02.284573+00	MERCHANDISE	{}	\N
-6cf8ac72-c00a-4577-8535-138bca761e68	APP-003	Jaket ARA Merah	sdfsdfs	500000	https://zzwmrvddaegjybsskmjv.supabase.co/storage/v1/object/public/product-images/products/1f04210e-b89c-473d-9f9a-233efef4d7b9.png	0	t	0	2026-10-03 09:15:45.064886+00	2026-11-14 20:09:14.511923+00	APPAREL	{L,XL,2XL}	JACKET
-8a637a2e-2359-449e-80ff-69c79669730e	APP-002	Tshirt	asdasdsa	250000	https://zzwmrvddaegjybsskmjv.supabase.co/storage/v1/object/public/product-images/products/7efce189-5faf-4d2b-92d9-7333d5d56729.jpg	0	t	0	2026-10-03 09:12:05.99958+00	2026-11-22 17:26:06.16507+00	APPAREL	{M,L,XL}	TSHIRT
-04cdbbdf-07db-44f4-bcac-e6c9d12145c1	ITB-002	Ichinose Asuna School w R125 itansha photocard	askdjhawohaowhdalshdlawhdoihawod	50000	https://zzwmrvddaegjybsskmjv.supabase.co/storage/v1/object/public/product-images/products/2c1a05e9-a9c2-4985-95a3-a6934e1e9211.png	0	t	0	2026-11-14 22:05:24.654612+00	2026-11-22 18:23:07.827701+00	MERCHANDISE	{}	\N
+COPY "public"."products" ("id", "code", "name", "description", "price", "image_url", "stock", "active", "sort_order", "created_at", "updated_at", "category", "available_sizes", "apparel_type", "featured") FROM stdin;
+7b84e2ce-3092-45b5-a88d-d442c1a3facd	ITB-004	Keychain Ichinose Asuna	Art by Oshii	30000	https://zzwmrvddaegjybsskmjv.supabase.co/storage/v1/object/public/product-images/products/b1f50c49-70be-4cff-b01d-f013db3964e3.png	0	t	0	2026-10-03 09:12:56.87318+00	2026-11-11 19:47:21.67335+00	MERCHANDISE	{}	\N	f
+aca4e3e6-28d3-42d8-bad1-3ba8915a3bb4	ITB-003	C&C Sticker Pack	Art By Oshii	10000	https://zzwmrvddaegjybsskmjv.supabase.co/storage/v1/object/public/product-images/products/2aecb6c9-d2d3-410c-be71-7fbbe099470f.png	0	t	30	2026-09-23 12:03:15.698514+00	2026-11-24 15:54:29.473792+00	MERCHANDISE	{}	\N	f
+03b97cd0-0eda-4b57-b740-99f2d68e5be4	ITB-005	Volkswagen Scirocco GT 24 Sunaookami Shiroko	Art by @hazaky	175000	https://zzwmrvddaegjybsskmjv.supabase.co/storage/v1/object/public/product-images/products/6c79e246-3528-4719-b5cf-92e326d3c524.png	0	t	0	2026-10-03 09:14:39.496659+00	2026-10-04 10:08:27.523227+00	MERCHANDISE	{}	\N	f
+712e41e7-8d86-499d-868e-c3f28e51b5af	APP-001	Jaket ARA Biru	alskdlaskhjdlasjd	500000	https://zzwmrvddaegjybsskmjv.supabase.co/storage/v1/object/public/product-images/products/6ca79ea9-496b-446c-9857-fca79dd28143.png	0	t	0	2026-10-02 23:45:30.642821+00	2026-11-14 18:02:16.447865+00	APPAREL	{M,L,XL}	JACKET	f
+c7c87c22-78b2-40ec-8a04-83c493dc0b1b	APP-004	v1	asdasd	300000	https://zzwmrvddaegjybsskmjv.supabase.co/storage/v1/object/public/product-images/products/8de82a55-65a4-4298-9c23-ca9c61b036ce.png	4	t	0	2026-11-24 16:48:28.414432+00	2026-11-24 17:48:14.421189+00	APPAREL	{M,L,XL}	HOODIE	f
+a8e991fc-b5ab-487c-886a-b385eac8a3dd	ITB-008	terus produk	asdasdasda	250000	https://zzwmrvddaegjybsskmjv.supabase.co/storage/v1/object/public/product-images/products/2b30cfed-0933-4b8c-ad3c-c54cd5327b9f.png	9	t	0	2026-11-24 16:47:58.836645+00	2026-11-24 17:50:13.597043+00	MERCHANDISE	{}	\N	f
+2405f07d-b40c-4df2-a4ca-fb28f03219c2	ITB-006	Keychain GR Supra	art by.........	30000	https://zzwmrvddaegjybsskmjv.supabase.co/storage/v1/object/public/product-images/products/23601b3a-ac5a-4e75-8fcc-adf6884a5983.png	0	t	0	2026-10-03 17:33:52.146386+00	2026-10-12 13:34:02.284573+00	MERCHANDISE	{}	\N	f
+6cf8ac72-c00a-4577-8535-138bca761e68	APP-003	Jaket ARA Merah	sdfsdfs	500000	https://zzwmrvddaegjybsskmjv.supabase.co/storage/v1/object/public/product-images/products/1f04210e-b89c-473d-9f9a-233efef4d7b9.png	0	t	0	2026-10-03 09:15:45.064886+00	2026-11-14 20:09:14.511923+00	APPAREL	{L,XL,2XL}	JACKET	f
+8a637a2e-2359-449e-80ff-69c79669730e	APP-002	Tshirt	asdasdsa	250000	https://zzwmrvddaegjybsskmjv.supabase.co/storage/v1/object/public/product-images/products/7efce189-5faf-4d2b-92d9-7333d5d56729.jpg	0	t	0	2026-10-03 09:12:05.99958+00	2026-11-22 17:26:06.16507+00	APPAREL	{M,L,XL}	TSHIRT	f
+04cdbbdf-07db-44f4-bcac-e6c9d12145c1	ITB-002	Ichinose Asuna School w R125 itansha photocard	askdjhawohaowhdalshdlawhdoihawod	50000	https://zzwmrvddaegjybsskmjv.supabase.co/storage/v1/object/public/product-images/products/2c1a05e9-a9c2-4985-95a3-a6934e1e9211.png	0	t	0	2026-11-14 22:05:24.654612+00	2026-11-22 18:23:07.827701+00	MERCHANDISE	{}	\N	f
+4c614771-69cf-4f8d-b4e2-3da8be684a49	ITB-001	Yvonne Acrylic Standee	Art By Hameru	140000	https://zzwmrvddaegjybsskmjv.supabase.co/storage/v1/object/public/product-images/products/3997379b-1b76-454f-a614-84d0ff871219.png	0	t	10	2026-09-23 12:03:15.698514+00	2026-11-24 15:41:47.170688+00	MERCHANDISE	{}	\N	f
+e6f00df9-6ff6-4b11-8092-af24e540c29c	APP-005	v2	asdadasds	200000	https://zzwmrvddaegjybsskmjv.supabase.co/storage/v1/object/public/product-images/products/3cbcc422-2bac-4cbb-adf3-bb17aecb72dc.png	9	t	0	2026-11-24 16:48:51.148227+00	2026-11-24 18:03:21.776037+00	APPAREL	{L,XL,2XL}	HOODIE	f
+1d9554b9-62e4-45aa-8505-905feaf23e5b	ITB-007	cek nambah produk aja	asasdasdasda	200000	https://zzwmrvddaegjybsskmjv.supabase.co/storage/v1/object/public/product-images/products/19daacb3-a5ce-4ba9-9337-8e23e6a2ac35.jpg	4	t	0	2026-11-24 16:47:37.786204+00	2026-11-24 22:01:56.03772+00	MERCHANDISE	{}	\N	f
 \.
 
 
@@ -385,6 +411,19 @@ c7f40813-507e-4cd9-99df-dedf0df4957d	c614cd78-232d-4c75-a2fa-5a4e1a92ec63	04cdbb
 b2edff16-ede3-41c1-9277-224b59141dc0	728df606-6ffb-4dca-9a70-09273e69d6ff	04cdbbdf-07db-44f4-bcac-e6c9d12145c1	Ichinose Asuna School w R125 itansha photocard	50000	2	MERCHANDISE	\N	\N
 123612b9-599a-4cee-ad54-d6511c08b305	728df606-6ffb-4dca-9a70-09273e69d6ff	8a637a2e-2359-449e-80ff-69c79669730e	Tshirt	250000	1	APPAREL	M	TSHIRT
 a737d45b-5c15-400d-8a83-8d05b19da0b1	dae51826-81bb-4443-81ac-a6908de96707	04cdbbdf-07db-44f4-bcac-e6c9d12145c1	Ichinose Asuna School w R125 itansha photocard	50000	4	MERCHANDISE	\N	\N
+0715de15-e751-4f99-906a-cad613db7139	25571122-075f-47df-ae64-f0d342d2c531	4c614771-69cf-4f8d-b4e2-3da8be684a49	Yvonne Acrylic Standee	140000	2	MERCHANDISE	\N	\N
+78c6f0b8-50e5-4b7f-927f-47144406b7bd	25571122-075f-47df-ae64-f0d342d2c531	aca4e3e6-28d3-42d8-bad1-3ba8915a3bb4	C&C Sticker Pack	10000	2	MERCHANDISE	\N	\N
+dd2aba7e-5717-4e9a-a67a-1d63ed2d6430	e7a749fb-cd50-451c-9819-894a05374693	aca4e3e6-28d3-42d8-bad1-3ba8915a3bb4	C&C Sticker Pack	10000	10	MERCHANDISE	\N	\N
+4ee092fd-97a1-4981-bd4c-83fa4655c4b1	88004298-8aea-4e16-9fd8-5f2f97044459	aca4e3e6-28d3-42d8-bad1-3ba8915a3bb4	C&C Sticker Pack	10000	12	MERCHANDISE	\N	\N
+4def4843-2b90-4dcb-be7f-8da14309bbe2	221cf316-6346-414d-8a1c-8748058a3378	aca4e3e6-28d3-42d8-bad1-3ba8915a3bb4	C&C Sticker Pack	10000	10	MERCHANDISE	\N	\N
+6765c5f2-fe99-4433-9415-fd03d6af9500	dea31f2a-49a1-488a-bede-65a6833144b7	e6f00df9-6ff6-4b11-8092-af24e540c29c	v2	200000	1	APPAREL	L	HOODIE
+b3a826c4-c208-4b8b-b4f4-05a0dfde2eff	dea31f2a-49a1-488a-bede-65a6833144b7	c7c87c22-78b2-40ec-8a04-83c493dc0b1b	v1	300000	1	APPAREL	M	HOODIE
+54b23627-ca7b-4696-bece-5d1b169d177d	dea31f2a-49a1-488a-bede-65a6833144b7	1d9554b9-62e4-45aa-8505-905feaf23e5b	cek nambah produk aja	200000	1	MERCHANDISE	\N	\N
+be8c3831-c7da-43be-a13c-b63c98992a6e	f4b530ed-67cf-4212-bc27-537cb1aa9e29	a8e991fc-b5ab-487c-886a-b385eac8a3dd	terus produk	250000	1	MERCHANDISE	\N	\N
+0a3476b0-75da-4fa3-9786-08b116b122c0	f4b530ed-67cf-4212-bc27-537cb1aa9e29	1d9554b9-62e4-45aa-8505-905feaf23e5b	cek nambah produk aja	200000	1	MERCHANDISE	\N	\N
+5dcb6f7b-4375-4fe2-83db-e8e9345f8242	50c2e18d-4023-4532-b667-77381d621851	1d9554b9-62e4-45aa-8505-905feaf23e5b	cek nambah produk aja	200000	2	MERCHANDISE	\N	\N
+aacb926b-1f5e-41d2-8534-056ff5ce1c1b	a45a2d36-41a2-427e-a1c9-e191a2ff015b	e6f00df9-6ff6-4b11-8092-af24e540c29c	v2	200000	2	APPAREL	L	HOODIE
+dcd30826-0299-476e-99b6-3360405492ad	0b4f143b-9cbe-47c2-a91b-b3e4ef72dae8	1d9554b9-62e4-45aa-8505-905feaf23e5b	cek nambah produk aja	200000	2	MERCHANDISE	\N	\N
 \.
 
 
@@ -417,6 +456,25 @@ f65bead9-39ea-4116-8719-497cc2139689	c614cd78-232d-4c75-a2fa-5a4e1a92ec63	INITIA
 462a419b-38e5-4575-b510-273bb8a588e9	e37db794-9fea-4778-9e41-fcbe8684f557	INITIAL	500000	500000	orders/e37db794-9fea-4778-9e41-fcbe8684f557/83b0b91a-6032-42ee-a902-6fdb64d4bd5b.png	PENDING	\N	2026-11-14 22:36:58.885684+00	\N	\N
 509a924b-3313-472e-b6f8-9a6e7e7edafd	dfd1e6c9-e3ca-41cc-86ac-194cb11d5a2f	INITIAL	550000	550000	orders/dfd1e6c9-e3ca-41cc-86ac-194cb11d5a2f/58e50464-c61b-4a62-b123-aceaec910ede.jpg	PENDING	\N	2026-11-14 22:42:09.795226+00	\N	\N
 6d14e8f3-e0e4-4f62-a6db-198719b3aa44	c3aa1732-887f-4c6b-91c5-0ad3d41a702c	INITIAL	290000	290000	orders/c3aa1732-887f-4c6b-91c5-0ad3d41a702c/394f25bf-5de6-45e7-a411-6c0746b444ad.png	PENDING	\N	2026-11-19 22:06:25.883254+00	\N	\N
+0b84dc59-6fb3-437a-b280-5113e27df959	f4b530ed-67cf-4212-bc27-537cb1aa9e29	INITIAL	450000	450000	orders/f4b530ed-67cf-4212-bc27-537cb1aa9e29/c78e2b5b-d961-40b5-aaea-70db83344939.jpg	PENDING	\N	2026-11-24 17:50:14.116643+00	\N	\N
+\.
+
+
+--
+-- Data for Name: product_search_events; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY "public"."product_search_events" ("id", "search_term", "created_at") FROM stdin;
+bfebcce9-0a66-4f3d-85cd-0cb84ccace3f	Keychain GR Supra	2026-11-24 17:37:59.774243+00
+\.
+
+
+--
+-- Data for Name: product_view_events; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY "public"."product_view_events" ("id", "product_id", "created_at", "search_term") FROM stdin;
+bb635713-21e9-4808-9fc0-1a9239136b37	2405f07d-b40c-4df2-a4ca-fb28f03219c2	2026-11-24 17:37:56.541943+00	\N
 \.
 
 
@@ -434,8 +492,8 @@ COPY "public"."profiles" ("id", "role", "display_name", "created_at") FROM stdin
 --
 
 COPY "public"."promo_members" ("id", "plate_code", "member_name", "discount_type", "discount_value", "is_active", "is_used", "used_order_id", "used_at", "created_at", "updated_at") FROM stdin;
+bbc7b69b-b0fc-4b2c-b4d8-21470cfe6973	F4382FHS	LUQMAN AHMAD	FIXED	100000	t	t	dea31f2a-49a1-488a-bede-65a6833144b7	2026-11-24 17:48:14.421189+00	2026-11-14 20:21:05.513538+00	2026-11-24 17:48:14.421189+00
 6d57bd6d-4d8e-41bd-b878-ec889fc15326	D3508UCC	FATHUR RIZQI	FIXED	100000	t	f	\N	\N	2026-11-14 20:21:05.513538+00	2026-11-22 17:21:34.735+00
-bbc7b69b-b0fc-4b2c-b4d8-21470cfe6973	F4382FHS	LUQMAN AHMAD	FIXED	100000	t	f	\N	\N	2026-11-14 20:21:05.513538+00	2026-11-22 18:25:06.051+00
 a96d61e3-391e-4a95-83f4-3072028dd7d3	D1586YVL	ALFINDI	FIXED	100000	t	f	\N	\N	2026-11-14 20:21:05.513538+00	2026-11-14 22:26:21.303594+00
 55dab504-e829-4d37-b926-5a7ed080c4d8	D4056ZCU	ERLANGGA FERDIANSYAH	FIXED	100000	t	f	\N	\N	2026-11-14 20:21:05.513538+00	2026-11-14 22:26:21.303594+00
 be7885f2-c502-4be9-bda2-201259b6f9a7	D4520SBM	KLEINDA FATIMA	FIXED	100000	t	f	\N	\N	2026-11-14 20:21:05.513538+00	2026-11-14 22:26:21.303594+00
@@ -472,11 +530,34 @@ a1a7a17b-8a13-4357-8699-d45979050024	D4112GW	PANGESTU MUHAMAD RIZKI	FIXED	100000
 
 
 --
+-- Data for Name: site_hero_slides; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY "public"."site_hero_slides" ("id", "image_url", "title", "subtitle", "button_text", "button_url", "sort_order", "is_active", "created_at", "updated_at") FROM stdin;
+4a4ee762-2f1e-4b14-a593-31447948e95d	https://zzwmrvddaegjybsskmjv.supabase.co/storage/v1/object/public/site-media/hero-slides/69cce773-3f9b-4ba4-ae73-4c5aced7cdd1.jpg					1	t	2026-11-24 18:51:29.421134+00	2026-11-24 19:14:40.906+00
+624fb0fa-f528-43ce-981b-bdca2b6a323b	https://zzwmrvddaegjybsskmjv.supabase.co/storage/v1/object/public/site-media/hero-slides/4d87d972-d5ea-4dca-b2ad-48dcada97b9f.jpg					2	t	2026-11-24 19:07:06.212529+00	2026-11-24 19:14:42.859+00
+\.
+
+
+--
+-- Data for Name: site_pages; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY "public"."site_pages" ("slug", "title", "content", "active", "sort_order", "updated_at") FROM stdin;
+about-us	Tentang Kami	Kenali Circle Itabaka dan cerita di balik setiap koleksi kami.	t	10	2026-11-24 16:44:27.364125+00
+terms-and-conditions	Terms and Conditions	Syarat dan ketentuan pemesanan akan ditampilkan di halaman ini.	t	20	2026-11-24 16:44:27.364125+00
+itasha-faqs	Itasha FAQs	Temukan jawaban untuk pertanyaan seputar Itasha.	t	30	2026-11-24 16:44:27.364125+00
+itazaki-akane-info	Itazaki Akane Info	Informasi mengenai Itazaki Akane akan ditampilkan di halaman ini.	t	40	2026-11-24 16:44:27.364125+00
+design-print-and-wrap-services	Design, Print and Wrap Services	Informasi layanan desain, printing, dan wrapping Itabaka.	t	50	2026-11-24 16:44:27.364125+00
+\.
+
+
+--
 -- Data for Name: site_settings; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY "public"."site_settings" ("id", "site_name", "site_title", "site_description", "logo_url", "banner_url", "primary_color", "accent_color", "updated_at", "qris_image_url", "bca_account_name", "bca_account_number", "dp_percentage", "full_payment_enabled", "midtrans_enabled") FROM stdin;
-1	ITABAKA	Itabaka Pre-Order	Search, Add, Pay, Weeb	https://zzwmrvddaegjybsskmjv.supabase.co/storage/v1/object/public/site-media/logo/248ef2ea-573d-42aa-987d-1b6ed139df5e.png	https://zzwmrvddaegjybsskmjv.supabase.co/storage/v1/object/public/site-media/banner/a352ee6c-8985-4a07-84ea-9975ed98e6bc.png	#ffffff	#ff0000	2026-11-22 17:25:45.032641+00	https://zzwmrvddaegjybsskmjv.supabase.co/storage/v1/object/public/site-media/qris/36c6f124-c788-4aff-83c5-27d5b13a09e5.png	Fauzi Agung Gumelar	3462518142	50	t	t
+1	ITABAKA	Itabaka Pre-Order	Search, Add, Pay, Weeb	https://zzwmrvddaegjybsskmjv.supabase.co/storage/v1/object/public/site-media/logo/248ef2ea-573d-42aa-987d-1b6ed139df5e.png	https://zzwmrvddaegjybsskmjv.supabase.co/storage/v1/object/public/site-media/banner/a352ee6c-8985-4a07-84ea-9975ed98e6bc.png	#ffffff	#ff0000	2026-11-24 18:52:05.785939+00	https://zzwmrvddaegjybsskmjv.supabase.co/storage/v1/object/public/site-media/qris/36c6f124-c788-4aff-83c5-27d5b13a09e5.png	Fauzi Agung Gumelar	3462518142	50	t	t
 \.
 
 
@@ -484,20 +565,20 @@ COPY "public"."site_settings" ("id", "site_name", "site_title", "site_descriptio
 -- Name: refresh_tokens_id_seq; Type: SEQUENCE SET; Schema: auth; Owner: supabase_auth_admin
 --
 
-SELECT pg_catalog.setval('"auth"."refresh_tokens_id_seq"', 100, true);
+SELECT pg_catalog.setval('"auth"."refresh_tokens_id_seq"', 105, true);
 
 
 --
 -- Name: order_invoice_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('"public"."order_invoice_seq"', 61, true);
+SELECT pg_catalog.setval('"public"."order_invoice_seq"', 70, true);
 
 
 --
 -- PostgreSQL database dump complete
 --
 
--- \unrestrict fYeSJPeJAS3ARXMM3HahbHNd5qqhjPtFTY4JlCYbs3mKcPJWSIyUGXUYu6Rtpbe
+-- \unrestrict HtR867UhBaICdf1BUq4pfidgvSEedkhis3Ego7nz5TZPBbW0xowEaMrSZSpCeXO
 
 RESET ALL;
