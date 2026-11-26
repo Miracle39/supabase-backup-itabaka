@@ -1397,11 +1397,16 @@ CREATE TABLE IF NOT EXISTS "public"."site_pages" (
     "content" "text" DEFAULT ''::"text" NOT NULL,
     "active" boolean DEFAULT true NOT NULL,
     "sort_order" integer DEFAULT 0 NOT NULL,
-    "updated_at" timestamp with time zone DEFAULT "now"() NOT NULL
+    "updated_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    "content_blocks" "jsonb" DEFAULT '[]'::"jsonb" NOT NULL
 );
 
 
 ALTER TABLE "public"."site_pages" OWNER TO "postgres";
+
+
+COMMENT ON COLUMN "public"."site_pages"."content_blocks" IS 'Ordered JSON blocks for page builder: text, image, image_text, gallery, banner, video';
+
 
 
 CREATE TABLE IF NOT EXISTS "public"."site_settings" (
